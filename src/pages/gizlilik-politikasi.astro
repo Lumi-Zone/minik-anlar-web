@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Gizlilik Politikası – Minik Anlar";
+const description = "Minik Anlar uygulamasının detaylı gizlilik politikası. Veri toplanmaz, her şey cihazınızda güvende kalır.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="legal-page">
+    <div class="container text-content">
+      <div class="back-link">
+        <a href="/">&larr; Ana Sayfaya Dön</a>
+      </div>
+      
+      <h1>Gizlilik Politikası</h1>
+      <p class="last-updated">Son Güncelleme: 18 Temmuz 2026</p>
+      
+      <div class="content-body">
+        <p>Minik Anlar ("Uygulama") olarak, mahremiyetinize ve kişisel verilerinizin güvenliğine en yüksek önemi veriyoruz. Hamilelik süreci gibi son derece hassas bir dönemde kaydettiğiniz verilerin gizliliği bizim için önceliklidir.</p>
+        <p>İşbu Gizlilik Politikası, uygulamamızı kullandığınızda bilgilerinizi nasıl işlediğimizi (veya işlemediğimizi) şeffaf bir şekilde açıklamak amacıyla hazırlanmıştır.</p>
+        
+        <h2>1. Temel Prensibimiz: Sıfır Veri Toplama</h2>
+        <p><strong>Minik Anlar uygulaması hiçbir şekilde kişisel veri TOPLAMAZ, İŞLEMEZ ve SUNUCULARINA AKTARMAZ.</strong></p>
+        <ul>
+          <li><strong>Hesap Oluşturma Yok:</strong> Uygulamayı kullanmak için adınız, soyadınız, e-posta adresiniz veya telefon numaranız gibi kişisel bilgilerinizi girerek bir hesap açmanız gerekmez.</li>
+          <li><strong>Yerel Depolama (Local Storage):</strong> Uygulama içerisine kaydettiğiniz tüm bilgiler (gebelik haftası, son adet tarihi, günlük notları, ruh hali, semptomlar, ultrason fotoğrafları, randevular) <strong>yalnızca telefonunuzun dahili hafızasında (yerel olarak)</strong> saklanır.</li>
+          <li><strong>Sunucu/Veritabanı Yok:</strong> Uygulamanın geliştiricisi olarak bizlerin (Lumi-Zone) ve üçüncü şahısların bu verilere erişim imkânı bulunmamaktadır. Verileriniz buluta veya herhangi bir dış sunucuya gönderilmez.</li>
+        </ul>
+
+        <h2>2. Uygulama İzinleri ve Kullanım Amaçları</h2>
+        <p>Uygulamanın özelliklerini tam ve verimli kullanabilmeniz için cihazınızdan bazı erişim izinleri istenebilir. Bu erişim izinleri kesinlikle verilerinizin toplanması veya satılması amacıyla kullanılmaz, sadece cihaz içi temel işlevleri yerine getirmek içindir:</p>
+        <ul>
+          <li><strong>Fotoğraf Galerisi / Kamera:</strong> Uygulama içerisindeki "Anılar" sekmesine ultrason fotoğraflarınızı, göbek büyüme fotoğraflarınızı ekleyebilmeniz için cihazınızın galerisine erişim izni istenir. Bu fotoğraflar uygulamanın kendi içerisindeki izole alanında saklanır ve cihaz dışına çıkarılmaz.</li>
+          <li><strong>Bildirimler (Push Notifications):</strong> Günlük ilaç hatırlatıcıları, su içme hatırlatıcıları veya haftalık hamilelik dönüm noktası bilgilendirmeleri için bildirim izni istenir. Bu bildirimler uzak bir sunucudan değil, cihazınızın kendi sisteminden "yerel bildirim" (Local Notification) olarak programlanır.</li>
+        </ul>
+        
+        <h2>3. Üçüncü Taraf Hizmetleri (Analytics ve Reklamlar)</h2>
+        <p>Minik Anlar uygulamasında <strong>hiçbir üçüncü taraf izleme (tracking), analiz (analytics) veya reklam (ad SDK) yazılımı kullanılmamaktadır.</strong> Uygulama içindeki davranışlarınız izlenmez, profiliniz çıkarılmaz ve bu veriler reklamverenlere satılmaz.</p>
+        
+        <h2>4. Satın Alma İşlemleri ve Finansal Bilgiler</h2>
+        <p>Uygulama içerisinde sunulan "Minik Anlar Premium" aboneliği ile ilgili tüm ödeme ve faturalandırma işlemleri doğrudan Apple / App Store (StoreKit) aracılığıyla güvenli bir şekilde gerçekleştirilir.</p>
+        <ul>
+          <li>Biz (Lumi-Zone), kredi kartı numaranız, fatura adresiniz veya finansal hesap bilgileriniz gibi hiçbir ödeme verisine sahip değiliz ve bunları saklamayız.</li>
+          <li>Ödeme verilerinizin nasıl işlendiğini öğrenmek için <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple'ın Gizlilik Politikası</a>'nı inceleyebilirsiniz.</li>
+        </ul>
+
+        <h2>5. Veri Güvenliği ve Silinmesi</h2>
+        <p>Verileriniz cihazınızda yerel olarak saklandığından, cihazınızın genel güvenlik önlemleri (örneğin cihaz parolanız veya Face ID) uygulamanın verilerini de korur.</p>
+        <ul>
+          <li>Eğer uygulamayı cihazınızdan silerseniz (kaldırırsanız), uygulamaya girdiğiniz tüm veriler ve anılar cihazınızdan <strong>kalıcı olarak silinir</strong>. Sistemimizde bir yedeği bulunmadığı için bu veriler bizim tarafımızdan geri getirilemez.</li>
+        </ul>
+        
+        <h2>6. Çocukların Gizliliği (COPPA Uyumluluğu)</h2>
+        <p>Minik Anlar uygulaması, 18 yaş ve üzeri bireylerin (anne adayları) kullanımına yönelik tasarlanmıştır. 13 yaşın altındaki çocuklardan bilerek veya kasıtlı olarak hiçbir bilgi toplamıyoruz. Eğer 13 yaşın altında bir bireyin uygulamayı kullandığını fark ederseniz, cihazdaki uygulamayı silerek verileri doğrudan imha edebilirsiniz.</p>
+
+        <h2>7. Değişiklikler ve Güncellemeler</h2>
+        <p>Uygulamaya yeni özellikler eklendiğinde bu Gizlilik Politikasında değişiklik veya güncellemeler yapabiliriz. Herhangi bir değişiklik durumunda, politikanın "Son Güncelleme" tarihini güncelleyerek bu sayfada yayınlayacağız. Önemli bir değişiklik olması durumunda (örneğin veri toplama modelinin değişmesi), uygulama içi bildirim ile sizi bilgilendiririz.</p>
+        
+        <h2>8. İletişim</h2>
+        <p>Gizlilik uygulamalarımız hakkında sorularınız, endişeleriniz veya şikayetleriniz varsa, lütfen aşağıdaki e-posta adresinden bizimle iletişime geçmekten çekinmeyin:</p>
+        <p><strong>E-posta:</strong> <a href="mailto:cfsmobiletech@gmail.com">cfsmobiletech@gmail.com</a></p>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: 60px 0 100px;
+    background-color: var(--pageBackground);
+  }
+  
+  .text-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .back-link {
+    margin-bottom: 40px;
+  }
+  
+  .back-link a {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    color: var(--accent);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  
+  .last-updated {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  
+  .content-body {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  
+  .content-body h2 {
+    color: var(--ink);
+    font-size: 1.5rem;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .content-body h2:first-of-type {
+    margin-top: 30px;
+  }
+  
+  .content-body p {
+    margin-bottom: 20px;
+  }
+  
+  .content-body ul {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  .content-body li {
+    margin-bottom: 10px;
+  }
+  
+  .content-body strong {
+    color: var(--ink);
+  }
+  
+  @media (max-width: 768px) {
+    .content-body {
+      padding: 24px;
+    }
+  }
+</style>

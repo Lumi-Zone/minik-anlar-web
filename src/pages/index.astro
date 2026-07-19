@@ -1,0 +1,138 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PrivacyStrip from '../components/PrivacyStrip.astro';
+import FeatureSection from '../components/FeatureSection.astro';
+import PremiumSection from '../components/PremiumSection.astro';
+import FAQ from '../components/FAQ.astro';
+import DownloadCTA from '../components/DownloadCTA.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması";
+const description = "Hafta hafta gebelik takibi yapın, en özel anlarınızı tek yerde güvenle saklayın. Hesap yok, reklam yok.";
+
+const faqItems = [
+  {
+    q: "Gebelik haftam nasıl hesaplanıyor?",
+    a: "Uygulamamız üç farklı yöntem sunar: Standart hesaplama için 'Son Adet Tarihi'ni, doktorunuzdan aldıysanız 'Tahmini Doğum Tarihi'ni veya biliyorsanız 'Gebe Kalma Tarihi'ni kullanabilirsiniz."
+  },
+  {
+    q: "Verilerim nerede saklanıyor?",
+    a: "Tüm verileriniz yalnızca kendi cihazınızda (telefonunuzda) saklanır. Uygulamamızın bir veritabanı veya sunucusu yoktur, hesap oluşturmanız gerekmez."
+  },
+  {
+    q: "İnternet bağlantısı gerekiyor mu?",
+    a: "Hayır, Minik Anlar tamamen çevrimdışı çalışır. Tüm özelliklere internet bağlantısı olmadan da erişebilirsiniz."
+  },
+  {
+    q: "Uygulama ücretsiz mi?",
+    a: "Evet, hafta hafta takip ve günlük gibi temel özellikler tamamen ücretsizdir. Dijital albümler ve PDF anı kitabı gibi ekstralar isteğe bağlı Premium paketle sunulur."
+  },
+  {
+    q: "Android sürümü var mı?",
+    a: "Şu an için Minik Anlar yalnızca iOS cihazlarda (iPhone ve iPad) kullanılabilmektedir."
+  },
+  {
+    q: "Tıbbi tavsiye veriyor mu?",
+    a: "Hayır, Minik Anlar'daki tüm içerikler genel bilgilendirme amaçlıdır ve tıbbi tavsiye yerine geçmez. Sağlığınızla ilgili kararlarda daima doktorunuza danışın."
+  },
+  {
+    q: "Aboneliğimi nasıl iptal ederim?",
+    a: "Cihazınızdan Ayarlar → Apple ID → Abonelikler adımlarını izleyerek aboneliğinizi dilediğiniz zaman iptal edebilirsiniz."
+  }
+];
+
+const softwareAppJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Minik Anlar",
+  "operatingSystem": "iOS",
+  "applicationCategory": "HealthApplication",
+  "offers": {
+    "@type": "Offer",
+    "price": "79.99",
+    "priceCurrency": "TRY"
+  }
+});
+
+const faqJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+});
+
+const combinedJsonLd = `[${softwareAppJsonLd}, ${faqJsonLd}]`;
+---
+
+<BaseLayout title={title} description={description} jsonLd={combinedJsonLd}>
+  <main>
+    <Hero />
+    <PrivacyStrip />
+    
+    <div class="features-wrapper">
+      <FeatureSection
+        title="Hafta Hafta Takip"
+        items={[
+          "40 haftanın her biri için bebeğin gelişimi ve annenin bedenindeki değişim özeti",
+          "Bebek boyutu karşılaştırmaları (haşhaş tohumu → yaban mersini...)",
+          "Trimester rehberi ve gebelik ilerleme halkası",
+          "3 farklı yöntemle hassas hafta hesabı"
+        ]}
+        mockupLabel="Bugün Sekmesi"
+      />
+      
+      <FeatureSection
+        title="Günlüğünüz ve Sağlığınız"
+        items={[
+          "Ruh hali, enerji seviyesi ve semptom kaydı",
+          "Günün mini listesi: su içme, vitamin alma, yürüyüş",
+          "Doktor randevuları için soru listesi hazırlama ve randevu sonrası notlar"
+        ]}
+        mockupLabel="Günlük Sekmesi"
+        reverse={true}
+      />
+      
+      <FeatureSection
+        title="En Özel Anılarınız"
+        items={[
+          "Haftalık hamilelik pozu fotoğraf albümü",
+          "Ultrason fotoğrafları, 'ilkler', bebeğe notlar ve komik anlar",
+          "Zaman tüneli ve özel albüm görünümleri"
+        ]}
+        mockupLabel="Anılar Sekmesi"
+      />
+      
+      <FeatureSection
+        title="Doğuma Hazırlık"
+        items={[
+          "Kapsamlı hastane çantası kontrol listesi",
+          "Yerel bildirimlerle nazik günlük ve haftalık hatırlatıcılar"
+        ]}
+        mockupLabel="Doğuma Hazırlık"
+        reverse={true}
+      />
+    </div>
+    
+    <PremiumSection />
+    
+    <FAQ items={faqItems} />
+    
+    <DownloadCTA />
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  .features-wrapper {
+    background-color: var(--pageBackground);
+    position: relative;
+  }
+</style>

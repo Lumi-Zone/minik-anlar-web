@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+
+const title = "Abonelik Koşulları – Minik Anlar Premium";
+const description = "Minik Anlar Premium abonelik koşulları, otomatik yenileme, deneme süresi ve iptal bilgileri.";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="legal-page">
+    <div class="container text-content">
+      <div class="back-link">
+        <a href="/">&larr; Ana Sayfaya Dön</a>
+      </div>
+      
+      <h1>Abonelik Koşulları</h1>
+      <p class="last-updated">Son Güncelleme: 18 Temmuz 2026</p>
+      
+      <div class="content-body">
+        <p>Minik Anlar temel özellikleriyle tamamen ücretsizdir. Daha gelişmiş anı saklama özellikleri için (Dijital Albümler, PDF Anı Kitabı, Haftalık Anı Soruları) "Minik Anlar Premium" aboneliği sunulmaktadır.</p>
+        
+        <h2>1. Abonelik Seçenekleri ve Ücretlendirme</h2>
+        <ul>
+          <li><strong>Aylık Abonelik:</strong> 79,99 ₺ / ay (İlk 3 gün ücretsiz deneme)</li>
+          <li><strong>Yıllık Abonelik:</strong> 499,99 ₺ / yıl</li>
+        </ul>
+        <p>Fiyatlar, ikamet ettiğiniz bölgeye ve Apple'ın yerel fiyatlandırma politikalarına göre değişiklik gösterebilir.</p>
+        
+        <h2>2. Ücretsiz Deneme Süresi</h2>
+        <p>Aylık abonelik seçeneği 3 günlük ücretsiz deneme süresi ile birlikte gelir. Ücretsiz deneme süresi boyunca hiçbir ücret ödemezsiniz. Deneme süresinin bitimine en az 24 saat kala aboneliğinizi iptal etmezseniz, aylık ücret Apple ID hesabınızdan otomatik olarak tahsil edilir.</p>
+        
+        <h2>3. Ödeme ve Otomatik Yenileme</h2>
+        <p>Ödemeler, satın alma işlemini onayladığınızda iTunes/Apple ID hesabınızdan tahsil edilecektir.</p>
+        <p>Mevcut abonelik döneminin bitiminden en az 24 saat önce otomatik yenilemeyi kapatmadığınız sürece, aboneliğiniz otomatik olarak yenilenecek ve hesabınızdan aynı ücret tahsil edilecektir.</p>
+        
+        <h2>4. Abonelik İptali</h2>
+        <p>Aboneliğinizi dilediğiniz zaman iptal edebilirsiniz. İptal işlemi, Minik Anlar uygulaması içinden değil, iOS Ayarlarından yapılmaktadır.</p>
+        <p><strong>İptal Etmek İçin:</strong></p>
+        <ol>
+          <li>Cihazınızda <strong>Ayarlar</strong> uygulamasını açın.</li>
+          <li>En üstte yer alan <strong>[Adınız] (Apple ID)</strong> seçeneğine dokunun.</li>
+          <li><strong>Abonelikler</strong> seçeneğine dokunun.</li>
+          <li>Listeden <strong>Minik Anlar</strong>'ı seçin.</li>
+          <li><strong>Aboneliği İptal Et</strong>'e dokunun.</li>
+        </ol>
+        <p>İptal ettikten sonra, mevcut faturalandırma döneminizin sonuna kadar Premium özelliklere erişmeye devam edersiniz.</p>
+        
+        <h2>5. Para İadesi</h2>
+        <p>Uygulama içi satın alma işlemleri doğrudan Apple tarafından yönetilmektedir. Bu nedenle para iadesi talepleri Minik Anlar (Lumi-Zone) tarafından değil, Apple Müşteri Hizmetleri üzerinden yapılmalıdır. Apple'ın iade politikaları geçerlidir.</p>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding: 60px 0 100px;
+    background-color: var(--pageBackground);
+  }
+  
+  .text-content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .back-link {
+    margin-bottom: 40px;
+  }
+  
+  .back-link a {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    color: var(--accent);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  
+  .last-updated {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-bottom: 40px;
+  }
+  
+  .content-body {
+    background-color: var(--card-bg);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+  
+  .content-body h2 {
+    color: var(--ink);
+    font-size: 1.5rem;
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+  }
+  
+  .content-body h2:first-of-type {
+    margin-top: 30px;
+  }
+  
+  .content-body p {
+    margin-bottom: 20px;
+  }
+  
+  .content-body ul, .content-body ol {
+    margin-bottom: 20px;
+    padding-left: 20px;
+  }
+  
+  .content-body li {
+    margin-bottom: 10px;
+  }
+  
+  .content-body strong {
+    color: var(--ink);
+  }
+  
+  @media (max-width: 768px) {
+    .content-body {
+      padding: 24px;
+    }
+  }
+</style>

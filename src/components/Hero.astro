@@ -1,0 +1,92 @@
+---
+---
+<section class="hero-section">
+  <div class="container hero-container">
+    <div class="hero-content">
+      <h1>Minik Anlar — Hamilelik Takibi ve Anı Defteri</h1>
+      <p class="subtitle">Hafta hafta gebelik yolculuğunu takip et, en özel anlarını tek yerde sakla.</p>
+      
+      <div class="cta-group">
+        <a href="#" class="btn btn-appstore">Yakında App Store'da</a>
+        <!-- <a href="#" class="btn btn-android">Yakında Play Store'da</a> -->
+      </div>
+    </div>
+    
+    <div class="hero-visual">
+      <div class="mockup-placeholder">
+        <span>Uygulama Ekranı (Bugün)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    padding: 80px 0 60px;
+    background: linear-gradient(to bottom, var(--pageBackground), #ffffff);
+  }
+  
+  .hero-container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .hero-content {
+    flex: 1;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+  }
+  
+  .cta-group {
+    display: flex;
+    gap: 16px;
+  }
+  
+  .btn-appstore {
+    background-color: var(--ink);
+  }
+  
+  .btn-appstore:hover {
+    background-color: #000;
+  }
+  
+  .hero-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mockup-placeholder {
+    width: 300px;
+    height: 600px;
+    background-color: var(--card-bg);
+    border: 8px solid var(--border-color);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  }
+
+  @media (max-width: 768px) {
+    .hero-container {
+      flex-direction: column;
+      text-align: center;
+    }
+    .cta-group {
+      justify-content: center;
+    }
+  }
+</style>

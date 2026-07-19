@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Footer from '../components/Footer.astro';
+import FAQ from '../components/FAQ.astro';
+
+const title = "Destek ve SSS – Minik Anlar";
+const description = "Minik Anlar uygulaması hakkında sık sorulan sorular ve destek ekibimizle iletişim bilgileri.";
+
+const faqItems = [
+  {
+    q: "Gebelik haftam nasıl hesaplanıyor?",
+    a: "Uygulamamız üç farklı yöntem sunar: Standart hesaplama için 'Son Adet Tarihi'ni, doktorunuzdan aldıysanız 'Tahmini Doğum Tarihi'ni veya biliyorsanız 'Gebe Kalma Tarihi'ni kullanabilirsiniz."
+  },
+  {
+    q: "Verilerim nerede saklanıyor?",
+    a: "Tüm verileriniz yalnızca kendi cihazınızda (telefonunuzda) saklanır. Uygulamamızın bir veritabanı veya sunucusu yoktur, hesap oluşturmanız gerekmez."
+  },
+  {
+    q: "İnternet bağlantısı gerekiyor mu?",
+    a: "Hayır, Minik Anlar tamamen çevrimdışı çalışır. Tüm özelliklere internet bağlantısı olmadan da erişebilirsiniz."
+  },
+  {
+    q: "Uygulama ücretsiz mi?",
+    a: "Evet, hafta hafta takip ve günlük gibi temel özellikler tamamen ücretsizdir. Dijital albümler ve PDF anı kitabı gibi ekstralar isteğe bağlı Premium paketle sunulur."
+  },
+  {
+    q: "Android sürümü var mı?",
+    a: "Şu an için Minik Anlar yalnızca iOS cihazlarda (iPhone ve iPad) kullanılabilmektedir."
+  },
+  {
+    q: "Aboneliğimi nasıl iptal ederim?",
+    a: "Cihazınızdan Ayarlar → Apple ID → Abonelikler adımlarını izleyerek aboneliğinizi dilediğiniz zaman iptal edebilirsiniz."
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="page-content">
+    <div class="container text-content">
+      <div class="back-link">
+        <a href="/">&larr; Ana Sayfaya Dön</a>
+      </div>
+      
+      <h1>Destek ve İletişim</h1>
+      
+      <div class="support-intro">
+        <p>Minik Anlar uygulamasıyla ilgili bir sorun mu yaşıyorsunuz veya bir öneriniz mi var? Size yardımcı olmaktan mutluluk duyarız.</p>
+        
+        <div class="contact-box">
+          <h3>Bize Ulaşın</h3>
+          <p>Her türlü soru, görüş ve geri bildiriminiz için aşağıdaki e-posta adresinden bize ulaşabilirsiniz:</p>
+          <a href="mailto:cfsmobiletech@gmail.com" class="email-link">cfsmobiletech@gmail.com</a>
+        </div>
+      </div>
+    </div>
+    
+    <FAQ items={faqItems} />
+  </main>
+  
+  <Footer />
+</BaseLayout>
+
+<style>
+  .page-content {
+    padding-top: 60px;
+  }
+  
+  .text-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+  }
+  
+  .back-link {
+    margin-bottom: 40px;
+  }
+  
+  .back-link a {
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+  
+  .back-link a:hover {
+    color: var(--accent);
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+    color: var(--ink);
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .support-intro {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 60px;
+  }
+  
+  .contact-box {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 40px;
+    margin-top: 40px;
+  }
+  
+  .contact-box h3 {
+    color: var(--ink);
+    margin-bottom: 15px;
+  }
+  
+  .email-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--accent);
+  }
+</style>

@@ -1,0 +1,49 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  jsonLd?: string;
+}
+
+const { title, description, canonical, jsonLd } = Astro.props;
+const siteUrl = Astro.site || 'https://minikanlar.app';
+const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const finalCanonical = canonical || currentUrl;
+---
+
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    
+    <link rel="canonical" href={finalCanonical} />
+    
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="theme-color" content="#FAF8F5" />
+    
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={finalCanonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content={`${siteUrl}/og.png`} />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}/og.png`} />
+    
+    {jsonLd && <script type="application/ld+json" is:inline set:html={jsonLd} />}
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

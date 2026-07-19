@@ -1,0 +1,128 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>Minik Anlar</h3>
+        <p>Hafta hafta gebelik takibi ve anı defteri.</p>
+      </div>
+      
+      <div class="footer-links">
+        <div class="link-column">
+          <h4>Yasal</h4>
+          <ul>
+            <li><a href="/gizlilik-politikasi">Gizlilik Politikası</a></li>
+            <li><a href="/kullanim-kosullari">Kullanım Koşulları</a></li>
+            <li><a href="/abonelik-kosullari">Abonelik Koşulları</a></li>
+          </ul>
+        </div>
+        
+        <div class="link-column">
+          <h4>Destek</h4>
+          <ul>
+            <li><a href="/support">SSS & İletişim</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <div class="disclaimer">
+        <strong>Önemli Not:</strong> Minik Anlar uygulaması ve bu web sitesi yalnızca bilgilendirme amaçlıdır ve tıbbi tavsiye niteliği taşımaz. Sağlık kararlarınız ve her türlü tıbbi endişeniz için daima doktorunuza veya uzman bir sağlık kuruluşuna danışınız.
+      </div>
+      
+      <div class="copyright">
+        &copy; {year} Lumi-Zone. Tüm hakları saklıdır.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--card-bg);
+    padding: 80px 0 40px;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 60px;
+  }
+  
+  .footer-brand h3 {
+    font-size: 1.5rem;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  
+  .footer-brand p {
+    color: var(--text-secondary);
+    max-width: 300px;
+  }
+  
+  .footer-links {
+    display: flex;
+    gap: 60px;
+  }
+  
+  .link-column h4 {
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+  
+  .link-column ul {
+    list-style: none;
+  }
+  
+  .link-column li {
+    margin-bottom: 12px;
+  }
+  
+  .link-column a {
+    color: var(--text-secondary);
+    transition: color 0.2s;
+  }
+  
+  .link-column a:hover {
+    color: var(--accent);
+  }
+  
+  .footer-bottom {
+    border-top: 1px solid var(--border-color);
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .disclaimer {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    background-color: rgba(0,0,0,0.02);
+    padding: 16px;
+    border-radius: 8px;
+  }
+  
+  .copyright {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+  }
+
+  @media (max-width: 768px) {
+    .footer-content {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .footer-links {
+      flex-direction: column;
+      gap: 30px;
+    }
+  }
+</style>

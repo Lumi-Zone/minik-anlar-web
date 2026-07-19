@@ -1,0 +1,89 @@
+---
+interface FAQItem {
+  q: string;
+  a: string;
+}
+
+interface Props {
+  items: FAQItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<section class="faq-section">
+  <div class="container">
+    <h2>Sıkça Sorulan Sorular</h2>
+    
+    <div class="faq-list">
+      {items.map((item) => (
+        <details class="faq-item">
+          <summary class="faq-question">
+            {item.q}
+            <span class="icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding: 80px 0;
+  }
+  
+  .faq-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+  }
+  
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .faq-item {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  
+  .faq-item[open] .icon {
+    transform: rotate(45deg);
+  }
+  
+  .faq-question {
+    padding: 24px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+  }
+  
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+  
+  .icon {
+    font-size: 1.5rem;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+  }
+  
+  .faq-answer {
+    padding: 0 24px 24px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,104 @@
+---
+interface Props {
+  title: string;
+  items: string[];
+  mockupLabel: string;
+  reverse?: boolean;
+}
+
+const { title, items, mockupLabel, reverse = false } = Astro.props;
+---
+
+<section class="feature-section">
+  <div class={`container feature-container ${reverse ? 'reverse' : ''}`}>
+    <div class="feature-content">
+      <h2>{title}</h2>
+      <ul>
+        {items.map((item) => (
+          <li>{item}</li>
+        ))}
+      </ul>
+    </div>
+    
+    <div class="feature-visual">
+      <div class="mockup-placeholder">
+        <span>{mockupLabel}</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .feature-section {
+    padding: 80px 0;
+  }
+  
+  .feature-container {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  
+  .feature-container.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .feature-content {
+    flex: 1;
+  }
+  
+  .feature-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: var(--ink);
+  }
+  
+  .feature-content ul {
+    list-style: none;
+  }
+  
+  .feature-content li {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+    position: relative;
+    padding-left: 30px;
+  }
+  
+  .feature-content li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+  }
+  
+  .feature-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .mockup-placeholder {
+    width: 280px;
+    height: 560px;
+    background-color: var(--card-bg);
+    border: 8px solid var(--border-color);
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  }
+
+  @media (max-width: 768px) {
+    .feature-container, .feature-container.reverse {
+      flex-direction: column;
+      text-align: center;
+    }
+    .feature-content li {
+      text-align: left;
+    }
+  }
+</style>

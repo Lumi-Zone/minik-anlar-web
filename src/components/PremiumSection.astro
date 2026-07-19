@@ -1,0 +1,167 @@
+---
+---
+<section class="premium-section">
+  <div class="container">
+    <div class="premium-header">
+      <h2>Minik Anlar Premium</h2>
+      <p>Daha fazla anı, daha özel deneyimler.</p>
+    </div>
+    
+    <div class="premium-grid">
+      <div class="premium-card">
+        <h3>Özel Dijital Albümler</h3>
+        <p>Atölye, Keten, Bahçe, Gökyüzü, Lavanta ve Sade Film temalarıyla albümünüzü kişiselleştirin.</p>
+      </div>
+      
+      <div class="premium-card">
+        <h3>PDF Anı Kitabı</h3>
+        <p>Hamilelik hikayenizi tek tıkla baskıya hazır bir PDF'e dönüştürün.</p>
+      </div>
+      
+      <div class="premium-card">
+        <h3>Haftalık Anı Soruları</h3>
+        <p>Her döneme özel yazma önerileriyle hiçbir detayı atlamayın.</p>
+      </div>
+    </div>
+    
+    <div class="pricing">
+      <div class="price-box">
+        <h4>Aylık Plan</h4>
+        <div class="price">79,99 ₺</div>
+        <p class="trial">3 gün ücretsiz deneme</p>
+      </div>
+      
+      <div class="price-box yearly">
+        <div class="badge">En Popüler</div>
+        <h4>Yıllık Plan</h4>
+        <div class="price">499,99 ₺</div>
+        <p class="trial">Avantajlı fiyat</p>
+      </div>
+    </div>
+    
+    <div class="premium-links">
+      <a href="/abonelik-kosullari">Abonelik Koşulları</a>
+      <span class="dot">•</span>
+      <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .premium-section {
+    padding: 80px 0;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .premium-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  
+  .premium-header h2 {
+    font-size: 2.5rem;
+    color: var(--ink);
+  }
+  
+  .premium-header p {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+  }
+  
+  .premium-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  
+  .premium-card {
+    background-color: var(--pageBackground);
+    padding: 30px;
+    border-radius: var(--radius);
+    text-align: center;
+  }
+  
+  .premium-card h3 {
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 15px;
+  }
+  
+  .pricing {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+  }
+  
+  .price-box {
+    border: 2px solid var(--border-color);
+    padding: 30px;
+    border-radius: var(--radius);
+    text-align: center;
+    min-width: 250px;
+    position: relative;
+  }
+  
+  .price-box.yearly {
+    border-color: var(--accent);
+    background-color: rgba(132, 165, 157, 0.05);
+  }
+  
+  .badge {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+  }
+  
+  .price-box h4 {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+  }
+  
+  .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  
+  .trial {
+    font-size: 0.9rem;
+    color: var(--accent);
+  }
+  
+  .premium-links {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+  }
+  
+  .premium-links a {
+    color: var(--text-secondary);
+  }
+  
+  .dot {
+    margin: 0 10px;
+  }
+
+  @media (max-width: 768px) {
+    .premium-grid {
+      grid-template-columns: 1fr;
+    }
+    .pricing {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
