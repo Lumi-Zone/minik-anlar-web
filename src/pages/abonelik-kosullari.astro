@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, SUBSCRIPTIONS } from '../config';
+import { SITE, SUBSCRIPTIONS, withBase } from '../config';
 
 const title = 'Abonelik Koşulları – Minik Anlar Premium';
 const description =
@@ -132,8 +132,9 @@ const description =
           <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>
         </p>
         <p>
-          Ayrıca <a href="/kullanim-kosullari/">Kullanım Koşulları</a> ve
-          <a href="/gizlilik-politikasi/">Gizlilik Politikası</a> sayfalarına da bakabilirsin.
+          Ayrıca <a href={withBase('/kullanim-kosullari/')}>Kullanım Koşulları</a> ve
+          <a href={withBase('/gizlilik-politikasi/')}>Gizlilik Politikası</a> sayfalarına da
+          bakabilirsin.
         </p>
       </div>
     </div>

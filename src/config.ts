@@ -37,8 +37,22 @@ export const downloadLabel = appStoreUrl
   : "Yakında App Store'da";
 
 /**
+ * Site kökü her ortamda aynı yerde değil: GitHub Pages proje sayfasında içerik
+ * `/<repo>/` altında yayınlanır (workflow `--base` ile derliyor). Kök-mutlak
+ * (`/...`) bir bağlantı orada siteden çıkıp organizasyonun kök sayfasına düşer.
+ * Bu yüzden **tüm iç bağlantılar ve public/ varlıkları** buradan geçirilir.
+ *
+ * `/` ile başlamayan değerler (mailto:, https:, `#anchor`) olduğu gibi döner.
+ */
+export function withBase(path: string): string {
+  if (!path.startsWith('/')) return path;
+  const base = import.meta.env.BASE_URL.replace(/\/+$/, '');
+  return `${base}${path}`;
+}
+
+/**
  * Başlıktaki gezinme. Çapalar ana sayfada; alt sayfalardan da çalışsın diye
- * kök göreli (`/#...`) yazılır.
+ * kök göreli (`/#...`) yazılır ve `withBase` ile taban yola göre çözülür.
  */
 export const NAV = [
   { href: '/#ozellikler', label: 'Özellikler' },

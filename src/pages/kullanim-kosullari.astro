@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { SITE, APP_STORE } from '../config';
+import { SITE, APP_STORE, withBase } from '../config';
 
 const title = 'Kullanım Koşulları – Minik Anlar';
 const description =
@@ -73,7 +73,7 @@ const description =
           kayıtlı projeler, hizalı poz kamerası ve randevu özeti isteğe bağlı Premium
           aboneliğiyle açılır. Paketler, otomatik yenileme, deneme süresi, iptal ve iade
           kuralları ayrı bir sayfada düzenlenmiştir:
-          <a href="/abonelik-kosullari/">Abonelik Koşulları</a>.
+          <a href={withBase('/abonelik-kosullari/')}>Abonelik Koşulları</a>.
         </p>
 
         <h2>4. Verilerin ve veri kaybı riski</h2>
@@ -81,7 +81,7 @@ const description =
           Gebelik kayıtların, günlüğün, fotoğrafların ve notların yalnızca cihazında
           saklanır; bunlara erişimimiz yoktur. Abonelik doğrulaması için işlenen sınırlı
           satın alma bilgileri
-          <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>'nda açıklanmıştır.
+          <a href={withBase('/gizlilik-politikasi/')}>Gizlilik Politikası</a>'nda açıklanmıştır.
         </p>
         <div class="callout">
           <p>

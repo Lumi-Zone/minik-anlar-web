@@ -1,4 +1,6 @@
 ---
+import { withBase } from '../config';
+
 /**
  * Gizlilik vaadi. Emoji yerine ince çizgili ikonlar kullanılır; ikonlar
  * dekoratiftir, anlamı her zaman yanındaki metin taşır.
@@ -57,7 +59,7 @@ const points = [
     </ul>
 
     <p class="more">
-      <a href="/gizlilik-politikasi/">Gizlilik politikasını oku</a>
+      <a href={withBase('/gizlilik-politikasi/')}>Gizlilik politikasını oku</a>
     </p>
   </div>
 </section>

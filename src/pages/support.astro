@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import FAQ from '../components/FAQ.astro';
-import { SITE, APP_STORE } from '../config';
+import { SITE, APP_STORE, withBase } from '../config';
 
 const title = 'Destek ve SSS – Minik Anlar';
 const description =
@@ -35,7 +35,7 @@ const supportFaq = [
   },
   {
     q: 'Aboneliğimi nasıl iptal ederim?',
-    a: 'iPhone Ayarlar → [adın] → Abonelikler → Minik Anlar → Aboneliği İptal Et. Ayrıntılar için <a href="/abonelik-kosullari/">Abonelik Koşulları</a> sayfasına bakabilirsin.',
+    a: `iPhone Ayarlar → [adın] → Abonelikler → Minik Anlar → Aboneliği İptal Et. Ayrıntılar için <a href="${withBase('/abonelik-kosullari/')}">Abonelik Koşulları</a> sayfasına bakabilirsin.`,
   },
   {
     q: 'Android sürümü var mı?',

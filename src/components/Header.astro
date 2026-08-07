@@ -3,28 +3,20 @@
  * Sabit üst başlık. JavaScript kullanmaz: yapışkanlık, bulanık zemin ve
  * duyarlı davranış tamamen CSS ile çözülür.
  */
-import { SITE, NAV, appStoreUrl, downloadLabel } from '../config';
+import { SITE, NAV, appStoreUrl, downloadLabel, withBase } from '../config';
 ---
 
 <header class="site-header">
   <div class="container bar">
-    <a class="brand" href="/">
-      <span class="mark" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" opacity="0.3" />
-          <path
-            d="M12 3a9 9 0 0 1 9 9"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-          />
-        </svg>
-      </span>
+    <a class="brand" href={withBase('/')}>
+      {/* Uygulamanın marka işareti (Assets.xcassets/BrandMark). Adı yanındaki
+          yazı taşıdığı için görsel dekoratiftir: alt boş bırakılır. */}
+      <img class="mark" src={withBase('/brand-mark.png')} width="32" height="32" alt="" />
       <span class="wordmark">{SITE.name}</span>
     </a>
 
     <nav class="nav" aria-label="Ana gezinme">
-      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+      {NAV.map((item) => <a href={withBase(item.href)}>{item.label}</a>)}
     </nav>
 
     {
@@ -68,19 +60,12 @@ import { SITE, NAV, appStoreUrl, downloadLabel } from '../config';
     text-decoration: none;
   }
 
+  /* Uygulama ikonuyla aynı okunsun diye iOS'un yuvarlatılmış kare oranı. */
   .mark {
-    display: grid;
-    place-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 9px;
-    background: var(--brand-soft);
-    color: var(--brand-deep);
-  }
-
-  .mark svg {
-    width: 18px;
-    height: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    box-shadow: 0 0 0 1px var(--line);
   }
 
   .wordmark {

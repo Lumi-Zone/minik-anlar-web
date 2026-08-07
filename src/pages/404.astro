@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../config';
 
 const title = 'Sayfa bulunamadı – Minik Anlar';
 const description = 'Aradığın sayfa bulunamadı.';
@@ -19,10 +20,10 @@ const links = [
       <h1>Bu sayfayı bulamadık</h1>
       <p class="text">Aradığın sayfa taşınmış veya adresi değişmiş olabilir.</p>
 
-      <a href="/" class="btn">Ana sayfaya dön</a>
+      <a href={withBase('/')} class="btn">Ana sayfaya dön</a>
 
       <nav class="links" aria-label="Diğer sayfalar">
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+        {links.map((link) => <a href={withBase(link.href)}>{link.label}</a>)}
       </nav>
     </div>
   </main>

@@ -3,7 +3,7 @@
  * Premium tanıtımı. Fiyat gösterilmez: güncel tutar bölgeye ve Apple'ın
  * fiyatlandırmasına göre değiştiği için tek doğru yer satın alma ekranıdır.
  */
-import { SUBSCRIPTIONS, PREMIUM_BENEFITS } from '../config';
+import { SUBSCRIPTIONS, PREMIUM_BENEFITS, withBase } from '../config';
 
 const planNames = SUBSCRIPTIONS.map((plan) => plan.name).join(' ve ');
 ---
@@ -40,9 +40,9 @@ const planNames = SUBSCRIPTIONS.map((plan) => plan.name).join(' ve ');
       </p>
 
       <p class="links">
-        <a href="/abonelik-kosullari/">Abonelik Koşulları</a>
-        <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
-        <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>
+        <a href={withBase('/abonelik-kosullari/')}>Abonelik Koşulları</a>
+        <a href={withBase('/kullanim-kosullari/')}>Kullanım Koşulları</a>
+        <a href={withBase('/gizlilik-politikasi/')}>Gizlilik Politikası</a>
       </p>
     </div>
   </div>
