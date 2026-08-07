@@ -1,42 +1,64 @@
 ---
+import { APP_STORE, appStoreUrl, downloadLabel } from '../config';
 ---
-<section class="download-cta">
-  <div class="container text-center">
-    <h2>Hemen Başlayın</h2>
-    <p>Hamilelik serüveninizi kaydetmeye başlamak için Minik Anlar'ı ücretsiz indirin.</p>
-    <a href="#" class="btn btn-appstore">Yakında App Store'da</a>
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="container">
+    <h2 id="cta-title">Yolculuğunu bugün kaydetmeye başla</h2>
+    <p>
+      Minik Anlar'ı ücretsiz indir; hafta hafta takip, günlük ve anı defteri
+      hiçbir ücret ödemeden kullanılabilir.
+    </p>
+
+    {
+      appStoreUrl ? (
+        <a href={appStoreUrl} class="btn btn-appstore">
+          {downloadLabel}
+        </a>
+      ) : (
+        <span class="btn btn-appstore is-pending">{downloadLabel}</span>
+      )
+    }
+
+    <p class="requirement">iPhone · iOS {APP_STORE.minimumOSVersion} ve üzeri · Türkçe</p>
   </div>
 </section>
 
 <style>
-  .download-cta {
-    padding: 100px 0;
-    background-color: var(--accent);
+  .cta {
+    padding: 96px 0;
+    background: var(--primary);
     color: #fff;
     text-align: center;
   }
-  
-  .download-cta h2 {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+
+  .cta h2 {
     color: #fff;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 14px;
   }
-  
-  .download-cta p {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    opacity: 0.9;
+
+  .cta > .container > p {
+    font-size: 1.0625rem;
+    max-width: 52ch;
+    margin: 0 auto 32px;
+    color: rgba(255, 255, 255, 0.92);
   }
-  
-  .btn-appstore {
-    background-color: var(--ink);
-    color: #fff;
-    font-size: 1.1rem;
-    padding: 16px 32px;
-    border-radius: 30px;
+
+  .cta .btn-appstore.is-pending {
+    background: #fff;
+    color: var(--ink);
+    border-color: transparent;
   }
-  
-  .btn-appstore:hover {
-    background-color: #000;
+
+  .cta .btn-appstore.is-pending:hover {
+    background: #fff;
+    color: var(--ink);
+  }
+
+  .requirement {
+    margin-top: 22px;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
   }
 </style>

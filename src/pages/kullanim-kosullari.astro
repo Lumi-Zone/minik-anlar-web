@@ -1,173 +1,149 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { SITE, APP_STORE } from '../config';
 
-const title = "Kullanım Koşulları – Minik Anlar";
-const description = "Minik Anlar uygulaması detaylı kullanım şartları.";
+const title = 'Kullanım Koşulları – Minik Anlar';
+const description =
+  'Minik Anlar kullanım koşulları: hizmetin kapsamı, lisans, tıbbi feragat, veri kaybı riski ve sorumluluk sınırları.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="legal-page">
-    <div class="container text-content">
-      <div class="back-link">
-        <a href="/">&larr; Ana Sayfaya Dön</a>
-      </div>
-      
-      <h1>Kullanım Şartları</h1>
-      <p class="last-updated">Son Güncelleme: 18 Temmuz 2026</p>
-      
+  <main id="main" class="legal-page">
+    <div class="container prose-wrap">
+      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
+
+      <h1>Kullanım Koşulları</h1>
+      <p class="last-updated">
+        Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
+      </p>
+
       <div class="content-body">
-        <p>Lütfen "Minik Anlar" mobil uygulamasını ("Uygulama") cihazınıza indirmeden, kurmadan veya kullanmaya başlamadan önce bu Kullanım Koşullarını ("Sözleşme") dikkatlice okuyunuz.</p>
-        <p>Bu uygulamayı indirerek, kurarak veya kullanarak, bu Kullanım Koşullarını yasal olarak bağlayıcı bir şekilde kabul etmiş sayılırsınız. Eğer bu şartları kabul etmiyorsanız, uygulamayı kullanmayınız ve cihazınızdan derhal siliniz.</p>
-        
-        <div class="medical-disclaimer">
-          <h2>⚠️ Tıbbi Feragatname (Kritik Uyarı)</h2>
-          <p><strong>Minik Anlar uygulaması YALNIZCA genel bilgilendirme, takip ve anı saklama amaçlarıyla geliştirilmiştir.</strong></p>
-          <p>Uygulama içerisinde sunulan haftalık bebek gelişim bilgileri, annenin bedenindeki değişimlere dair metinler, hatırlatıcılar, günlük sağlık takibi içerikleri ve diğer hiçbir metin <strong>TIBBİ TAVSİYE, TEŞHİS VEYA TEDAVİ NİTELİĞİ TAŞIMAZ.</strong></p>
-          <p>Uygulama, tıp uzmanlarının, doktorların veya diğer profesyonel sağlık çalışanlarının tavsiyelerinin yerini alacak şekilde tasarlanmamıştır. Hamileliğiniz, gebelik komplikasyonlarınız, diyetiniz, egzersizleriniz veya bebeğinizin gelişimi ile ilgili herhangi bir şüphe veya endişeniz olduğunda <strong>DAİMA DOKTORUNUZA VEYA UZMAN BİR SAĞLIK KURULUŞUNA BAŞVURMALISINIZ.</strong></p>
-          <p>Uygulamada yer alan bilgilere dayanarak tıbbi destek aramayı geciktirmemeli veya aldığınız tıbbi tavsiyeleri göz ardı etmemelisiniz. Uygulamanın kullanımından doğabilecek hiçbir sağlık veya sağlık dışı sonuçtan Lumi-Zone sorumlu tutulamaz.</p>
+        <p>
+          Bu koşullar, {SITE.publisher} tarafından geliştirilen Minik Anlar iPhone
+          uygulamasının ("Uygulama") kullanımını düzenler. Uygulamayı indirerek, kurarak
+          veya kullanarak bu koşulları kabul etmiş olursun. Kabul etmiyorsan uygulamayı
+          kullanma ve cihazından sil.
+        </p>
+
+        <div class="callout warning">
+          <h2>Tıbbi feragat</h2>
+          <p>
+            <strong>Minik Anlar yalnızca bilgilendirme, kişisel takip ve anı saklama
+            amacıyla geliştirilmiştir.</strong>
+          </p>
+          <p>
+            Uygulamadaki haftalık gelişim içerikleri, bedenindeki değişimlere dair metinler,
+            kilo, tansiyon ve tekme kayıtları, hatırlatıcılar ve diğer hiçbir içerik
+            <strong>tıbbi tavsiye, teşhis veya tedavi niteliği taşımaz.</strong> Uygulama
+            bilinçli olarak hiçbir değeri "normal", "yüksek" veya "riskli" diye
+            yorumlamaz; kayıtları yalnızca olduğu gibi gösterir. Bu değerlendirme
+            doktorunun işidir.
+          </p>
+          <p>
+            Hamileliğin, beslenmen, egzersizin veya bebeğinin gelişimiyle ilgili herhangi
+            bir sorun ya da endişen olduğunda <strong>daima doktoruna veya bir sağlık
+            kuruluşuna başvur.</strong> Uygulamadaki bilgilere dayanarak tıbbi desteğe
+            başvurmayı geciktirme veya aldığın tıbbi tavsiyeyi göz ardı etme.
+          </p>
         </div>
-        
-        <h2>1. Hizmetin Tanımı ve Kapsamı</h2>
-        <p>Minik Anlar, anne adaylarının hamilelik sürecini hafta hafta takip edebilmelerini, günlük ruh hallerini ve semptomlarını kaydedebilmelerini, doktor randevularını organize edebilmelerini ve bebekleriyle ilgili ultrason fotoğrafları ile anılarını kaydedebilmelerini sağlayan kişisel bir iOS platformudur.</p>
-        
-        <h2>2. Kişisel ve Ticari Olmayan Kullanım Lisansı</h2>
-        <p>Lumi-Zone, size bu Uygulamayı kişisel, ticari olmayan amaçlarla kullanmanız için sınırlı, münhasır olmayan, devredilemez ve iptal edilebilir bir lisans vermektedir.</p>
+
+        <h2>1. Hizmetin tanımı</h2>
+        <p>
+          Minik Anlar; gebelik haftası takibi, günlük ruh hali ve semptom kaydı, günlük
+          rutin, kilo/tansiyon/tekme kayıtları, doktor randevusu notları, anı ve fotoğraf
+          defteri, hastane çantası listesi ve yerel hatırlatıcılar sunan, cihaz içinde
+          çalışan kişisel bir uygulamadır. iOS {APP_STORE.minimumOSVersion} ve üzeri
+          gerektirir.
+        </p>
+
+        <h2>2. Kullanım lisansı</h2>
+        <p>
+          {SITE.publisher}, uygulamayı kişisel ve ticari olmayan amaçlarla kullanman için
+          sana sınırlı, münhasır olmayan, devredilemez ve iptal edilebilir bir lisans verir.
+        </p>
         <ul>
-          <li>Uygulamayı kopyalayamaz, çoğaltamaz, değiştiremez veya kaynak koduna dönüştüremezsiniz.</li>
-          <li>Uygulamayı herhangi bir ticari amaçla, kâr elde etmek amacıyla kiralayamaz, satamaz veya dağıtamazsınız.</li>
+          <li>Uygulamayı kopyalayamaz, çoğaltamaz, değiştiremez, tersine mühendislikle kaynak koduna dönüştüremezsin.</li>
+          <li>Uygulamayı kiralayamaz, satamaz, alt lisanslayamaz veya ticari amaçla dağıtamazsın.</li>
+          <li>Uygulama içinde oluşturduğun içerikler (fotoğraflar, notlar, videolar, albümler ve PDF'ler) sana aittir; bunları dilediğin gibi kullanabilir ve paylaşabilirsin.</li>
         </ul>
-        
-        <h2>3. Minik Anlar Premium (Abonelikler)</h2>
-        <p>Uygulamanın temel özellikleri tamamen ücretsizdir. Ancak "Dijital Albümler", "PDF Anı Kitabı" ve "Haftalık Anı Soruları" gibi ek özellikler "Minik Anlar Premium" paketi altında ücretli abonelik olarak sunulmaktadır.</p>
+
+        <h2>3. Minik Anlar Premium</h2>
+        <p>
+          Temel özellikler ücretsizdir. Gelişim Videosu, Dijital Albüm, PDF Anı Kitabı,
+          kayıtlı projeler, hizalı poz kamerası ve randevu özeti isteğe bağlı Premium
+          aboneliğiyle açılır. Fiyatlar, otomatik yenileme, deneme süresi, iptal ve iade
+          kuralları ayrı bir sayfada düzenlenmiştir:
+          <a href="/abonelik-kosullari/">Abonelik Koşulları</a>.
+        </p>
+
+        <h2>4. Verilerin ve veri kaybı riski</h2>
+        <p>
+          Gebelik kayıtların, günlüğün, fotoğrafların ve notların yalnızca cihazında
+          saklanır; bunlara erişimimiz yoktur. Abonelik doğrulaması için işlenen sınırlı
+          satın alma bilgileri
+          <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>'nda açıklanmıştır.
+        </p>
+        <div class="callout">
+          <p>
+            <strong>Telefonundaki kopya tek kopyadır.</strong> Cihazın arızalanır, kaybolur,
+            sıfırlanırsa veya uygulamayı silersen kayıtların da gider ve bizim tarafımızdan
+            geri getirilemez. Uygulamanın Ayarlar bölümündeki dışa aktarma özelliğiyle
+            düzenli yedek almanı önemle öneririz. Yedekleme kullanıcının kendi
+            sorumluluğundadır.
+          </p>
+        </div>
+
+        <h2>5. Kullanıcının sorumlulukları</h2>
         <ul>
-          <li><strong>Faturalandırma:</strong> Premium abonelik satın aldığınızda ödemeler iTunes/Apple Kimliği hesabınız üzerinden tahsil edilir.</li>
-          <li><strong>Otomatik Yenileme:</strong> Mevcut fatura döneminin bitimine en az 24 saat kala aboneliğinizi Apple ayarlarından iptal etmediğiniz sürece, aboneliğiniz otomatik olarak yenilenir.</li>
-          <li><strong>İptal ve İadeler:</strong> Aboneliklerinizi cihazınızın "Ayarlar > Apple ID > Abonelikler" bölümünden dilediğiniz zaman iptal edebilirsiniz. İade işlemleri bizzat Apple'ın kendi kurallarına tabi olup, doğrudan Apple destek birimi üzerinden yapılmalıdır.</li>
+          <li>Uygulamaya girdiğin bilgilerin doğruluğu sana aittir; hatalı tarih girişi hafta hesabını etkiler.</li>
+          <li>Uygulamayı yürürlükteki mevzuata aykırı biçimde kullanamazsın.</li>
+          <li>Başkasına ait fotoğrafları veya kişisel bilgileri onları paylaşma hakkın olmadan uygulamaya eklememelisin.</li>
         </ul>
-        
-        <h2>4. Veri Saklama, Güvenlik ve Veri Kaybı Riski</h2>
-        <p>Gizlilik Politikamızda da detaylıca belirtildiği üzere, Uygulama verilerinizi uzak sunuculara veya bulut veritabanlarına <strong>KAYDETMEZ</strong>. Tüm verileriniz cihazınızda yerel (local) olarak tutulur.</p>
-        <ul>
-          <li>Cihazınızın arızalanması, çalınması, sıfırlanması veya uygulamanın cihazınızdan silinmesi durumunda, kayıt ettiğiniz tüm anılar ve veriler de silinecektir.</li>
-          <li>Veri kaybı durumlarından dolayı Lumi-Zone kesinlikle sorumlu tutulamaz. Verilerinizin (fotoğraflarınızın vb.) cihaz dışına yedeklenmesi tamamen kullanıcının kendi sorumluluğundadır.</li>
-        </ul>
-        
-        <h2>5. Fikri Mülkiyet Hakları</h2>
-        <p>Uygulama içerisindeki tüm metinler, grafikler, kullanıcı arayüzleri, görsel arayüzler, fotoğraflar, logolar, müzikler, sesler, bilgisayar kodları ve tasarım ("İçerik") Lumi-Zone'a aittir ve uluslararası telif hakkı, marka hakları ve diğer fikri mülkiyet yasalarıyla korunmaktadır.</p>
-        
-        <h2>6. Sorumluluğun Sınırlandırılması</h2>
-        <p>Yasaların izin verdiği en geniş ölçüde, Lumi-Zone Uygulamanın veya Uygulama üzerinden sağlanan herhangi bir içeriğin kalitesi, doğruluğu veya kesintisiz çalışabilirliği konusunda hiçbir garanti (açık veya zımni) vermez. Uygulamadaki olası teknik hatalardan, erişim kesintilerinden, verilerin zarar görmesinden kaynaklanabilecek doğrudan, dolaylı, tesadüfi veya cezai zararlardan Lumi-Zone sorumlu tutulamaz.</p>
-        
-        <h2>7. Sözleşme Değişiklikleri</h2>
-        <p>Lumi-Zone, bu Kullanım Koşullarını önceden bildirimde bulunmaksızın dilediği zaman tek taraflı olarak değiştirme veya güncelleme hakkını saklı tutar. Uygulamayı kullanmaya devam etmeniz, değiştirilmiş koşulları kabul ettiğiniz anlamına gelir. Koşulların güncel halini web sitemizden veya uygulama içinden her zaman takip edebilirsiniz.</p>
-        
-        <h2>8. İletişim Bilgileri</h2>
-        <p>Bu Kullanım Koşulları ile ilgili herhangi bir sorunuz, geri bildiriminiz veya yasal talebiniz olması halinde bizimle e-posta yoluyla iletişime geçebilirsiniz:</p>
-        <p><strong>Destek E-posta:</strong> <a href="mailto:cfsmobiletech@gmail.com">cfsmobiletech@gmail.com</a></p>
+
+        <h2>6. Fikri mülkiyet</h2>
+        <p>
+          Uygulamanın kendisi — metinleri, haftalık içerikleri, arayüzü, grafikleri,
+          logosu, sesleri, tasarımı ve kaynak kodu — {SITE.publisher}'a aittir ve telif
+          hakkı ile marka mevzuatı tarafından korunur. Bu koşullar sana uygulamanın
+          içeriği üzerinde herhangi bir mülkiyet hakkı vermez.
+        </p>
+
+        <h2>7. Garanti reddi ve sorumluluğun sınırlandırılması</h2>
+        <p>
+          Uygulama "olduğu gibi" sunulur. Yasaların izin verdiği en geniş ölçüde
+          {SITE.publisher}; uygulamanın kesintisiz veya hatasız çalışacağına, içeriğin
+          eksiksiz veya senin durumuna uygun olacağına dair açık ya da zımni bir garanti
+          vermez.
+        </p>
+        <p>
+          Yasaların izin verdiği ölçüde {SITE.publisher}, uygulamanın kullanımından veya
+          kullanılamamasından doğan dolaylı, arızi veya sonuç niteliğindeki zararlardan
+          sorumlu tutulamaz. Tüketici mevzuatından doğan hakların saklıdır.
+        </p>
+
+        <h2>8. Koşullardaki değişiklikler</h2>
+        <p>
+          Bu koşulları güncelleyebiliriz. Güncel metin her zaman bu sayfada yayınlanır ve
+          yürürlük tarihi değişir. Uygulamayı kullanmaya devam etmen güncel koşulları
+          kabul ettiğin anlamına gelir.
+        </p>
+
+        <h2>9. Uygulanacak hukuk</h2>
+        <p>
+          Bu koşullara Türkiye Cumhuriyeti hukuku uygulanır. Tüketici olarak, yaşadığın
+          yerdeki tüketici hakem heyetlerine ve tüketici mahkemelerine başvurma hakkın
+          saklıdır.
+        </p>
+
+        <h2>10. İletişim</h2>
+        <p>
+          Sorular ve yasal bildirimler için:
+          <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>
+        </p>
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
-
-<style>
-  .legal-page {
-    padding: 60px 0 100px;
-    background-color: var(--pageBackground);
-  }
-  
-  .text-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .back-link {
-    margin-bottom: 40px;
-  }
-  
-  .back-link a {
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-  
-  .back-link a:hover {
-    color: var(--accent);
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  
-  .last-updated {
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: 40px;
-  }
-  
-  .content-body {
-    background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    line-height: 1.8;
-  }
-  
-  .medical-disclaimer {
-    background-color: rgba(255, 107, 107, 0.1);
-    border-left: 4px solid #ff6b6b;
-    padding: 24px;
-    border-radius: 0 8px 8px 0;
-    margin: 30px 0;
-  }
-  
-  .medical-disclaimer h2 {
-    color: #e03131 !important;
-    border-bottom: none !important;
-    margin-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  
-  .medical-disclaimer p:last-child {
-    margin-bottom: 0;
-  }
-  
-  .content-body h2 {
-    color: var(--ink);
-    font-size: 1.5rem;
-    margin: 40px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .content-body h2:first-of-type:not(.medical-disclaimer h2) {
-    margin-top: 30px;
-  }
-  
-  .content-body p {
-    margin-bottom: 20px;
-  }
-  
-  .content-body ul, .content-body ol {
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  
-  .content-body li {
-    margin-bottom: 10px;
-  }
-  
-  .content-body strong {
-    color: var(--ink);
-  }
-  
-  @media (max-width: 768px) {
-    .content-body {
-      padding: 24px;
-    }
-  }
-</style>

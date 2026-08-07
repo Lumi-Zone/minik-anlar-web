@@ -6,84 +6,110 @@ interface FAQItem {
 
 interface Props {
   items: FAQItem[];
+  title?: string;
 }
 
-const { items } = Astro.props;
+const { items, title = 'Sıkça Sorulan Sorular' } = Astro.props;
 ---
 
-<section class="faq-section">
+<section class="faq" id="sss" aria-labelledby="faq-title">
   <div class="container">
-    <h2>Sıkça Sorulan Sorular</h2>
-    
+    <h2 id="faq-title">{title}</h2>
+
     <div class="faq-list">
-      {items.map((item) => (
-        <details class="faq-item">
-          <summary class="faq-question">
-            {item.q}
-            <span class="icon">+</span>
-          </summary>
-          <div class="faq-answer">
-            <p>{item.a}</p>
-          </div>
-        </details>
-      ))}
+      {
+        items.map((item) => (
+          <details class="faq-item">
+            <summary>
+              <span>{item.q}</span>
+              <span class="icon" aria-hidden="true" />
+            </summary>
+            <div class="faq-answer">
+              <p set:html={item.a} />
+            </div>
+          </details>
+        ))
+      }
     </div>
   </div>
 </section>
 
 <style>
-  .faq-section {
-    padding: 80px 0;
+  .faq {
+    padding: 84px 0;
   }
-  
-  .faq-section h2 {
+
+  .faq h2 {
     text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 50px;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 44px;
   }
-  
+
   .faq-list {
-    max-width: 800px;
-    margin: 0 auto;
+    max-width: var(--prose-width);
+    margin-inline: auto;
+    display: grid;
+    gap: 12px;
   }
-  
+
   .faq-item {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    margin-bottom: 16px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-sm);
     overflow: hidden;
   }
-  
-  .faq-item[open] .icon {
-    transform: rotate(45deg);
-  }
-  
-  .faq-question {
-    padding: 24px;
-    font-size: 1.1rem;
+
+  summary {
+    padding: 20px 24px;
+    font-size: 1.0625rem;
     font-weight: 600;
     color: var(--ink);
     cursor: pointer;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 16px;
     list-style: none;
   }
-  
-  .faq-question::-webkit-details-marker {
+
+  summary::-webkit-details-marker {
     display: none;
   }
-  
+
+  /* Artı işareti iki sözde elemanla çizilir; açıkken eksiye döner. */
   .icon {
-    font-size: 1.5rem;
-    color: var(--accent);
-    transition: transform 0.3s ease;
+    position: relative;
+    flex: none;
+    width: 16px;
+    height: 16px;
   }
-  
+
+  .icon::before,
+  .icon::after {
+    content: '';
+    position: absolute;
+    background: var(--primary);
+    border-radius: 2px;
+    inset-block: 7px;
+    inset-inline: 0;
+  }
+
+  .icon::after {
+    inset-block: 0;
+    inset-inline: 7px;
+    transition: opacity 0.2s ease;
+  }
+
+  .faq-item[open] .icon::after {
+    opacity: 0;
+  }
+
   .faq-answer {
-    padding: 0 24px 24px;
+    padding: 0 24px 22px;
     color: var(--text-secondary);
-    line-height: 1.6;
+  }
+
+  .faq-answer :global(a) {
+    font-weight: 500;
   }
 </style>

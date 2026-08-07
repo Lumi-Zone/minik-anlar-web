@@ -1,104 +1,144 @@
 ---
 interface Props {
+  id: string;
+  eyebrow: string;
   title: string;
+  intro: string;
   items: string[];
-  mockupLabel: string;
+  /** Yandaki panelde gösterilen kısa vurgular. */
+  highlights: { label: string; value: string }[];
   reverse?: boolean;
 }
 
-const { title, items, mockupLabel, reverse = false } = Astro.props;
+const { id, eyebrow, title, intro, items, highlights, reverse = false } = Astro.props;
 ---
 
-<section class="feature-section">
-  <div class={`container feature-container ${reverse ? 'reverse' : ''}`}>
-    <div class="feature-content">
-      <h2>{title}</h2>
-      <ul>
-        {items.map((item) => (
-          <li>{item}</li>
-        ))}
+<section class={`feature ${reverse ? 'reverse' : ''}`} aria-labelledby={`${id}-title`}>
+  <div class="container feature-grid">
+    <div class="feature-copy">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id={`${id}-title`}>{title}</h2>
+      <p class="intro">{intro}</p>
+      <ul class="feature-list">
+        {items.map((item) => <li>{item}</li>)}
       </ul>
     </div>
-    
-    <div class="feature-visual">
-      <div class="mockup-placeholder">
-        <span>{mockupLabel}</span>
-      </div>
+
+    <div class="feature-panel">
+      <dl>
+        {
+          highlights.map((h) => (
+            <div class="highlight">
+              <dt>{h.label}</dt>
+              <dd>{h.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
     </div>
   </div>
 </section>
 
 <style>
-  .feature-section {
-    padding: 80px 0;
-  }
-  
-  .feature-container {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-  }
-  
-  .feature-container.reverse {
-    flex-direction: row-reverse;
-  }
-  
-  .feature-content {
-    flex: 1;
-  }
-  
-  .feature-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 30px;
-    color: var(--ink);
-  }
-  
-  .feature-content ul {
-    list-style: none;
-  }
-  
-  .feature-content li {
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 16px;
-    position: relative;
-    padding-left: 30px;
-  }
-  
-  .feature-content li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-weight: bold;
-  }
-  
-  .feature-visual {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .mockup-placeholder {
-    width: 280px;
-    height: 560px;
-    background-color: var(--card-bg);
-    border: 8px solid var(--border-color);
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-secondary);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  .feature {
+    padding: 72px 0;
   }
 
-  @media (max-width: 768px) {
-    .feature-container, .feature-container.reverse {
-      flex-direction: column;
-      text-align: center;
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  .feature.reverse .feature-copy {
+    order: 2;
+  }
+
+  .feature-copy h2 {
+    font-size: clamp(1.7rem, 3.6vw, 2.25rem);
+    margin-bottom: 14px;
+  }
+
+  .intro {
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    margin-bottom: 24px;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 13px;
+  }
+
+  .feature-list li {
+    position: relative;
+    padding-left: 30px;
+    color: var(--text-secondary);
+  }
+
+  .feature-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+
+  .feature-panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 12px;
+    box-shadow: var(--shadow-soft);
+  }
+
+  .feature-panel dl {
+    margin: 0;
+    display: grid;
+    gap: 4px;
+  }
+
+  .highlight {
+    background: var(--page-bg);
+    border-radius: var(--radius-sm);
+    padding: 18px 20px;
+  }
+
+  .highlight dt {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 4px;
+  }
+
+  .highlight dd {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+  }
+
+  @media (max-width: 900px) {
+    .feature {
+      padding: 48px 0;
     }
-    .feature-content li {
-      text-align: left;
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .feature.reverse .feature-copy {
+      order: 0;
     }
   }
 </style>

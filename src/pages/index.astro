@@ -7,132 +7,171 @@ import PremiumSection from '../components/PremiumSection.astro';
 import FAQ from '../components/FAQ.astro';
 import DownloadCTA from '../components/DownloadCTA.astro';
 import Footer from '../components/Footer.astro';
+import { SITE, APP_STORE, SUBSCRIPTIONS, CURRENCY } from '../config';
 
-const title = "Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması";
-const description = "Hafta hafta gebelik takibi yapın, en özel anlarınızı tek yerde güvenle saklayın. Hesap yok, reklam yok.";
+const title = 'Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması';
+const description =
+  'Hafta hafta gebelik takibi, günlük ve anı defteri tek uygulamada. Kayıtların telefonunda kalır: hesap yok, reklam yok, izleme yok. iPhone için, tamamen Türkçe.';
 
+/**
+ * SSS metinleri hem sayfada hem `FAQPage` JSON-LD'sinde kullanılır.
+ * Cevaplar uygulamanın gerçek davranışını anlatır — çevrimdışı ve gizlilik
+ * ifadeleri için plan.md § 2.1'e bak.
+ */
 const faqItems = [
   {
-    q: "Gebelik haftam nasıl hesaplanıyor?",
-    a: "Uygulamamız üç farklı yöntem sunar: Standart hesaplama için 'Son Adet Tarihi'ni, doktorunuzdan aldıysanız 'Tahmini Doğum Tarihi'ni veya biliyorsanız 'Gebe Kalma Tarihi'ni kullanabilirsiniz."
+    q: 'Gebelik haftam nasıl hesaplanıyor?',
+    a: 'Üç yöntemden birini seçebilirsin: son adet tarihi (standart yöntem), gebe kalma tarihi veya doktorunun verdiği tahmini doğum tarihi. Hesap 280 günlük gebelik üzerinden yapılır ve 40. haftada durur.',
   },
   {
-    q: "Verilerim nerede saklanıyor?",
-    a: "Tüm verileriniz yalnızca kendi cihazınızda (telefonunuzda) saklanır. Uygulamamızın bir veritabanı veya sunucusu yoktur, hesap oluşturmanız gerekmez."
+    q: 'Verilerim nerede saklanıyor?',
+    a: 'Gebelik profilin, günlük kayıtların, anıların, fotoğrafların ve randevuların yalnızca telefonunda saklanır. Uygulamanın kullanıcı hesabı yoktur ve bu kayıtlar bizim erişebileceğimiz bir sunucuya gönderilmez.',
   },
   {
-    q: "İnternet bağlantısı gerekiyor mu?",
-    a: "Hayır, Minik Anlar tamamen çevrimdışı çalışır. Tüm özelliklere internet bağlantısı olmadan da erişebilirsiniz."
+    q: 'İnternet bağlantısı gerekiyor mu?',
+    a: 'Takip, günlük, anılar ve hatırlatıcılar internet olmadan çalışır. Yalnızca Premium satın alma ekranını açmak, satın alma yapmak veya aboneliği geri yüklemek için bağlantı gerekir.',
   },
   {
-    q: "Uygulama ücretsiz mi?",
-    a: "Evet, hafta hafta takip ve günlük gibi temel özellikler tamamen ücretsizdir. Dijital albümler ve PDF anı kitabı gibi ekstralar isteğe bağlı Premium paketle sunulur."
+    q: 'Uygulama ücretsiz mi?',
+    a: 'Evet. Hafta hafta takip, günlük, anı defteri, hatırlatıcılar ve sağlık kayıtları ücretsizdir. Gelişim videosu ve PDF anı kitabının kısa birer örneğini de ücretsiz oluşturabilirsin.',
   },
   {
-    q: "Android sürümü var mı?",
-    a: "Şu an için Minik Anlar yalnızca iOS cihazlarda (iPhone ve iPad) kullanılabilmektedir."
+    q: 'Premium neyi açıyor?',
+    a: 'Tam uzunlukta gelişim videosu, altı temalı dijital albüm, tüm anılarını içeren PDF Anı Kitabı, kayıtlı video ve albüm projeleri, hizalı haftalık poz kamerası ve doktor randevusu özeti.',
   },
   {
-    q: "Tıbbi tavsiye veriyor mu?",
-    a: "Hayır, Minik Anlar'daki tüm içerikler genel bilgilendirme amaçlıdır ve tıbbi tavsiye yerine geçmez. Sağlığınızla ilgili kararlarda daima doktorunuza danışın."
+    q: 'Verilerimi yedekleyebilir miyim?',
+    a: 'Evet. Ayarlar bölümünden tüm kayıtlarını ve fotoğraflarını tek bir arşiv dosyası olarak dışa aktarabilir, dilediğin yere kaydedebilirsin. Uygulamanın sunucusu olmadığı için telefonundaki kopya tek kopyadır; düzenli yedek almanı öneririz.',
   },
   {
-    q: "Aboneliğimi nasıl iptal ederim?",
-    a: "Cihazınızdan Ayarlar → Apple ID → Abonelikler adımlarını izleyerek aboneliğinizi dilediğiniz zaman iptal edebilirsiniz."
-  }
+    q: 'Android sürümü var mı?',
+    a: `Şu an yalnızca iPhone için sunuluyor (iOS ${APP_STORE.minimumOSVersion} ve üzeri).`,
+  },
+  {
+    q: 'Tıbbi tavsiye veriyor mu?',
+    a: 'Hayır. Haftalık içerikler ve sağlık kayıtları bilgilendirme ve kişisel takip amaçlıdır; neyin normal olduğunu değerlendirmez ve tıbbi tavsiye yerine geçmez. Sağlık kararların için doktoruna danış.',
+  },
+  {
+    q: 'Aboneliğimi nasıl iptal ederim?',
+    a: 'iPhone\'unda Ayarlar → [adın] → Abonelikler → Minik Anlar yolunu izleyerek dilediğin zaman iptal edebilirsin. Mevcut dönemin sonuna kadar Premium açık kalır.',
+  },
 ];
 
-const softwareAppJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "SoftwareApplication",
-  "name": "Minik Anlar",
-  "operatingSystem": "iOS",
-  "applicationCategory": "HealthApplication",
-  "offers": {
-    "@type": "Offer",
-    "price": "79.99",
-    "priceCurrency": "TRY"
-  }
-});
+const softwareApplication = {
+  '@context': 'https://schema.org',
+  '@type': 'SoftwareApplication',
+  name: SITE.name,
+  description,
+  operatingSystem: `iOS ${APP_STORE.minimumOSVersion}+`,
+  applicationCategory: 'HealthApplication',
+  inLanguage: 'tr',
+  offers: SUBSCRIPTIONS.map((plan) => ({
+    '@type': 'Offer',
+    name: `${SITE.name} Premium — ${plan.name}`,
+    price: plan.priceValue,
+    priceCurrency: CURRENCY,
+    category: 'subscription',
+  })),
+};
 
-const faqJsonLd = JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": faqItems.map(item => ({
-    "@type": "Question",
-    "name": item.q,
-    "acceptedAnswer": {
-      "@type": "Answer",
-      "text": item.a
-    }
-  }))
-});
-
-const combinedJsonLd = `[${softwareAppJsonLd}, ${faqJsonLd}]`;
+const faqPage = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
 ---
 
-<BaseLayout title={title} description={description} jsonLd={combinedJsonLd}>
-  <main>
+<BaseLayout title={title} description={description} schemas={[softwareApplication, faqPage]}>
+  <main id="main">
     <Hero />
     <PrivacyStrip />
-    
-    <div class="features-wrapper">
+
+    <div id="ozellikler">
       <FeatureSection
-        title="Hafta Hafta Takip"
+        id="takip"
+        eyebrow="Bugün"
+        title="Hafta hafta ne olduğunu gerçekten anlat"
+        intro="Her hafta için ayrı yazılmış, birbirinin tekrarı olmayan içerik: bebeğin gelişimi, senin bedenindeki değişim ve o haftaya özel bir bilgi."
         items={[
-          "40 haftanın her biri için bebeğin gelişimi ve annenin bedenindeki değişim özeti",
-          "Bebek boyutu karşılaştırmaları (haşhaş tohumu → yaban mersini...)",
-          "Trimester rehberi ve gebelik ilerleme halkası",
-          "3 farklı yöntemle hassas hafta hesabı"
+          '40 haftanın her biri için ayrı başlık, bebek ve anne tarafından üçer maddelik somut özet',
+          'Her hafta değişen “Bunu biliyor muydun?” notu',
+          'Bebek boyutu karşılaştırması ile tahmini boy ve ağırlık',
+          'Gebelik ilerleme halkası ve trimester rehberi',
+          'Hafta hesabı üç yöntemle: son adet tarihi, gebe kalma tarihi veya tahmini doğum tarihi',
         ]}
-        mockupLabel="Bugün Sekmesi"
+        highlights={[
+          { label: 'İçerik', value: '40 haftanın tamamı yazıldı' },
+          { label: 'Hesaplama', value: '280 gün · 3 farklı başlangıç' },
+          { label: 'Ton', value: 'Anlatır, teşhis koymaz' },
+        ]}
       />
-      
+
       <FeatureSection
-        title="Günlüğünüz ve Sağlığınız"
+        id="gunluk"
+        eyebrow="Günlük"
+        title="Nasıl hissettiğini ve doktorunla konuşacaklarını kaydet"
+        intro="Günü birkaç dokunuşla işaretle, doktor randevularına hazırlıklı git."
         items={[
-          "Ruh hali, enerji seviyesi ve semptom kaydı",
-          "Günün mini listesi: su içme, vitamin alma, yürüyüş",
-          "Doktor randevuları için soru listesi hazırlama ve randevu sonrası notlar"
+          'Ruh hali, enerji seviyesi ve semptom kaydı',
+          'Günlük rutin: su, vitamin, kısa yürüyüş ve kendi eklediğin hedefler',
+          'Doktor randevuları: öncesinde soru listesi, sonrasında notlar',
+          'Kilo, tansiyon ve tekme sayacı kayıtları',
+          'Randevuya götürebileceğin tek sayfalık özet',
         ]}
-        mockupLabel="Günlük Sekmesi"
+        highlights={[
+          { label: 'Sağlık kayıtları', value: 'Kilo · Tansiyon · Tekme' },
+          { label: 'Yaklaşım', value: 'Değer gösterir, yorum yapmaz' },
+          { label: 'Randevu', value: 'Soru listesi ve notlar bir arada' },
+        ]}
         reverse={true}
       />
-      
+
       <FeatureSection
-        title="En Özel Anılarınız"
+        id="anilar"
+        eyebrow="Anılar"
+        title="Bu dönemin fotoğrafları galerinde kaybolmasın"
+        intro="Haftalık pozlar, ultrasonlar, ilkler ve bebeğine yazdığın mektuplar tek bir zaman tünelinde."
         items={[
-          "Haftalık hamilelik pozu fotoğraf albümü",
-          "Ultrason fotoğrafları, 'ilkler', bebeğe notlar ve komik anlar",
-          "Zaman tüneli ve özel albüm görünümleri"
+          'Haftalık poz albümü ve hizalı poz kamerası: önceki haftanın karesi hayalet çerçeve olarak görünür',
+          'Ultrason fotoğrafları, “ilkler”, komik anlar ve bebeğe notlar',
+          'Zaman tüneli ve albüm görünümleri',
+          'Paylaşmak için hazırlanan anı kartları',
         ]}
-        mockupLabel="Anılar Sekmesi"
+        highlights={[
+          { label: 'Poz kamerası', value: 'Aynı açıdan, her hafta' },
+          { label: 'Fotoğraflar', value: 'Cihazda saklanır' },
+          { label: 'Görünüm', value: 'Zaman tüneli ve albüm' },
+        ]}
       />
-      
+
       <FeatureSection
-        title="Doğuma Hazırlık"
+        id="hazirlik"
+        eyebrow="Hazırlık"
+        title="Doğuma kadar yanında, doğumdan sonra da"
+        intro="Nazik hatırlatıcılar, hastane çantası listesi ve yolculuğunun sonunda toparlanan özet."
         items={[
-          "Kapsamlı hastane çantası kontrol listesi",
-          "Yerel bildirimlerle nazik günlük ve haftalık hatırlatıcılar"
+          'Hastane çantası kontrol listesi',
+          'Yerel bildirimlerle günlük ve haftalık hatırlatıcılar',
+          'Doğum tarihini girdiğinde geri sayım yerini doğum özetine bırakır',
+          'Tüm kayıtlarını ve fotoğraflarını tek arşiv dosyası olarak dışa aktarma',
         ]}
-        mockupLabel="Doğuma Hazırlık"
+        highlights={[
+          { label: 'Bildirimler', value: 'Cihaz içi, sunucusuz' },
+          { label: 'Yedekleme', value: 'Tek dosyada dışa aktarım' },
+          { label: 'Doğum sonrası', value: 'Yolculuk özeti' },
+        ]}
         reverse={true}
       />
     </div>
-    
+
     <PremiumSection />
-    
     <FAQ items={faqItems} />
-    
     <DownloadCTA />
   </main>
-  
+
   <Footer />
 </BaseLayout>
-
-<style>
-  .features-wrapper {
-    background-color: var(--pageBackground);
-    position: relative;
-  }
-</style>

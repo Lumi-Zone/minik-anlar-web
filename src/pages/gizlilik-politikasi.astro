@@ -1,149 +1,182 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { SITE } from '../config';
 
-const title = "Gizlilik Politikası – Minik Anlar";
-const description = "Minik Anlar uygulamasının detaylı gizlilik politikası. Veri toplanmaz, her şey cihazınızda güvende kalır.";
+const title = 'Gizlilik Politikası – Minik Anlar';
+const description =
+  'Minik Anlar gizlilik politikası: gebelik kayıtların cihazında kalır, hesap ve reklam yoktur. Abonelik doğrulaması için işlenen verileri açıkça listeleriz.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="legal-page">
-    <div class="container text-content">
-      <div class="back-link">
-        <a href="/">&larr; Ana Sayfaya Dön</a>
-      </div>
-      
+  <main id="main" class="legal-page">
+    <div class="container prose-wrap">
+      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
+
       <h1>Gizlilik Politikası</h1>
-      <p class="last-updated">Son Güncelleme: 18 Temmuz 2026</p>
-      
+      <p class="last-updated">
+        Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
+      </p>
+
       <div class="content-body">
-        <p>Minik Anlar ("Uygulama") olarak, mahremiyetinize ve kişisel verilerinizin güvenliğine en yüksek önemi veriyoruz. Hamilelik süreci gibi son derece hassas bir dönemde kaydettiğiniz verilerin gizliliği bizim için önceliklidir.</p>
-        <p>İşbu Gizlilik Politikası, uygulamamızı kullandığınızda bilgilerinizi nasıl işlediğimizi (veya işlemediğimizi) şeffaf bir şekilde açıklamak amacıyla hazırlanmıştır.</p>
-        
-        <h2>1. Temel Prensibimiz: Sıfır Veri Toplama</h2>
-        <p><strong>Minik Anlar uygulaması hiçbir şekilde kişisel veri TOPLAMAZ, İŞLEMEZ ve SUNUCULARINA AKTARMAZ.</strong></p>
+        <p>
+          Minik Anlar ("Uygulama"), hamilelik sürecini takip etmen ve anılarını saklaman için
+          geliştirilmiş bir iPhone uygulamasıdır. Hamilelik verisi en hassas veri
+          kategorilerinden biridir; bu politika, hangi bilgilerin nerede kaldığını ve hangi
+          sınırlı bilgilerin kimlerle paylaşıldığını olduğu gibi anlatır.
+        </p>
+
+        <div class="callout">
+          <h3>Kısaca</h3>
+          <p>
+            Gebelik kayıtların, günlüğün, fotoğrafların ve notların <strong>yalnızca
+            telefonunda</strong> saklanır. Kullanıcı hesabı yoktur, reklam yoktur, uygulama
+            içi davranışın izlenmez. Tek istisna: Premium satın alman doğrulanırken
+            Apple ve abonelik altyapımız Adapty ile <strong>satın alma bilgisi</strong>
+            paylaşılır. Bu kapsam aşağıda ayrıntılı yazılıdır.
+          </p>
+        </div>
+
+        <h2>1. Cihazında kalan bilgiler</h2>
+        <p>
+          Aşağıdaki kayıtların tamamı telefonunun kendi depolama alanında tutulur. Bu veriler
+          bize veya üçüncü taraflara gönderilmez; bizim bu kayıtlara erişimimiz yoktur.
+        </p>
         <ul>
-          <li><strong>Hesap Oluşturma Yok:</strong> Uygulamayı kullanmak için adınız, soyadınız, e-posta adresiniz veya telefon numaranız gibi kişisel bilgilerinizi girerek bir hesap açmanız gerekmez.</li>
-          <li><strong>Yerel Depolama (Local Storage):</strong> Uygulama içerisine kaydettiğiniz tüm bilgiler (gebelik haftası, son adet tarihi, günlük notları, ruh hali, semptomlar, ultrason fotoğrafları, randevular) <strong>yalnızca telefonunuzun dahili hafızasında (yerel olarak)</strong> saklanır.</li>
-          <li><strong>Sunucu/Veritabanı Yok:</strong> Uygulamanın geliştiricisi olarak bizlerin (Lumi-Zone) ve üçüncü şahısların bu verilere erişim imkânı bulunmamaktadır. Verileriniz buluta veya herhangi bir dış sunucuya gönderilmez.</li>
+          <li>Gebelik profilin: son adet tarihi, gebe kalma tarihi veya tahmini doğum tarihi, bebeğin cinsiyeti, tema tercihi, doğum tarihi</li>
+          <li>Günlük kayıtların: ruh hali, enerji seviyesi, semptomlar, günlük rutin işaretleri</li>
+          <li>Sağlık kayıtların: kilo, tansiyon ve tekme sayacı ölçümleri</li>
+          <li>Doktor randevuların, randevu öncesi soruların ve sonrası notların</li>
+          <li>Anıların: haftalık poz fotoğrafları, ultrason görüntüleri, "ilkler", bebeğe yazdığın notlar ve mektuplar</li>
+          <li>Hatırlatıcı tercihlerin</li>
+        </ul>
+        <p>
+          Fotoğraflar uygulamanın kendi izole klasöründe saklanır. Uygulama içinde ürettiğin
+          gelişim videosu, dijital albüm ve PDF anı kitabı da tamamen cihazında oluşturulur;
+          bu dosyalar sen paylaşmayı seçmedikçe cihazından çıkmaz.
+        </p>
+
+        <h2>2. Hesap ve reklam</h2>
+        <ul>
+          <li><strong>Kullanıcı hesabı yoktur.</strong> Uygulamayı kullanmak için ad, e-posta, telefon numarası veya başka bir kimlik bilgisi vermezsin.</li>
+          <li><strong>Reklam gösterilmez.</strong> Uygulamada reklam ağı veya reklam SDK'sı bulunmaz.</li>
+          <li><strong>Reklam takibi yapılmaz.</strong> Uygulama Apple'ın izleme izni (App Tracking Transparency) kapsamında izleme yapmaz ve reklam kimliğini (IDFA) toplamaz.</li>
         </ul>
 
-        <h2>2. Uygulama İzinleri ve Kullanım Amaçları</h2>
-        <p>Uygulamanın özelliklerini tam ve verimli kullanabilmeniz için cihazınızdan bazı erişim izinleri istenebilir. Bu erişim izinleri kesinlikle verilerinizin toplanması veya satılması amacıyla kullanılmaz, sadece cihaz içi temel işlevleri yerine getirmek içindir:</p>
-        <ul>
-          <li><strong>Fotoğraf Galerisi / Kamera:</strong> Uygulama içerisindeki "Anılar" sekmesine ultrason fotoğraflarınızı, göbek büyüme fotoğraflarınızı ekleyebilmeniz için cihazınızın galerisine erişim izni istenir. Bu fotoğraflar uygulamanın kendi içerisindeki izole alanında saklanır ve cihaz dışına çıkarılmaz.</li>
-          <li><strong>Bildirimler (Push Notifications):</strong> Günlük ilaç hatırlatıcıları, su içme hatırlatıcıları veya haftalık hamilelik dönüm noktası bilgilendirmeleri için bildirim izni istenir. Bu bildirimler uzak bir sunucudan değil, cihazınızın kendi sisteminden "yerel bildirim" (Local Notification) olarak programlanır.</li>
-        </ul>
-        
-        <h2>3. Üçüncü Taraf Hizmetleri (Analytics ve Reklamlar)</h2>
-        <p>Minik Anlar uygulamasında <strong>hiçbir üçüncü taraf izleme (tracking), analiz (analytics) veya reklam (ad SDK) yazılımı kullanılmamaktadır.</strong> Uygulama içindeki davranışlarınız izlenmez, profiliniz çıkarılmaz ve bu veriler reklamverenlere satılmaz.</p>
-        
-        <h2>4. Satın Alma İşlemleri ve Finansal Bilgiler</h2>
-        <p>Uygulama içerisinde sunulan "Minik Anlar Premium" aboneliği ile ilgili tüm ödeme ve faturalandırma işlemleri doğrudan Apple / App Store (StoreKit) aracılığıyla güvenli bir şekilde gerçekleştirilir.</p>
-        <ul>
-          <li>Biz (Lumi-Zone), kredi kartı numaranız, fatura adresiniz veya finansal hesap bilgileriniz gibi hiçbir ödeme verisine sahip değiliz ve bunları saklamayız.</li>
-          <li>Ödeme verilerinizin nasıl işlendiğini öğrenmek için <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple'ın Gizlilik Politikası</a>'nı inceleyebilirsiniz.</li>
-        </ul>
+        <h2>3. Abonelik işlemleri için paylaşılan bilgiler</h2>
+        <p>
+          Minik Anlar Premium aboneliği App Store üzerinden satılır. Bu işlemin çalışabilmesi
+          için iki taraf devreye girer:
+        </p>
 
-        <h2>5. Veri Güvenliği ve Silinmesi</h2>
-        <p>Verileriniz cihazınızda yerel olarak saklandığından, cihazınızın genel güvenlik önlemleri (örneğin cihaz parolanız veya Face ID) uygulamanın verilerini de korur.</p>
-        <ul>
-          <li>Eğer uygulamayı cihazınızdan silerseniz (kaldırırsanız), uygulamaya girdiğiniz tüm veriler ve anılar cihazınızdan <strong>kalıcı olarak silinir</strong>. Sistemimizde bir yedeği bulunmadığı için bu veriler bizim tarafımızdan geri getirilemez.</li>
-        </ul>
-        
-        <h2>6. Çocukların Gizliliği (COPPA Uyumluluğu)</h2>
-        <p>Minik Anlar uygulaması, 18 yaş ve üzeri bireylerin (anne adayları) kullanımına yönelik tasarlanmıştır. 13 yaşın altındaki çocuklardan bilerek veya kasıtlı olarak hiçbir bilgi toplamıyoruz. Eğer 13 yaşın altında bir bireyin uygulamayı kullandığını fark ederseniz, cihazdaki uygulamayı silerek verileri doğrudan imha edebilirsiniz.</p>
+        <h3>Apple</h3>
+        <p>
+          Ödeme, faturalandırma ve abonelik yönetimi doğrudan Apple tarafından yürütülür.
+          Kart bilgilerine, fatura adresine veya finansal hesap bilgilerine erişimimiz yoktur
+          ve bunları saklamayız. Apple'ın veri işleme koşulları için
+          <a href="https://www.apple.com/legal/privacy/tr/" target="_blank" rel="noopener noreferrer">Apple Gizlilik Politikası</a>'na bakabilirsin.
+        </p>
 
-        <h2>7. Değişiklikler ve Güncellemeler</h2>
-        <p>Uygulamaya yeni özellikler eklendiğinde bu Gizlilik Politikasında değişiklik veya güncellemeler yapabiliriz. Herhangi bir değişiklik durumunda, politikanın "Son Güncelleme" tarihini güncelleyerek bu sayfada yayınlayacağız. Önemli bir değişiklik olması durumunda (örneğin veri toplama modelinin değişmesi), uygulama içi bildirim ile sizi bilgilendiririz.</p>
-        
-        <h2>8. İletişim</h2>
-        <p>Gizlilik uygulamalarımız hakkında sorularınız, endişeleriniz veya şikayetleriniz varsa, lütfen aşağıdaki e-posta adresinden bizimle iletişime geçmekten çekinmeyin:</p>
-        <p><strong>E-posta:</strong> <a href="mailto:cfsmobiletech@gmail.com">cfsmobiletech@gmail.com</a></p>
+        <h3>Adapty</h3>
+        <p>
+          Satın almanın geçerliliğini doğrulamak, Premium erişimini açık tutmak ve abonelik
+          performansını ölçmek için abonelik altyapısı olarak Adapty hizmetini kullanıyoruz.
+          Bu kapsamda işlenen bilgiler satın alma ve abonelik bilgileridir:
+        </p>
+        <ul>
+          <li>Satın aldığın ürün, işlem kimliği, satın alma ve yenileme tarihleri</li>
+          <li>Aboneliğin durumu (etkin, iptal edilmiş, deneme sürümünde, süresi dolmuş)</li>
+          <li>Cihaz ve uygulama sürümü gibi teknik bilgiler ile uygulamanın Adapty tarafından atanan anonim kullanıcı kimliği</li>
+        </ul>
+        <p>
+          <strong>Adapty'ye gebelik verilerin, günlük kayıtların, sağlık ölçümlerin,
+          fotoğrafların veya notların gönderilmez.</strong> Adapty tarafında reklam kimliği
+          (IDFA) toplama ve IP adresi toplama kapalıdır.
+        </p>
+
+        <h2>4. İnternet bağlantısı</h2>
+        <p>
+          Hafta hafta takip, günlük, anılar, sağlık kayıtları ve hatırlatıcılar internet
+          bağlantısı olmadan çalışır. Bağlantı yalnızca Premium satın alma ekranını açmak,
+          satın alma yapmak veya mevcut aboneliğini geri yüklemek için gerekir.
+        </p>
+
+        <h2>5. İzinler</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>İzin</th>
+              <th>Ne zaman istenir</th>
+              <th>Ne için kullanılır</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Fotoğraf kitaplığı</td>
+              <td>Anılara fotoğraf eklemek istediğinde</td>
+              <td>Yalnızca senin seçtiğin görseller uygulamaya kopyalanır</td>
+            </tr>
+            <tr>
+              <td>Kamera</td>
+              <td>Uygulama içi haftalık poz çekiminde</td>
+              <td>Çekilen kare cihazında saklanır, hiçbir yere gönderilmez</td>
+            </tr>
+            <tr>
+              <td>Bildirimler</td>
+              <td>Onboarding sırasında veya Ayarlar'dan</td>
+              <td>Cihazın kendisinde planlanan yerel hatırlatıcılar</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          Tüm izinler isteğe bağlıdır ve iOS Ayarlar bölümünden dilediğin zaman geri
+          alınabilir. İzin vermeden de uygulamanın temel takip özelliklerini kullanabilirsin.
+        </p>
+
+        <h2>6. Verilerinin saklanması, yedeklenmesi ve silinmesi</h2>
+        <ul>
+          <li>Veriler cihazında saklandığı için telefonunun kilidi ve şifrelemesi bu verileri de korur.</li>
+          <li>Ayarlar bölümünden tüm kayıtlarını ve fotoğraflarını tek bir arşiv dosyası olarak dışa aktarabilirsin. Uygulamanın sunucusu olmadığından telefonundaki kopya tek kopyadır; düzenli yedek almanı öneririz.</li>
+          <li>Uygulamayı sildiğinde uygulama içindeki tüm veriler cihazından kalıcı olarak silinir. Bizde bir kopyası bulunmadığı için bu veriler geri getirilemez.</li>
+          <li>Cihaz yedeklerin iCloud veya bilgisayarında tutuluyorsa, uygulama verilerin bu yedeklerin bir parçası olabilir. Yedeklerin yönetimi Apple'ın koşullarına tabidir.</li>
+        </ul>
+        <p>
+          Abonelik kayıtları, yasal ve muhasebesel yükümlülükler ile abonelik durumunun
+          doğrulanabilmesi için Apple ve Adapty tarafında saklanmaya devam eder; bu kayıtlar
+          uygulamayı silmenle ortadan kalkmaz.
+        </p>
+
+        <h2>7. Haklarınız</h2>
+        <p>
+          Kişisel gebelik kayıtların bizim erişimimizde olmadığı için bu veriler üzerinde
+          erişim, düzeltme ve silme işlemlerini doğrudan uygulama içinden yaparsın.
+          Abonelik bilgilerinle ilgili bir talebin varsa (erişim, düzeltme, silme veya
+          itiraz) aşağıdaki e-posta adresinden bize ulaşabilirsin; talebini ilgili
+          mevzuatın öngördüğü süre içinde karşılarız.
+        </p>
+
+        <h2>8. Çocukların gizliliği</h2>
+        <p>
+          Uygulama yetişkin kullanıcılar için tasarlanmıştır. 13 yaşın altındaki
+          çocuklardan bilerek bilgi toplamayız.
+        </p>
+
+        <h2>9. Değişiklikler</h2>
+        <p>
+          Uygulamaya yeni özellikler eklendiğinde bu politikayı güncelleyebiliriz.
+          Güncellemelerde bu sayfadaki yürürlük tarihi değişir; veri işleme biçimini
+          etkileyen önemli bir değişiklikte uygulama içinden de bilgilendirme yaparız.
+        </p>
+
+        <h2>10. İletişim</h2>
+        <p>
+          Gizlilikle ilgili soru, talep veya şikâyetlerin için:
+          <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>
+        </p>
+        <p>Veri sorumlusu: {SITE.publisher}</p>
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
-
-<style>
-  .legal-page {
-    padding: 60px 0 100px;
-    background-color: var(--pageBackground);
-  }
-  
-  .text-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .back-link {
-    margin-bottom: 40px;
-  }
-  
-  .back-link a {
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-  
-  .back-link a:hover {
-    color: var(--accent);
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  
-  .last-updated {
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: 40px;
-  }
-  
-  .content-body {
-    background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    line-height: 1.8;
-  }
-  
-  .content-body h2 {
-    color: var(--ink);
-    font-size: 1.5rem;
-    margin: 40px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .content-body h2:first-of-type {
-    margin-top: 30px;
-  }
-  
-  .content-body p {
-    margin-bottom: 20px;
-  }
-  
-  .content-body ul {
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  
-  .content-body li {
-    margin-bottom: 10px;
-  }
-  
-  .content-body strong {
-    color: var(--ink);
-  }
-  
-  @media (max-width: 768px) {
-    .content-body {
-      padding: 24px;
-    }
-  }
-</style>

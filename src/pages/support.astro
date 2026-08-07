@@ -2,120 +2,127 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 import FAQ from '../components/FAQ.astro';
+import { SITE, APP_STORE } from '../config';
 
-const title = "Destek ve SSS – Minik Anlar";
-const description = "Minik Anlar uygulaması hakkında sık sorulan sorular ve destek ekibimizle iletişim bilgileri.";
+const title = 'Destek ve SSS – Minik Anlar';
+const description =
+  'Minik Anlar destek sayfası: sık sorulan sorular, sorun giderme adımları ve iletişim e-postası.';
 
-const faqItems = [
+/** Landing SSS'sinden farklı: burada sorun giderme ağırlıklı sorular yer alır. */
+const supportFaq = [
   {
-    q: "Gebelik haftam nasıl hesaplanıyor?",
-    a: "Uygulamamız üç farklı yöntem sunar: Standart hesaplama için 'Son Adet Tarihi'ni, doktorunuzdan aldıysanız 'Tahmini Doğum Tarihi'ni veya biliyorsanız 'Gebe Kalma Tarihi'ni kullanabilirsiniz."
+    q: 'Gebelik haftam yanlış görünüyor, nasıl düzeltirim?',
+    a: 'Ayarlar bölümünden gebelik bilgilerini düzenleyebilirsin. Hafta hesabı 280 günlük gebelik üzerinden yapılır; son adet tarihi girdiysen hesap doğrudan bu tarihten, gebe kalma tarihi girdiysen 14 gün öncesinden, tahmini doğum tarihi girdiysen 280 gün öncesinden başlar. Doktorunun verdiği hafta ile küçük farklar olması normaldir.',
   },
   {
-    q: "Verilerim nerede saklanıyor?",
-    a: "Tüm verileriniz yalnızca kendi cihazınızda (telefonunuzda) saklanır. Uygulamamızın bir veritabanı veya sunucusu yoktur, hesap oluşturmanız gerekmez."
+    q: 'Hatırlatıcı bildirimleri gelmiyor.',
+    a: 'Önce iPhone Ayarlar → Bildirimler → Minik Anlar yolundan bildirim izninin açık olduğunu kontrol et. Odaklanma (Focus) veya Rahatsız Etmeyin modu açıksa bildirimler ertelenebilir. İzin verdikten sonra uygulamadaki Ayarlar bölümünden hatırlatıcı saatlerini yeniden kaydetmen gerekebilir.',
   },
   {
-    q: "İnternet bağlantısı gerekiyor mu?",
-    a: "Hayır, Minik Anlar tamamen çevrimdışı çalışır. Tüm özelliklere internet bağlantısı olmadan da erişebilirsiniz."
+    q: 'Premium satın aldım ama özellikler açılmadı.',
+    a: 'Satın alma ekranındaki "Satın alımları geri yükle" seçeneğini dene; bu işlem internet bağlantısı gerektirir ve satın almanın yapıldığı Apple Kimliği ile giriş yapmış olman gerekir. Ödeme "beklemede" durumundaysa (örneğin aile onayı gerekiyorsa) Apple onayı tamamlayana kadar erişim açılmaz. Sorun sürerse aşağıdaki adresten bize yaz.',
   },
   {
-    q: "Uygulama ücretsiz mi?",
-    a: "Evet, hafta hafta takip ve günlük gibi temel özellikler tamamen ücretsizdir. Dijital albümler ve PDF anı kitabı gibi ekstralar isteğe bağlı Premium paketle sunulur."
+    q: 'Yeni telefona geçiyorum, verilerim taşınır mı?',
+    a: 'Veriler cihazında saklandığı için otomatik olarak taşınmaz. iCloud veya bilgisayar üzerinden alınan tam cihaz yedeğini yeni telefona geri yüklersen uygulama verilerin de gelir. Ayrıca uygulamadaki Ayarlar bölümünden tüm kayıtlarını ve fotoğraflarını tek arşiv dosyası olarak dışa aktarabilirsin. Premium aboneliğin aynı Apple Kimliğiyle geri yüklenir.',
   },
   {
-    q: "Android sürümü var mı?",
-    a: "Şu an için Minik Anlar yalnızca iOS cihazlarda (iPhone ve iPad) kullanılabilmektedir."
+    q: 'Fotoğraflarım ve anılarım nerede saklanıyor?',
+    a: 'Uygulamanın kendi izole klasöründe, telefonunda. Bir sunucuya yüklenmez ve bizim bu dosyalara erişimimiz yoktur. Uygulamayı silersen bu dosyalar da kalıcı olarak silinir.',
   },
   {
-    q: "Aboneliğimi nasıl iptal ederim?",
-    a: "Cihazınızdan Ayarlar → Apple ID → Abonelikler adımlarını izleyerek aboneliğinizi dilediğiniz zaman iptal edebilirsiniz."
-  }
+    q: 'Uygulamayı sildim, verilerimi geri alabilir miyim?',
+    a: 'Ne yazık ki hayır. Uygulamanın sunucusu ve hesabı olmadığı için bizde bir kopya bulunmaz. Yalnızca daha önce aldığın bir cihaz yedeği veya dışa aktardığın arşiv dosyası varsa geri dönebilirsin.',
+  },
+  {
+    q: 'Aboneliğimi nasıl iptal ederim?',
+    a: 'iPhone Ayarlar → [adın] → Abonelikler → Minik Anlar → Aboneliği İptal Et. Ayrıntılar için <a href="/abonelik-kosullari/">Abonelik Koşulları</a> sayfasına bakabilirsin.',
+  },
+  {
+    q: 'Android sürümü var mı?',
+    a: `Şu an yalnızca iPhone için sunuluyor (iOS ${APP_STORE.minimumOSVersion} ve üzeri).`,
+  },
+  {
+    q: 'Uygulama tıbbi tavsiye veriyor mu?',
+    a: 'Hayır. İçerikler bilgilendirme ve kişisel takip amaçlıdır, tıbbi tavsiye yerine geçmez. Sağlık kararların için doktoruna danış.',
+  },
 ];
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="page-content">
-    <div class="container text-content">
-      <div class="back-link">
-        <a href="/">&larr; Ana Sayfaya Dön</a>
-      </div>
-      
-      <h1>Destek ve İletişim</h1>
-      
-      <div class="support-intro">
-        <p>Minik Anlar uygulamasıyla ilgili bir sorun mu yaşıyorsunuz veya bir öneriniz mi var? Size yardımcı olmaktan mutluluk duyarız.</p>
-        
-        <div class="contact-box">
-          <h3>Bize Ulaşın</h3>
-          <p>Her türlü soru, görüş ve geri bildiriminiz için aşağıdaki e-posta adresinden bize ulaşabilirsiniz:</p>
-          <a href="mailto:cfsmobiletech@gmail.com" class="email-link">cfsmobiletech@gmail.com</a>
-        </div>
+  <main id="main" class="support-page">
+    <div class="container prose-wrap">
+      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
+
+      <h1>Destek</h1>
+      <p class="lede">
+        Bir sorun mu yaşıyorsun, bir önerin mi var? Aşağıdaki sorular çoğu durumu
+        çözüyor; çözmezse bize doğrudan yazabilirsin.
+      </p>
+
+      <div class="contact-box">
+        <h2>Bize ulaş</h2>
+        <p>
+          Her türlü soru, hata bildirimi ve öneri için:
+        </p>
+        <a href={`mailto:${SITE.supportEmail}`} class="email">{SITE.supportEmail}</a>
+        <p class="hint">
+          Hata bildiriyorsan iPhone modelini, iOS sürümünü ve sorunun hangi ekranda
+          olduğunu yazarsan çok daha hızlı yardımcı olabiliriz. E-postalara genellikle
+          birkaç iş günü içinde yanıt veriyoruz.
+        </p>
       </div>
     </div>
-    
-    <FAQ items={faqItems} />
+
+    <FAQ items={supportFaq} title="Sık sorulan sorular" />
   </main>
-  
+
   <Footer />
 </BaseLayout>
 
 <style>
-  .page-content {
-    padding-top: 60px;
+  .support-page {
+    padding-top: 56px;
   }
-  
-  .text-content {
-    max-width: 800px;
-    margin: 0 auto;
-    padding-bottom: 40px;
+
+  .support-page h1 {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    margin-bottom: 12px;
   }
-  
-  .back-link {
-    margin-bottom: 40px;
-  }
-  
-  .back-link a {
+
+  .lede {
     color: var(--text-secondary);
-    font-weight: 500;
+    font-size: 1.0625rem;
+    margin-bottom: 32px;
   }
-  
-  .back-link a:hover {
-    color: var(--accent);
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: var(--ink);
-    margin-bottom: 30px;
-    text-align: center;
-  }
-  
-  .support-intro {
-    text-align: center;
-    font-size: 1.1rem;
-    color: var(--text-secondary);
-    margin-bottom: 60px;
-  }
-  
+
   .contact-box {
-    background-color: var(--card-bg);
-    border: 1px solid var(--border-color);
+    background: var(--surface);
+    border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 40px;
-    margin-top: 40px;
+    padding: clamp(24px, 5vw, 36px);
+    box-shadow: var(--shadow-card);
   }
-  
-  .contact-box h3 {
-    color: var(--ink);
-    margin-bottom: 15px;
+
+  .contact-box h2 {
+    font-size: 1.25rem;
+    margin-bottom: 10px;
   }
-  
-  .email-link {
+
+  .contact-box p {
+    color: var(--text-secondary);
+  }
+
+  .email {
     display: inline-block;
-    margin-top: 15px;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: var(--accent);
+    margin: 14px 0 18px;
+    font-size: 1.1875rem;
+    font-weight: 700;
+  }
+
+  .hint {
+    font-size: 0.9375rem;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
   }
 </style>

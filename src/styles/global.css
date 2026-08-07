@@ -1,44 +1,106 @@
+/*
+ * Palet, uygulamanın `DesignSystem.swift` içindeki `AppColorPalette.neutral`
+ * temasından HSB→HEX çevrilerek türetildi; site ile uygulama aynı görünsün.
+ */
 :root {
-  --pageBackground: #FAF8F5; /* Warm cream */
-  --accent: #84A59D; /* Sage green */
-  --accent-hover: #6B8B83;
-  --ink: #2D3142; /* Dark ink */
-  --text-secondary: #5C6275;
-  --border-color: #E2DFD8;
-  --card-bg: #FFFFFF;
-  --radius: 16px;
-  
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --primary: #729E84;        /* sage — neutral.primary */
+  --primary-hover: #5E866F;
+  --primary-light: #DFF7E9;  /* neutral.primaryLight */
+  --primary-muted: #C5E8D3;  /* neutral.primaryMuted */
+
+  --accent: #8FA6B3;         /* neutral.accent */
+  --accent-light: #D5E5ED;   /* neutral.accentLight */
+
+  --page-bg: #F6F2EC;        /* neutral.pageBackground — sıcak krem */
+  --surface: #FFFFFF;
+  --surface-secondary: #F0ECE6;
+
+  --ink: #242220;            /* neutral.ink */
+  --text-secondary: #6B6966; /* neutral.secondaryText */
+  --text-tertiary: #757371;
+
+  --mint: #C3E8D2;
+  --lavender: #CCD2E8;
+  --sky: #BCD7E6;
+  --butter: #F0E5C9;
+  --honey: #AD8C5A;
+
+  --line: rgba(0, 0, 0, 0.08);
+  --shadow-soft: 0 18px 40px rgba(36, 34, 32, 0.07);
+  --shadow-card: 0 2px 10px rgba(36, 34, 32, 0.04);
+
+  --radius: 20px;
+  --radius-sm: 12px;
+  --radius-pill: 999px;
+
+  --content-width: 1080px;
+  --prose-width: 760px;
+
+  --font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+    Roboto, Helvetica, Arial, sans-serif;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+body,
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, figure {
   margin: 0;
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
-  background-color: var(--pageBackground);
+  background-color: var(--page-bg);
   color: var(--ink);
   font-family: var(--font-family);
-  line-height: 1.6;
+  font-size: 1.0625rem;
+  line-height: 1.65;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.18;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  text-wrap: balance;
 }
 
 a {
-  color: var(--accent);
-  text-decoration: none;
+  color: var(--primary-hover);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--ink);
 }
 
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
-  margin-bottom: 0.5em;
-  font-weight: 700;
+ul, ol {
+  padding-left: 1.25rem;
 }
 
 img {
@@ -47,27 +109,255 @@ img {
   display: block;
 }
 
-.container {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 20px;
+/* Klavyeyle gezinenler için görünür odak halkası. */
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
-.btn {
-  display: inline-block;
-  background-color: var(--accent);
+.container {
+  width: 100%;
+  max-width: var(--content-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--ink);
   color: #fff;
-  padding: 12px 24px;
-  border-radius: 8px;
+  padding: 12px 20px;
+  border-radius: 0 0 var(--radius-sm) 0;
+  z-index: 100;
+}
+
+.skip-link:focus {
+  left: 0;
+  color: #fff;
+}
+
+/* --- Butonlar --- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: var(--primary);
+  color: #fff;
+  padding: 15px 30px;
+  border-radius: var(--radius-pill);
+  font-size: 1.0625rem;
   font-weight: 600;
   text-decoration: none;
-  transition: background-color 0.2s;
   border: none;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-  background-color: var(--accent-hover);
+  background-color: var(--primary-hover);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* App Store butonu — indirilebilir olmadığında `is-pending` ile durağan. */
+.btn-appstore {
+  background-color: var(--ink);
+}
+
+.btn-appstore:hover {
+  background-color: #000;
+}
+
+.btn-appstore.is-pending {
+  background-color: var(--surface);
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+  cursor: default;
+}
+
+.btn-appstore.is-pending:hover {
+  transform: none;
+  background-color: var(--surface);
+  color: var(--ink);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink);
+  border: 1.5px solid var(--line);
+}
+
+.btn-ghost:hover {
+  background: var(--surface);
+  color: var(--ink);
+}
+
+/* --- Bölüm başlıkları --- */
+
+.section-heading {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  margin-bottom: 56px;
+}
+
+.section-heading h2 {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  margin-bottom: 14px;
+}
+
+.section-heading p {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--primary-hover);
+  margin-bottom: 12px;
+}
+
+/* --- Yasal / metin sayfaları --- */
+
+.legal-page {
+  padding: 56px 0 96px;
+}
+
+.prose-wrap {
+  max-width: var(--prose-width);
+  margin-inline: auto;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 32px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.9375rem;
   text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--primary-hover);
+}
+
+.legal-page h1 {
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  margin-bottom: 10px;
+}
+
+.last-updated {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 36px;
+}
+
+.content-body {
+  background-color: var(--surface);
+  padding: clamp(24px, 5vw, 44px);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-card);
+  color: var(--text-secondary);
+  line-height: 1.8;
+}
+
+.content-body h2 {
+  color: var(--ink);
+  font-size: 1.375rem;
+  margin: 40px 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.content-body h2:first-child {
+  margin-top: 0;
+}
+
+.content-body h3 {
+  color: var(--ink);
+  font-size: 1.0625rem;
+  margin: 24px 0 10px;
+}
+
+.content-body p,
+.content-body ul,
+.content-body ol {
+  margin-bottom: 18px;
+}
+
+.content-body li {
+  margin-bottom: 10px;
+}
+
+.content-body li::marker {
+  color: var(--primary);
+}
+
+.content-body strong {
+  color: var(--ink);
+}
+
+.content-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  font-size: 0.9375rem;
+}
+
+.content-body th,
+.content-body td {
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+}
+
+.content-body th {
+  color: var(--ink);
+  font-weight: 600;
+  background: var(--surface-secondary);
+}
+
+/* Politika sayfalarındaki vurgulu bilgi kutusu. */
+.callout {
+  background-color: var(--primary-light);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius-sm);
+  padding: 20px 24px;
+  margin: 28px 0;
+}
+
+.callout.warning {
+  background-color: var(--butter);
+  border-left-color: var(--honey);
+}
+
+.callout h2,
+.callout h3 {
+  border-bottom: none;
+  margin-top: 0;
+  padding-bottom: 0;
+}
+
+.callout > :last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  body {
+    font-size: 1rem;
+  }
+
+  .container {
+    padding-inline: 20px;
+  }
 }

@@ -1,49 +1,85 @@
 ---
 import '../styles/global.css';
+import { SITE, APP_STORE } from '../config';
 
 interface Props {
   title: string;
   description: string;
   canonical?: string;
-  jsonLd?: string;
+  /** Sayfaya özel JSON-LD nesneleri; BaseLayout `Organization` ile birleştirir. */
+  schemas?: Record<string, unknown>[];
+  /** 404 gibi dizine girmemesi gereken sayfalar için. */
+  noindex?: boolean;
 }
 
-const { title, description, canonical, jsonLd } = Astro.props;
-const siteUrl = Astro.site || 'https://minikanlar.app';
-const currentUrl = new URL(Astro.url.pathname, siteUrl).toString();
-const finalCanonical = canonical || currentUrl;
+const { title, description, canonical, schemas = [], noindex = false } = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? SITE.url;
+const finalCanonical = canonical ?? new URL(Astro.url.pathname, `${siteUrl}/`).toString();
+const ogImage = `${siteUrl}/og.png`;
+
+const organization = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: SITE.publisher,
+  url: `${siteUrl}/`,
+  email: SITE.supportEmail,
+};
+
+const jsonLd = JSON.stringify([organization, ...schemas]);
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="tr">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    
-    <link rel="canonical" href={finalCanonical} />
-    
-    <meta name="robots" content="index, follow, max-image-preview:large" />
-    <meta name="theme-color" content="#FAF8F5" />
-    
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    {!noindex && <link rel="canonical" href={finalCanonical} />}
+    <meta
+      name="robots"
+      content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}
+    />
+    <meta name="theme-color" content="#F6F2EC" />
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    
+
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:locale" content={SITE.locale} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={finalCanonical} />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content={`${siteUrl}/og.png`} />
-    
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${siteUrl}/og.png`} />
-    
-    {jsonLd && <script type="application/ld+json" is:inline set:html={jsonLd} />}
+    <meta name="twitter:image" content={ogImage} />
+
+    {
+      /*
+       * Smart banner ve app-link meta'ları yalnızca uygulama yayınlandığında
+       * anlamlıdır; App Store ID olmadan Safari boş bir banner gösterir.
+       */
+      APP_STORE.appStoreId && (
+        <>
+          <meta name="apple-itunes-app" content={`app-id=${APP_STORE.appStoreId}`} />
+          <meta property="al:ios:app_store_id" content={APP_STORE.appStoreId} />
+          <meta property="al:ios:app_name" content={SITE.name} />
+        </>
+      )
+    }
+
+    <script type="application/ld+json" is:inline set:html={jsonLd} />
   </head>
   <body>
+    <a class="skip-link" href="#main">İçeriğe geç</a>
     <slot />
   </body>
 </html>

@@ -1,136 +1,145 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
+import { SITE, SUBSCRIPTIONS } from '../config';
 
-const title = "Abonelik Koşulları – Minik Anlar Premium";
-const description = "Minik Anlar Premium abonelik koşulları, otomatik yenileme, deneme süresi ve iptal bilgileri.";
+const title = 'Abonelik Koşulları – Minik Anlar Premium';
+const description =
+  'Minik Anlar Premium abonelik koşulları: paketler ve fiyatlar, otomatik yenileme, ücretsiz deneme, iptal ve iade bilgileri.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <main class="legal-page">
-    <div class="container text-content">
-      <div class="back-link">
-        <a href="/">&larr; Ana Sayfaya Dön</a>
-      </div>
-      
+  <main id="main" class="legal-page">
+    <div class="container prose-wrap">
+      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
+
       <h1>Abonelik Koşulları</h1>
-      <p class="last-updated">Son Güncelleme: 18 Temmuz 2026</p>
-      
+      <p class="last-updated">
+        Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
+      </p>
+
       <div class="content-body">
-        <p>Minik Anlar temel özellikleriyle tamamen ücretsizdir. Daha gelişmiş anı saklama özellikleri için (Dijital Albümler, PDF Anı Kitabı, Haftalık Anı Soruları) "Minik Anlar Premium" aboneliği sunulmaktadır.</p>
-        
-        <h2>1. Abonelik Seçenekleri ve Ücretlendirme</h2>
+        <p>
+          Minik Anlar'ın temel özellikleri ücretsizdir: hafta hafta takip, günlük, anı
+          defteri, sağlık kayıtları ve hatırlatıcılar için ödeme yapman gerekmez.
+          "Minik Anlar Premium", anılarını kalıcı bir hikâyeye dönüştüren ek özellikleri
+          açan isteğe bağlı bir aboneliktir.
+        </p>
+
+        <h2>1. Premium neyi açar?</h2>
         <ul>
-          <li><strong>Aylık Abonelik:</strong> 79,99 ₺ / ay (İlk 3 gün ücretsiz deneme)</li>
-          <li><strong>Yıllık Abonelik:</strong> 499,99 ₺ / yıl</li>
+          <li><strong>Gelişim Videosu:</strong> haftalık pozlarından müzikli, tam uzunlukta MP4 klip</li>
+          <li><strong>Dijital Albüm:</strong> kapak ve altı editoryal tema (Atölye, Bahçe, Botanik, Gökyüzü, Lavanta, Sade Film)</li>
+          <li><strong>PDF Anı Kitabı:</strong> tüm anılarını, trimester ayraçlarını ve mektupları içeren baskıya hazır kitap</li>
+          <li>Kayıtlı video ve albüm projeleri</li>
+          <li>Hizalı haftalık poz kamerası</li>
+          <li>Doktor randevusu özeti</li>
         </ul>
-        <p>Fiyatlar, ikamet ettiğiniz bölgeye ve Apple'ın yerel fiyatlandırma politikalarına göre değişiklik gösterebilir.</p>
-        
-        <h2>2. Ücretsiz Deneme Süresi</h2>
-        <p>Aylık abonelik seçeneği 3 günlük ücretsiz deneme süresi ile birlikte gelir. Ücretsiz deneme süresi boyunca hiçbir ücret ödemezsiniz. Deneme süresinin bitimine en az 24 saat kala aboneliğinizi iptal etmezseniz, aylık ücret Apple ID hesabınızdan otomatik olarak tahsil edilir.</p>
-        
-        <h2>3. Ödeme ve Otomatik Yenileme</h2>
-        <p>Ödemeler, satın alma işlemini onayladığınızda iTunes/Apple ID hesabınızdan tahsil edilecektir.</p>
-        <p>Mevcut abonelik döneminin bitiminden en az 24 saat önce otomatik yenilemeyi kapatmadığınız sürece, aboneliğiniz otomatik olarak yenilenecek ve hesabınızdan aynı ücret tahsil edilecektir.</p>
-        
-        <h2>4. Abonelik İptali</h2>
-        <p>Aboneliğinizi dilediğiniz zaman iptal edebilirsiniz. İptal işlemi, Minik Anlar uygulaması içinden değil, iOS Ayarlarından yapılmaktadır.</p>
-        <p><strong>İptal Etmek İçin:</strong></p>
+        <p>
+          Premium olmadan da gelişim videosunun ve PDF anı kitabının kısa, imzalı birer
+          örneğini oluşturup paylaşabilirsin.
+        </p>
+
+        <h2>2. Paketler ve fiyatlar</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Paket</th>
+              <th>Fiyat</th>
+              <th>Yenilenme</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              SUBSCRIPTIONS.map((plan) => (
+                <tr>
+                  <td>{plan.name}</td>
+                  <td>{plan.price}</td>
+                  <td>Her {plan.period} otomatik</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+        <p>
+          Fiyatlar Türkiye App Store için geçerlidir. Apple'ın bölgesel fiyatlandırması,
+          vergiler ve döviz kurları nedeniyle bulunduğun ülkeye göre farklılık gösterebilir.
+          Satın alma ekranında sana uygulanacak güncel fiyat her zaman görünür.
+        </p>
+
+        <h2>3. Ücretsiz deneme</h2>
+        <p>
+          Zaman zaman ücretsiz deneme süresi sunulur. Deneme süresi sabit değildir;
+          uygunluğun ve süresi satın alma ekranında, satın almayı onaylamadan önce
+          açıkça gösterilir. Daha önce aynı abonelik grubundan deneme kullandıysan
+          yeniden deneme hakkın olmayabilir — bu değerlendirmeyi Apple yapar.
+        </p>
+        <p>
+          Deneme süresi boyunca ücret alınmaz. Denemenin bitimine en az 24 saat kala iptal
+          etmezsen abonelik ücretli olarak başlar.
+        </p>
+
+        <h2>4. Ödeme ve otomatik yenileme</h2>
+        <ul>
+          <li>Ödeme, satın almayı onayladığında Apple Kimliği hesabından tahsil edilir.</li>
+          <li>Her iki paket de <strong>otomatik olarak yenilenir.</strong></li>
+          <li>Mevcut dönemin bitiminden en az 24 saat önce otomatik yenilemeyi kapatmazsan abonelik yenilenir ve dönem ücreti aynı hesaptan tahsil edilir.</li>
+          <li>Yenileme ücreti, mevcut dönemin bitiminden önceki 24 saat içinde tahsil edilir.</li>
+          <li>Aboneliğin yönetimi ve otomatik yenilemenin kapatılması, satın alma sonrasında Apple Kimliği ayarlarından yapılır.</li>
+        </ul>
+
+        <h2>5. İptal</h2>
+        <p>
+          Aboneliğini dilediğin zaman iptal edebilirsin. İptal işlemi uygulama içinden değil,
+          iOS ayarlarından yapılır:
+        </p>
         <ol>
-          <li>Cihazınızda <strong>Ayarlar</strong> uygulamasını açın.</li>
-          <li>En üstte yer alan <strong>[Adınız] (Apple ID)</strong> seçeneğine dokunun.</li>
-          <li><strong>Abonelikler</strong> seçeneğine dokunun.</li>
-          <li>Listeden <strong>Minik Anlar</strong>'ı seçin.</li>
-          <li><strong>Aboneliği İptal Et</strong>'e dokunun.</li>
+          <li>iPhone'unda <strong>Ayarlar</strong> uygulamasını aç.</li>
+          <li>En üstte adının yazdığı <strong>Apple Kimliği</strong> bölümüne dokun.</li>
+          <li><strong>Abonelikler</strong>'e dokun.</li>
+          <li>Listeden <strong>Minik Anlar</strong>'ı seç.</li>
+          <li><strong>Aboneliği İptal Et</strong>'e dokun.</li>
         </ol>
-        <p>İptal ettikten sonra, mevcut faturalandırma döneminizin sonuna kadar Premium özelliklere erişmeye devam edersiniz.</p>
-        
-        <h2>5. Para İadesi</h2>
-        <p>Uygulama içi satın alma işlemleri doğrudan Apple tarafından yönetilmektedir. Bu nedenle para iadesi talepleri Minik Anlar (Lumi-Zone) tarafından değil, Apple Müşteri Hizmetleri üzerinden yapılmalıdır. Apple'ın iade politikaları geçerlidir.</p>
+        <p>
+          İptal ettikten sonra mevcut faturalandırma döneminin sonuna kadar Premium
+          özellikleri kullanmaya devam edersin. Dönem bitince Premium kapanır; uygulamada
+          oluşturduğun dosyalar ve kayıtlar cihazında kalır.
+        </p>
+
+        <h2>6. Geri yükleme</h2>
+        <p>
+          Cihaz değiştirdiğinde veya uygulamayı yeniden kurduğunda, satın alma ekranındaki
+          "Satın alımları geri yükle" seçeneğiyle aboneliğini aynı Apple Kimliği üzerinden
+          geri yükleyebilirsin. Bu işlem internet bağlantısı gerektirir.
+        </p>
+
+        <h2>7. İade</h2>
+        <p>
+          Uygulama içi satın almalar Apple tarafından yönetildiği için iade talepleri
+          {SITE.publisher} tarafından değil, doğrudan Apple üzerinden yapılır. Talebini
+          <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer">reportaproblem.apple.com</a>
+          adresinden iletebilirsin. Apple'ın iade koşulları geçerlidir.
+        </p>
+
+        <h2>8. Değişiklikler</h2>
+        <p>
+          Fiyatlar ve paket içerikleri değişebilir. Mevcut aboneliğinin fiyatında bir
+          değişiklik olursa Apple seni önceden bilgilendirir ve gerektiğinde onayını ister;
+          onaylamazsan abonelik yenilenmez.
+        </p>
+
+        <h2>9. İletişim</h2>
+        <p>
+          Abonelikle ilgili sorular için:
+          <a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a>
+        </p>
+        <p>
+          Ayrıca <a href="/kullanim-kosullari/">Kullanım Koşulları</a> ve
+          <a href="/gizlilik-politikasi/">Gizlilik Politikası</a> sayfalarına da bakabilirsin.
+        </p>
       </div>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
-
-<style>
-  .legal-page {
-    padding: 60px 0 100px;
-    background-color: var(--pageBackground);
-  }
-  
-  .text-content {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .back-link {
-    margin-bottom: 40px;
-  }
-  
-  .back-link a {
-    color: var(--text-secondary);
-    font-weight: 500;
-  }
-  
-  .back-link a:hover {
-    color: var(--accent);
-  }
-  
-  h1 {
-    font-size: 2.5rem;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  
-  .last-updated {
-    color: var(--text-secondary);
-    font-style: italic;
-    margin-bottom: 40px;
-  }
-  
-  .content-body {
-    background-color: var(--card-bg);
-    padding: 40px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    line-height: 1.8;
-  }
-  
-  .content-body h2 {
-    color: var(--ink);
-    font-size: 1.5rem;
-    margin: 40px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
-  }
-  
-  .content-body h2:first-of-type {
-    margin-top: 30px;
-  }
-  
-  .content-body p {
-    margin-bottom: 20px;
-  }
-  
-  .content-body ul, .content-body ol {
-    margin-bottom: 20px;
-    padding-left: 20px;
-  }
-  
-  .content-body li {
-    margin-bottom: 10px;
-  }
-  
-  .content-body strong {
-    color: var(--ink);
-  }
-  
-  @media (max-width: 768px) {
-    .content-body {
-      padding: 24px;
-    }
-  }
-</style>

@@ -1,22 +1,84 @@
 ---
 ---
-<div class="privacy-strip">
-  <div class="container">
-    <p>🛡️ Hesap yok. Reklam yok. Analytics yok. Tüm verilerin telefonunda kalır.</p>
+
+<section class="privacy-strip" aria-labelledby="privacy-strip-title">
+  <div class="container strip-inner">
+    <div class="strip-copy">
+      <h2 id="privacy-strip-title">Hesap yok. Reklam yok. İzleme yok.</h2>
+      <p>
+        Gebelik profilin, günlük kayıtların, fotoğrafların ve notların telefonunda kalır —
+        bizim görebileceğimiz bir sunucuya gitmez. Yalnızca Premium satın alman
+        doğrulanırken Apple ve Adapty ile abonelik bilgisi paylaşılır.
+      </p>
+      <a href="/gizlilik-politikasi/" class="strip-link">Gizlilik politikasını oku →</a>
+    </div>
+
+    <ul class="strip-badges">
+      <li><span aria-hidden="true">🔒</span> Cihazda saklama</li>
+      <li><span aria-hidden="true">🚫</span> Reklam ve IDFA yok</li>
+      <li><span aria-hidden="true">📤</span> Verini dışa aktarabilirsin</li>
+    </ul>
   </div>
-</div>
+</section>
 
 <style>
   .privacy-strip {
-    background-color: var(--accent);
-    color: #fff;
-    padding: 16px 0;
-    text-align: center;
-    font-weight: 500;
+    background: var(--primary-light);
+    border-block: 1px solid var(--line);
+    padding: 44px 0;
   }
-  
-  .privacy-strip p {
-    margin: 0;
-    font-size: 1.1rem;
+
+  .strip-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .strip-copy h2 {
+    font-size: clamp(1.35rem, 3vw, 1.75rem);
+    margin-bottom: 10px;
+  }
+
+  .strip-copy p {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+  }
+
+  .strip-link {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .strip-link:hover {
+    text-decoration: underline;
+  }
+
+  .strip-badges {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .strip-badges li {
+    background: #fff;
+    border-radius: var(--radius-pill);
+    padding: 11px 20px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    box-shadow: var(--shadow-card);
+  }
+
+  .strip-badges span {
+    margin-right: 8px;
+  }
+
+  @media (max-width: 820px) {
+    .strip-inner {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
   }
 </style>

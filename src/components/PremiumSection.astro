@@ -1,167 +1,183 @@
 ---
+import { SUBSCRIPTIONS, PREMIUM_BENEFITS } from '../config';
 ---
-<section class="premium-section">
+
+<section class="premium" id="premium" aria-labelledby="premium-title">
   <div class="container">
-    <div class="premium-header">
-      <h2>Minik Anlar Premium</h2>
-      <p>Daha fazla anı, daha özel deneyimler.</p>
+    <div class="section-heading">
+      <p class="eyebrow">İsteğe bağlı</p>
+      <h2 id="premium-title">Minik Anlar Premium</h2>
+      <p>
+        Hafta hafta takip, günlük ve anı defteri her zaman ücretsiz.
+        Premium, biriktirdiğin anıları saklanacak bir hikâyeye dönüştürür.
+      </p>
     </div>
-    
-    <div class="premium-grid">
-      <div class="premium-card">
-        <h3>Özel Dijital Albümler</h3>
-        <p>Atölye, Keten, Bahçe, Gökyüzü, Lavanta ve Sade Film temalarıyla albümünüzü kişiselleştirin.</p>
-      </div>
-      
-      <div class="premium-card">
-        <h3>PDF Anı Kitabı</h3>
-        <p>Hamilelik hikayenizi tek tıkla baskıya hazır bir PDF'e dönüştürün.</p>
-      </div>
-      
-      <div class="premium-card">
-        <h3>Haftalık Anı Soruları</h3>
-        <p>Her döneme özel yazma önerileriyle hiçbir detayı atlamayın.</p>
-      </div>
+
+    <div class="benefit-grid">
+      {
+        PREMIUM_BENEFITS.map((benefit) => (
+          <article class="benefit">
+            <h3>{benefit.title}</h3>
+            <p>{benefit.detail}</p>
+          </article>
+        ))
+      }
     </div>
-    
-    <div class="pricing">
-      <div class="price-box">
-        <h4>Aylık Plan</h4>
-        <div class="price">79,99 ₺</div>
-        <p class="trial">3 gün ücretsiz deneme</p>
-      </div>
-      
-      <div class="price-box yearly">
-        <div class="badge">En Popüler</div>
-        <h4>Yıllık Plan</h4>
-        <div class="price">499,99 ₺</div>
-        <p class="trial">Avantajlı fiyat</p>
-      </div>
+
+    <div class="pricing" aria-label="Abonelik seçenekleri">
+      {
+        SUBSCRIPTIONS.map((plan) => (
+          <div class={`plan ${plan.featured ? 'featured' : ''}`}>
+            {plan.featured && <span class="badge">Varsayılan</span>}
+            <h3>{plan.name}</h3>
+            <p class="price">
+              {plan.price}
+              <span>/{plan.period}</span>
+            </p>
+            <p class="plan-note">{plan.note}</p>
+          </div>
+        ))
+      }
     </div>
-    
-    <div class="premium-links">
-      <a href="/abonelik-kosullari">Abonelik Koşulları</a>
-      <span class="dot">•</span>
-      <a href="/gizlilik-politikasi">Gizlilik Politikası</a>
-    </div>
+
+    <p class="fineprint">
+      Her iki paket de otomatik olarak yenilenir. Dönem bitiminden en az 24 saat önce
+      iptal etmezsen abonelik yenilenir ve ücret Apple Kimliğinden tahsil edilir.
+      Sana özel bir ücretsiz deneme tanımlıysa uygulama içindeki satın alma ekranında
+      süresiyle birlikte gösterilir. Fiyatlar Türkiye App Store içindir ve Apple'ın
+      bölgesel fiyatlandırmasına göre değişebilir.
+    </p>
+
+    <p class="premium-links">
+      <a href="/abonelik-kosullari/">Abonelik Koşulları</a>
+      <span aria-hidden="true">·</span>
+      <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
+      <span aria-hidden="true">·</span>
+      <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>
+    </p>
   </div>
 </section>
 
 <style>
-  .premium-section {
-    padding: 80px 0;
-    background-color: var(--card-bg);
-    border-top: 1px solid var(--border-color);
+  .premium {
+    padding: 84px 0;
+    background: var(--surface);
+    border-block: 1px solid var(--line);
   }
-  
-  .premium-header {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  
-  .premium-header h2 {
-    font-size: 2.5rem;
-    color: var(--ink);
-  }
-  
-  .premium-header p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-  }
-  
-  .premium-grid {
+
+  .benefit-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-bottom: 60px;
+    gap: 22px;
+    margin-bottom: 56px;
   }
-  
-  .premium-card {
-    background-color: var(--pageBackground);
-    padding: 30px;
+
+  .benefit {
+    background: var(--page-bg);
     border-radius: var(--radius);
-    text-align: center;
+    padding: 28px 26px;
   }
-  
-  .premium-card h3 {
-    font-size: 1.3rem;
-    color: var(--ink);
-    margin-bottom: 15px;
+
+  .benefit h3 {
+    font-size: 1.1875rem;
+    margin-bottom: 10px;
   }
-  
+
+  .benefit p {
+    color: var(--text-secondary);
+    font-size: 0.9688rem;
+  }
+
   .pricing {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    gap: 30px;
-    margin-bottom: 30px;
+    gap: 20px;
+    margin-bottom: 28px;
   }
-  
-  .price-box {
-    border: 2px solid var(--border-color);
-    padding: 30px;
+
+  .plan {
+    position: relative;
+    border: 1.5px solid var(--line);
     border-radius: var(--radius);
+    padding: 30px 34px;
     text-align: center;
     min-width: 250px;
-    position: relative;
+    background: var(--surface);
   }
-  
-  .price-box.yearly {
-    border-color: var(--accent);
-    background-color: rgba(132, 165, 157, 0.05);
+
+  .plan.featured {
+    border-color: var(--primary);
+    background: var(--primary-light);
   }
-  
+
   .badge {
     position: absolute;
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background-color: var(--accent);
+    background: var(--primary);
     color: #fff;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: bold;
-  }
-  
-  .price-box h4 {
-    color: var(--text-secondary);
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-  }
-  
-  .price {
-    font-size: 2rem;
+    padding: 4px 14px;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
     font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  
-  .trial {
-    font-size: 0.9rem;
-    color: var(--accent);
-  }
-  
-  .premium-links {
-    text-align: center;
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-  }
-  
-  .premium-links a {
-    color: var(--text-secondary);
-  }
-  
-  .dot {
-    margin: 0 10px;
+    white-space: nowrap;
   }
 
-  @media (max-width: 768px) {
-    .premium-grid {
+  .plan h3 {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .price {
+    font-size: 1.875rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+
+  .price span {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .plan-note {
+    margin-top: 8px;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .fineprint {
+    max-width: 68ch;
+    margin: 0 auto 20px;
+    text-align: center;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .premium-links {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+  }
+
+  .premium-links a {
+    color: var(--text-secondary);
+    margin-inline: 6px;
+  }
+
+  .premium-links a:hover {
+    color: var(--primary-hover);
+  }
+
+  @media (max-width: 860px) {
+    .benefit-grid {
       grid-template-columns: 1fr;
-    }
-    .pricing {
-      flex-direction: column;
-      align-items: center;
     }
   }
 </style>

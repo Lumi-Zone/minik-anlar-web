@@ -1,260 +1,201 @@
-# Minik Anlar — Tanıtım Websitesi Geliştirme Planı
+# Minik Anlar — Tanıtım Websitesi Planı
 
-**Tarih:** 9 Temmuz 2026
-**Kapsam:** Minik Anlar iOS uygulaması (hamilelik takibi + anı defteri) için SEO destekli statik tanıtım sitesi
-**Referans projeler:** `Lumi-Zone/aevo-web` (aevo-ada-pruefung.de), `Lumi-Zone/leben-in-deutschland-web` (lid-einbuergerung.de)
-**Site türü:** Yalnızca tanıtım — interaktif araç/özellik YOK. Uygulamayı anlatır, App Store'a yönlendirir, yasal sayfaları barındırır.
+**Tarih:** 7 Ağustos 2026
+**Kapsam:** Minik Anlar iOS uygulaması için App Store başvurusuna hazır, SEO destekli statik tanıtım sitesi
+**Kaynak:** Bu plandaki her özellik, fiyat ve gizlilik ifadesi `MinikAnlar` uygulamasının **kod tabanından** doğrulanmıştır.
+**Site türü:** Yalnızca tanıtım — interaktif araç yok. Uygulamayı anlatır, App Store'a yönlendirir, yasal sayfaları barındırır.
+
+> Bu dosya 9 Temmuz 2026 tarihli planın yerine geçer. Eski plan; fiyatlandırma, abonelik ürünleri, gizlilik mimarisi ve özellik listesi bakımından uygulamayla **uyuşmuyordu**. Bölüm 10 farkları listeler.
 
 ---
 
 ## 1. Amaç ve Başarı Kriterleri
 
-1. App Store Connect başvurusu için zorunlu URL'leri sağlamak (Marketing URL, Privacy Policy URL, Terms/EULA).
-2. Uygulamanın özelliklerini net şekilde tanıtıp App Store'a dönüşüm sağlamak.
-3. "hamilelik takip uygulaması", "hamilelik anı defteri" gibi Türkçe sorgularda organik görünürlük kazanmak.
-4. Marka güveni: gizlilik farklılaşmasını (hesapsız, reklamsız, backend'siz) öne çıkarmak.
+1. App Store Connect başvurusu için zorunlu URL'leri sağlamak (Marketing URL, Support URL, Privacy Policy URL, EULA).
+2. Yasal sayfaların uygulamanın **gerçek** davranışını doğru anlatması — App Review'un gizlilik beyanı ile kodun çelişmesi ret sebebidir.
+3. Uygulamanın özelliklerini net tanıtıp App Store'a dönüşüm sağlamak.
+4. "hamilelik takip uygulaması", "hamilelik anı defteri" gibi Türkçe sorgularda organik görünürlük.
 
 ---
 
-## 2. Teknoloji ve Altyapı
+## 2. Doğrulanmış Uygulama Gerçekleri
 
-| Konu | Karar | Not |
+Bu tablo sitedeki tüm iddiaların tek referansıdır. Değiştirmeden önce koddan tekrar doğrula.
+
+| Konu | Gerçek | Kaynak |
 |---|---|---|
-| Framework | Astro 5 + TypeScript | aevo-web / leben-in-deutschland-web ile aynı |
-| Stil | Saf CSS (CSS değişkenleri) | Framework yok; palet uygulamadan türetilecek |
-| Hosting | GitHub Pages + custom domain | `deploy.yml` aevo-web'den kopyalanır |
-| Repo | `Lumi-Zone/minik-anlar-web` | |
-| Domain | `minikanlar.app` veya `minik-anlar.com` | 5 sayfalık tanıtım sitesi için marka domain'i yeterli |
-| Dil | Yalnızca Türkçe (`lang="tr"`) | Uygulama tr_TR; hreflang gerekmiyor |
-| JS | ~0 KB | Tek istisna: FAQ accordion (native `<details>` ile JS'siz de çözülebilir) |
+| Bundle id | `com.minikanlar.app` | `CLAUDE.md` |
+| Platform | Yalnızca iOS, deployment target 17.0 | `CLAUDE.md` |
+| Dil | Tamamı Türkçe, `tr_TR` | `CLAUDE.md` |
+| Depolama | SwiftData, **cihazda**; hesap ve uygulama sunucusu yok | `MinikAnlarApp.swift` |
+| Fotoğraflar | `Application Support/Media/`, cihazda | `MediaStore.swift` |
+| Sekmeler | Bugün · Günlük · Anılar · Ayarlar | `RootViews.swift` |
+| **Üçüncü taraf SDK** | **Adapty** — satın alma doğrulama, Premium erişim yönetimi, abonelik analitiği | `PremiumStore.swift`, `MinikAnlarApp.swift` |
+| Adapty placement | `main_premium`, access level `premium` | `PremiumConfiguration` |
+| Ürün 1 | `premium_monthly_subscription` — **699,99 ₺ / ay**, otomatik yenilenen | `MinikAnlar.storekit` |
+| Ürün 2 | `premium_weekly_subscription` — **199,99 ₺ / hafta**, otomatik yenilenen | `MinikAnlar.storekit` |
+| Yıllık plan | **YOK** | `MinikAnlar.storekit` |
+| Ücretsiz deneme | Sabit değil — Adapty'den kullanıcıya göre gelir (`introOfferPeriodTexts`) | `PremiumStore.swift` |
+| Varsayılan seçim | Aylık paket | `PremiumPaywallView` |
+| Premium'un açtığı | Gelişim Videosu · Dijital Albüm · PDF Anı Kitabı (+ kayıtlı projeler, hizalı poz kamerası, randevu özeti) | `PremiumBenefit`, `CLAUDE.md` |
+| Ücretsiz kalan | Tüm temel gebelik takibi; video ve PDF'in kısa/imzalı sürümü | `CLAUDE.md` |
+| Albüm temaları | Atölye · Bahçe · **Botanik** · Gökyüzü · Lavanta · Sade Film (6) | `DigitalAlbumTheme` |
+| İzinler | Fotoğraf kitaplığı, **kamera** (haftalık poz), bildirim | `CLAUDE.md`, release checklist |
+| Hafta hesabı | 280 gün; öncelik son adet → gebe kalma (−14g) → tahmini doğum (−280g); 40. haftada sabitlenir | `GestationalAgeService` |
+| Sağlık takibi | Kilo, tansiyon, tekme sayacı — **hiçbir eşik/uyarı göstermez** | `HealthTrackingView` |
+| Dışa aktarma | `DataExportService` — tüm kayıtlar + fotoğraflar `.zip` | `DataExportService.swift` |
+| Reklam / IDFA / izleme | Yok; `NSPrivacyTracking = false` | `PrivacyInfo.xcprivacy` |
 
-### Repo iskeleti
+### 2.1 Gizlilik: sitenin söyleyebileceği ve söyleyemeyeceği
 
-```
-minik-anlar-web/
-├── .github/workflows/deploy.yml        # GitHub Pages deploy (aevo-web'den)
-├── astro.config.mjs                    # site: 'https://minikanlar.app', @astrojs/sitemap
-├── public/
-│   ├── mockups/                        # Uygulama ekran görüntüleri (Bugün, Günlük, Anılar, Premium)
-│   ├── og.png                          # 1200×630 paylaşım görseli
-│   ├── favicon.svg / apple-touch-icon.png
-│   └── robots.txt
-└── src/
-    ├── layouts/BaseLayout.astro        # TÜM SEO head mantığı tek merkezde
-    ├── components/
-    │   ├── Hero.astro
-    │   ├── PrivacyStrip.astro          # Gizlilik vurgu şeridi
-    │   ├── FeatureSection.astro        # Tekrar kullanılabilir özellik bloğu (görsel + metin)
-    │   ├── PremiumSection.astro
-    │   ├── FAQ.astro
-    │   ├── DownloadCTA.astro
-    │   └── Footer.astro
-    ├── styles/global.css               # Palet + tipografi değişkenleri
-    └── pages/
-        ├── index.astro
-        ├── support.astro
-        ├── gizlilik-politikasi.astro
-        ├── kullanim-kosullari.astro
-        └── abonelik-kosullari.astro
-```
+Uygulama gerçekten hesapsız ve gebelik verisi cihazda kalıyor — bu güçlü ve doğru bir mesaj. Ancak Adapty entegrasyonu nedeniyle **"analytics yok", "üçüncü taraf yok", "tamamen çevrimdışı"** ifadeleri yanlıştır ve Privacy Policy URL'inde yer alamaz.
+
+**Söylenebilir:**
+- "Hesap yok, reklam yok, izleme yok."
+- "Gebelik kayıtların, fotoğrafların ve notların cihazında kalır."
+- "Video ve PDF cihazında üretilir."
+- "Yalnızca abonelik doğrulaması için Apple ve Adapty ile satın alma bilgisi paylaşılır; IDFA ve IP toplama kapalı."
+
+**Söylenemez:**
+- ❌ "Hiçbir üçüncü taraf yazılım kullanılmaz"
+- ❌ "Analytics yok"
+- ❌ "Tamamen çevrimdışı çalışır" (paywall, satın alma ve geri yükleme internet ister)
+- ❌ "Üçüncü şahısların verilere erişimi yoktur"
 
 ---
 
-## 3. Site Haritası
+## 3. Teknoloji
 
-### Launch kapsamı (zorunlu)
-
-| URL | Sayfa | Amaç |
-|---|---|---|
-| `/` | Landing | Tanıtım + App Store dönüşümü |
-| `/support/` | Destek | SSS + iletişim e-postası (App Store "Support URL") |
-| `/gizlilik-politikasi/` | Privacy Policy | App Store zorunlu |
-| `/kullanim-kosullari/` | Terms of Use | Paywall'dan link verilecek |
-| `/abonelik-kosullari/` | Abonelik Koşulları | Otomatik yenileme/deneme şartları (App Review paywall kontrolü) |
-
-### Faz 3 — isteğe bağlı SEO genişlemesi (yayın sonrası)
-
-| URL | Hedef sorgu |
+| Konu | Karar |
 |---|---|
-| `/hamilelik-takip-uygulamasi/` | "hamilelik takip uygulaması", "gebelik takip uygulaması" |
-| `/hamilelik-ani-defteri/` | "hamilelik anı defteri", "hamilelik günlüğü uygulaması" |
+| Framework | Astro 5 + TypeScript |
+| Stil | Saf CSS değişkenleri; palet `DesignSystem.swift` **neutral** temasından türetildi |
+| Hosting | GitHub Pages + custom domain |
+| Domain | `minikanlar.app` |
+| Dil | Yalnızca Türkçe (`lang="tr"`) |
+| JS | 0 KB — SSS native `<details>` ile |
+| Tek konfig | `src/config.ts` — fiyat, e-posta, App Store ID, tarihler tek yerde |
 
-Bu sayfalar AEVO'daki `/aevo-pruefung` benzeri pillar sayfalardır: uygulamanın ilgili özelliklerini derinlemesine anlatır, sonunda App Store CTA'sı bulunur. İnteraktif öğe içermez.
+### Palet (neutral temadan HSB→HEX)
 
----
-
-## 4. Landing Sayfası Yapısı (bölüm bölüm)
-
-Akış: AEVO'nun bölüm anlatımı + LiD'nin görsel yaklaşımı. Tüm özellik metinleri uygulamanın gerçek kod tabanındaki özelliklere dayanır.
-
-### 4.1 Hero
-- **H1:** `Minik Anlar — Hamilelik Takibi ve Anı Defteri`
-- Alt metin: "Hafta hafta gebelik yolculuğunu takip et, en özel anlarını tek yerde sakla."
-- App Store rozet butonu (yayın öncesi: "Yakında App Store'da")
-- Telefon mockup'ı: uygulamanın **Bugün** ekranı (ilerleme halkası + bebek boyutu kartı)
-
-### 4.2 Gizlilik şeridi (hero'nun hemen altında — ana farklılaşma)
-> "Hesap yok. Reklam yok. Analytics yok. Tüm verilerin telefonunda kalır."
-
-Hamilelik verisi en hassas veri kategorisi; büyük rakipler veri toplamasıyla biliniyor. Bu mesaj erken ve görünür durmalı.
-
-### 4.3 Özellik bölümleri (uygulamanın 4 ana alanı, her biri mockup + metin)
-
-**Bölüm A — Hafta Hafta Takip (Bugün sekmesi)**
-- 40 haftanın her biri için: bebeğin gelişimi + annenin bedenindeki değişim özeti
-- Bebek boyutu karşılaştırmaları (haşhaş tohumu → yaban mersini → …)
-- Trimester rehberi ve gebelik ilerleme halkası
-- Hafta hesabı 3 yöntemle: son adet tarihi, tahmini doğum tarihi veya gebe kalma tarihi
-
-**Bölüm B — Günlük (Günlük sekmesi)**
-- Ruh hali, enerji seviyesi ve semptom kaydı
-- Günün mini listesi: su, vitamin, kısa yürüyüş, günlük kaydı
-- Doktor randevuları: randevu öncesi soru listesi, randevu sonrası notlar
-
-**Bölüm C — Anılar (Anılar sekmesi)**
-- Haftalık hamilelik pozu fotoğraf albümü
-- Ultrason fotoğrafları, "ilkler", bebeğe notlar, komik anlar
-- Zaman tüneli ve albüm görünümleri
-
-**Bölüm D — Doğuma Hazırlık**
-- Hastane çantası kontrol listesi
-- Yerel bildirimlerle nazik hatırlatıcılar (günlük durum, haftalık fotoğraf)
-
-### 4.4 Premium bölümü
-- **Dijital Albüm:** 6 tema (Atölye, Keten, Bahçe, Gökyüzü, Lavanta, Sade Film)
-- **PDF Anı Kitabı:** baskıya hazır hamilelik hikâyesi
-- **Haftalık anı soruları:** dönemlere özel yazma önerileri
-- Fiyat: 79,99 ₺/ay (3 gün ücretsiz deneme) · 499,99 ₺/yıl
-- Küçük not + linkler: abonelik koşulları, gizlilik politikası
-
-### 4.5 SSS (accordion, `FAQPage` JSON-LD ile)
-1. Gebelik haftam nasıl hesaplanıyor? (3 yöntem; standart: son adet tarihi, 280 gün)
-2. Verilerim nerede saklanıyor? (Yalnızca cihazında; hesap/backend yok)
-3. İnternet bağlantısı gerekiyor mu? (Hayır, tamamen çevrimdışı)
-4. Uygulama ücretsiz mi? (Temel özellikler ücretsiz; Premium isteğe bağlı)
-5. Android sürümü var mı? (Şu an yalnızca iOS)
-6. Tıbbi tavsiye veriyor mu? (Hayır — bilgilendirme amaçlıdır, doktorunuza danışın)
-7. Aboneliğimi nasıl iptal ederim? (Ayarlar → Apple ID → Abonelikler)
-
-### 4.6 Kapanış CTA + Footer
-- Footer linkleri: Support, Gizlilik Politikası, Kullanım Koşulları, Abonelik Koşulları, © Lumi-Zone
-- "Tıbbi tavsiye değildir" dipnotu
-
-### Yayın sonrası eklenecekler
-- Gerçek App Store yorumları bölümü (LiD modelinde küratörlü kartlar) — launch'ta KOYMA, yorum birikince ekle
-- App Store puanı rozeti
-
----
-
-## 5. SEO Katmanı
-
-### 5.1 Meta / head (BaseLayout.astro içinde merkezî)
-- **Title (landing):** `Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması`
-- **Description:** ~150 karakter; "hafta hafta gebelik takibi", "anı defteri", "gizlilik" temaları tek cümlede
-- Canonical, `lang="tr"`, `robots: index, follow, max-image-preview:large`
-- OG + Twitter card + `og.png` (1200×630: mockup + logo + slogan)
-- Her sayfa kendi title/description'ını props ile geçer
-
-### 5.2 Yapılandırılmış veri (JSON-LD)
-- `SoftwareApplication`: name, operatingSystem: iOS, applicationCategory: HealthApplication, offers (79,99 ₺ / 499,99 ₺, TRY)
-- `FAQPage`: landing SSS'sinden
-- Yayın sonrası: `AggregateRating` (gerçek App Store puanıyla)
-- `Organization` (Lumi-Zone) footer düzeyinde
-
-### 5.3 App entegrasyon meta'ları
-- `apple-itunes-app` smart banner (App Store ID yayın sonrası eklenir)
-- `al:ios:app_store_id`, `al:ios:app_name` app link meta'ları
-- Android meta'ları YOK (uygulama yalnızca iOS)
-
-### 5.4 Teknik
-- `@astrojs/sitemap` → sitemap.xml; robots.txt sitemap'i işaret eder
-- Görseller: Astro `<Image>` ile AVIF/WebP, mockuplarda lazy loading
-- Hedefler: LCP < 2.0 s, CLS ≈ 0
-- Yayın sonrası: Google Search Console kaydı + sitemap gönderimi
-
-### 5.5 Sayfa bazlı title/description tablosu
-
-| Sayfa | Title | Description özü |
+| Değişken | HEX | Kaynak |
 |---|---|---|
-| `/` | Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması | Hafta hafta takip + anı saklama + gizlilik |
-| `/support/` | Destek ve SSS – Minik Anlar | Sık sorulan sorular ve iletişim |
-| `/gizlilik-politikasi/` | Gizlilik Politikası – Minik Anlar | Veri toplanmaz; her şey cihazda |
-| `/kullanim-kosullari/` | Kullanım Koşulları – Minik Anlar | Kullanım şartları |
-| `/abonelik-kosullari/` | Abonelik Koşulları – Minik Anlar Premium | Otomatik yenileme, deneme, iptal |
+| `--primary` | `#729E84` | `primary` sage |
+| `--accent` | `#8FA6B3` | `accent` sky |
+| `--page-bg` | `#F6F2EC` | `pageBackground` sıcak krem |
+| `--ink` | `#242220` | `ink` |
+| `--text-secondary` | `#6B6966` | `secondaryText` |
+| `--mint` / `--lavender` / `--sky` | `#C3E8D2` / `#CCD2E8` / `#BCD7E6` | pastel vurgular |
 
 ---
 
-## 6. Görsel Kimlik
+## 4. Site Haritası
 
-Palet, uygulamanın `DesignSystem.swift` **nötr** temasından CSS değişkenlerine çevrilir — site ile uygulama aynı görünmeli:
+| URL | Sayfa | App Store Connect alanı |
+|---|---|---|
+| `/` | Landing | Marketing URL |
+| `/support/` | Destek + SSS | Support URL |
+| `/gizlilik-politikasi/` | Gizlilik Politikası | Privacy Policy URL |
+| `/kullanim-kosullari/` | Kullanım Koşulları (EULA) | Paywall'dan link |
+| `/abonelik-kosullari/` | Abonelik Koşulları | Paywall'dan link |
+| `/404` | Bulunamadı | — |
 
-- Zemin: sıcak krem (hue 0.08, çok düşük doygunluk — `pageBackground`)
-- Birincil vurgu: sage/mint yeşilleri (`accent` hue 0.40 ailesi)
-- İkincil vurgular: blush, lavanta, gökyüzü pastel tonları (dozunda)
-- Metin: koyu mürekkep tonu (`ink`) + ikincil gri
-- Tipografi: sistem fontu ya da tek değişken Google Font (ör. Nunito/Inter); yumuşak köşeler (uygulamadaki card radius diliyle uyumlu)
-- Genel his: sakin, nazik, tıbbi/klinik DEĞİL — uygulamanın metin tonuyla aynı ("nazik hatırlatma" dili)
+---
+
+## 5. Landing Yapısı
+
+**5.1 Hero** — H1 `Minik Anlar — Hamilelik Takibi ve Anı Defteri`. Alt metin + App Store rozeti (yayın öncesi "Yakında App Store'da"). Bugün ekranı mockup'ı.
+
+**5.2 Gizlilik şeridi** — "Hesap yok. Reklam yok. İzleme yok. Gebelik kayıtların cihazında kalır." (Ayrıntı için gizlilik politikasına link.)
+
+**5.3 Özellik bölümleri**
+
+- **A — Hafta Hafta Takip (Bugün):** 40 haftanın bebek/anne özeti, benzersiz haftalık başlık ve "Bunu biliyor muydun?", bebek boyutu karşılaştırmaları, tahmini boy/kilo, trimester rehberi, 3 yöntemle hafta hesabı.
+- **B — Günlük:** ruh hali, enerji, semptom; günlük rutin (su, vitamin, yürüyüş); doktor randevuları — öncesinde soru listesi, sonrasında notlar.
+- **C — Anılar:** haftalık poz albümü, ultrason, "ilkler", bebeğe mektuplar; zaman tüneli ve albüm görünümü; **hizalı poz kamerası** (önceki haftanın hayalet çerçevesi).
+- **D — Takip ve Hazırlık:** kilo, tansiyon, tekme sayacı (yorum yok, yalnızca kayıt); hastane çantası listesi; yerel bildirimlerle nazik hatırlatıcılar; doğum sonrası özet; `.zip` yedek dışa aktarma.
+
+**5.4 Premium** — 3 fayda: Gelişim Videosu (müzikli MP4), Dijital Albüm (6 tema), PDF Anı Kitabı. Ücretsiz sürümde video ve PDF'in kısa/imzalı örneği alınabilir. Fiyat: 199,99 ₺/hafta · 699,99 ₺/ay. Deneme süresi varsa uygulama içinde gösterilir. Yanına abonelik + gizlilik linkleri.
+
+**5.5 SSS** (`FAQPage` JSON-LD)
+1. Gebelik haftam nasıl hesaplanıyor?
+2. Verilerim nerede saklanıyor?
+3. İnternet gerekiyor mu? → *Takip ve anılar çevrimdışı; yalnızca Premium satın alma/geri yükleme internet ister.*
+4. Uygulama ücretsiz mi?
+5. Premium neyi açar?
+6. Verilerimi yedekleyebilir miyim?
+7. Android sürümü var mı?
+8. Tıbbi tavsiye veriyor mu?
+9. Aboneliğimi nasıl iptal ederim?
+
+**5.6 Kapanış CTA + Footer** — yasal linkler, "tıbbi tavsiye değildir" dipnotu, © .
+
+**Yayın sonrası:** gerçek yorumlar + `AggregateRating`, App Store puanı rozeti, smart banner.
+
+---
+
+## 6. SEO
+
+- `BaseLayout.astro` tüm meta/OG/JSON-LD'yi merkezîleştirir; her sayfa kendi title/description'ını props ile geçer.
+- Canonical, `lang="tr"`, `og:locale=tr_TR`, `robots: index, follow, max-image-preview:large`.
+- JSON-LD: `SoftwareApplication` (iOS, HealthApplication, offers 199,99 / 699,99 TRY), `FAQPage`, `Organization`.
+- `@astrojs/sitemap` + `robots.txt`.
+- Yayın sonrası: `apple-itunes-app` smart banner + `al:ios:*` meta'ları (App Store ID gerekir).
+- Hedef: LCP < 2,0 s, CLS ≈ 0, Lighthouse SEO 100 / Performance ≥ 95 / A11y ≥ 95.
 
 ---
 
 ## 7. Yasal Sayfa İçerik Notları
 
-### Gizlilik Politikası
-- Ana beyan: uygulama kişisel veri TOPLAMAZ; hesap, backend, analytics, reklam SDK'sı yok
-- Verilerin (profil, günlük, fotoğraf, randevu, hatırlatıcı) yalnızca cihazda saklandığı
-- İzinler ve amaçları: fotoğraf kitaplığı (albüm), bildirimler (hatırlatıcı)
-- Satın alma işlemlerinin Apple/StoreKit tarafından işlendiği; Apple'ın gizlilik politikasına link
-- `PrivacyInfo.xcprivacy` beyanıyla tutarlı olmalı
-- İletişim e-postası + yürürlük tarihi
+**Gizlilik Politikası** — cihazda saklama; hesap/reklam/izleme yok; **Adapty ve Apple'ın satın alma verisini işlediği açıkça yazılır** (amaç: doğrulama, erişim, abonelik analitiği; IDFA ve IP kapalı); izinler (fotoğraf, kamera, bildirim) ve amaçları; uygulama silinince veri kalıcı gider; dışa aktarma ile yedek alınabilir; `PrivacyInfo.xcprivacy` ile tutarlı; iletişim + yürürlük tarihi.
 
-### Kullanım Koşulları
-- Hizmet tanımı, kabul, fikri mülkiyet, sorumluluk sınırı
-- **Tıbbi feragat (kritik):** içerik bilgilendirme amaçlıdır, tıbbi tavsiye değildir; sağlık kararları için doktora danışılmalıdır
+**Kullanım Koşulları** — hizmet tanımı, lisans, fikri mülkiyet, sorumluluk sınırı, veri kaybı riski ve **tıbbi feragat** (kritik).
 
-### Abonelik Koşulları
-- Ürünler: Aylık 79,99 ₺ (3 gün ücretsiz deneme) / Yıllık 499,99 ₺
-- Otomatik yenileme mekanizması; dönem bitiminden 24 saat önce iptal edilmezse yenilenir
-- İptal yolu: iOS Ayarlar → Apple ID → Abonelikler
-- Deneme süresi bitmeden iptal edilirse ücret alınmaz
-
-### Uygulama tarafında yapılacak (site değil ama bağlantılı)
-- [ ] `PremiumPaywallView`'a Gizlilik Politikası + Kullanım/Abonelik Koşulları linklerini ekle (App Review şartı)
-- [ ] App Store Connect: Marketing URL = `/`, Support URL = `/support/`, Privacy Policy URL = `/gizlilik-politikasi/`
+**Abonelik Koşulları** — iki ürün ve gerçek fiyatları; otomatik yenileme ve 24 saat kuralı; deneme süresinin sabit olmadığı; iptal yolu (Ayarlar → Apple ID → Abonelikler); iadelerin Apple'a tabi olduğu; Premium'un neyi açtığı ve temel takibin ücretsiz kaldığı.
 
 ---
 
-## 8. Yol Haritası
+## 8. Uygulama Tarafı (site değil, ama bağlantılı)
 
-### Faz 1 — Yasal çekirdek + iskelet (launch blocker)
-- [ ] Repo kurulumu, Astro 5 projesi, deploy.yml, custom domain + HTTPS
-- [ ] BaseLayout.astro (tüm meta/OG/JSON-LD mantığı)
-- [ ] 3 yasal sayfa + `/support/` (metinleriyle)
-- [ ] Basit landing v0 (hero + özellik özetleri + footer)
-- [ ] robots.txt + sitemap
-- **Çıktı:** App Store Connect başvurusuna girilebilir URL'ler
-
-### Faz 2 — Tam landing (yayınla eşzamanlı)
-- [ ] Uygulamadan ekran görüntüleri (Bugün, Günlük, Anılar, Premium) → mockup çerçevesi
-- [ ] 4 özellik bölümü + gizlilik şeridi + Premium bölümü + SSS accordion
-- [ ] og.png tasarımı
-- [ ] JSON-LD (SoftwareApplication + FAQPage)
-- [ ] Search Console kaydı
-
-### Faz 3 — Yayın sonrası
-- [ ] App Store ID ile smart banner + al:ios meta'ları + gerçek App Store butonu/linki
-- [ ] Yorumlar bölümü (gerçek yorumlar birikince) + AggregateRating
-- [ ] İsteğe bağlı: 2 pillar sayfa (`/hamilelik-takip-uygulamasi/`, `/hamilelik-ani-defteri/`)
-- [ ] Search Console verisine göre iyileştirme
+- [ ] `PremiumPaywallView`'da Gizlilik Politikası + Kullanım/Abonelik Koşulları linkleri görünür olmalı (App Review şartı).
+- [ ] App Store Connect: Marketing `/`, Support `/support/`, Privacy `/gizlilik-politikasi/`, EULA `/kullanim-kosullari/`.
+- [ ] **`PrivacyInfo.xcprivacy` gözden geçirilmeli:** `NSPrivacyCollectedDataTypes` boş, ancak Adapty satın alma verisi işliyor. App Store Connect gizlilik formunda "Satın Alma Geçmişi" beyanı ile manifest'in tutarlı olması gerekir.
 
 ---
 
-## 9. Kontrol Listesi — "Bitti" Tanımı
+## 9. Yol Haritası
 
-- [ ] Tüm sayfalarda benzersiz title + description + canonical
-- [ ] OG görseliyle paylaşım önizlemesi doğru (WhatsApp/Twitter testi)
-- [ ] Lighthouse: Performance ≥ 95, SEO = 100, Accessibility ≥ 95
-- [ ] Mobilde tüm bölümler tek elle okunabilir; mockuplar lazy load
-- [ ] sitemap.xml erişilebilir, Search Console'da hatasız
-- [ ] Yasal sayfa URL'leri App Store Connect'e girildi
-- [ ] "Tıbbi tavsiye değildir" ibaresi landing footer'ında ve kullanım koşullarında mevcut
+**Faz 1 — Yasal çekirdek (launch blocker)** · BaseLayout + meta, 3 yasal sayfa + `/support/`, landing v1, robots + sitemap, 404. → App Store Connect'e girilebilir URL'ler.
+
+**Faz 2 — Tam landing** · Uygulama ekran görüntüleri → mockup çerçevesi, `og.png`, JSON-LD, Search Console.
+
+**Faz 3 — Yayın sonrası** · App Store ID ile gerçek link + smart banner, yorumlar + `AggregateRating`, opsiyonel pillar sayfalar (`/hamilelik-takip-uygulamasi/`, `/hamilelik-ani-defteri/`).
+
+---
+
+## 10. Eski Planın Düzeltilen Hataları
+
+| Eski (yanlış) | Yeni (doğru) |
+|---|---|
+| 79,99 ₺/ay + 499,99 ₺/yıl | 199,99 ₺/hafta + 699,99 ₺/ay; yıllık plan yok |
+| "3 gün ücretsiz deneme" | Deneme sabit değil, Adapty'den gelir |
+| "Analytics yok, backend'siz" | Adapty satın alma verisini işler (analitik dahil) |
+| "Tamamen çevrimdışı" | Takip çevrimdışı; satın alma/geri yükleme internet ister |
+| Premium = albüm + PDF + haftalık anı soruları | Premium = Gelişim Videosu + Dijital Albüm + PDF Anı Kitabı |
+| Tema "Keten" | Tema "Botanik" |
+| İzinler: fotoğraf + bildirim | + **kamera** (hizalı haftalık poz) |
+| Özellik listesinde yok | Gelişim videosu, sağlık takibi, poz kamerası, veri dışa aktarma, doğum özeti |
+| 3 sekme ima ediliyordu | Bugün · Günlük · Anılar · Ayarlar |
+
+---
+
+## 11. "Bitti" Tanımı
+
+- [ ] Her sayfada benzersiz title + description + canonical
+- [ ] Sitedeki hiçbir gizlilik/fiyat ifadesi kodla çelişmiyor (Bölüm 2 tablosuyla karşılaştır)
+- [ ] OG görseliyle paylaşım önizlemesi doğru
+- [ ] Lighthouse: Performance ≥ 95, SEO 100, A11y ≥ 95
+- [ ] sitemap.xml erişilebilir; robots.txt işaret ediyor
+- [ ] "Tıbbi tavsiye değildir" landing footer'ında ve kullanım koşullarında
 - [ ] 404 sayfası mevcut
+- [ ] Yasal URL'ler App Store Connect'e girildi

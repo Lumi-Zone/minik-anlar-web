@@ -2,52 +2,67 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Footer from '../components/Footer.astro';
 
-const title = "Sayfa Bulunamadı – Minik Anlar";
-const description = "Aradığınız sayfa bulunamadı.";
+const title = 'Sayfa bulunamadı – Minik Anlar';
+const description = 'Aradığın sayfa bulunamadı.';
 ---
 
-<BaseLayout title={title} description={description}>
-  <main class="error-page">
-    <div class="container text-center">
-      <h1>404</h1>
-      <h2>Sayfa Bulunamadı</h2>
-      <p>Aradığınız sayfa taşınmış veya silinmiş olabilir.</p>
-      <a href="/" class="btn">Ana Sayfaya Dön</a>
+<BaseLayout title={title} description={description} noindex={true}>
+  <main id="main" class="notfound">
+    <div class="container">
+      <p class="code">404</p>
+      <h1>Bu sayfayı bulamadık</h1>
+      <p class="text">
+        Aradığın sayfa taşınmış veya adresi değişmiş olabilir.
+      </p>
+
+      <a href="/" class="btn">Ana sayfaya dön</a>
+
+      <nav class="links" aria-label="Diğer sayfalar">
+        <a href="/support/">Destek</a>
+        <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>
+        <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
+        <a href="/abonelik-kosullari/">Abonelik Koşulları</a>
+      </nav>
     </div>
   </main>
-  
+
   <Footer />
 </BaseLayout>
 
 <style>
-  .error-page {
-    padding: 120px 0;
-    min-height: 60vh;
-    display: flex;
-    align-items: center;
-    background-color: var(--pageBackground);
-  }
-  
-  .text-center {
+  .notfound {
+    padding: 100px 0 120px;
     text-align: center;
   }
-  
-  h1 {
-    font-size: 6rem;
-    color: var(--accent);
-    margin-bottom: 10px;
+
+  .code {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--primary-muted);
     line-height: 1;
+    margin-bottom: 12px;
   }
-  
-  h2 {
-    font-size: 2rem;
-    color: var(--ink);
-    margin-bottom: 20px;
+
+  .notfound h1 {
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    margin-bottom: 12px;
   }
-  
-  p {
-    font-size: 1.2rem;
+
+  .text {
     color: var(--text-secondary);
-    margin-bottom: 40px;
+    margin-bottom: 32px;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 24px;
+    margin-top: 44px;
+    font-size: 0.9375rem;
+  }
+
+  .links a {
+    color: var(--text-secondary);
   }
 </style>

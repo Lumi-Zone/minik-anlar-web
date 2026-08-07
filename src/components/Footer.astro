@@ -1,128 +1,136 @@
 ---
+import { SITE } from '../config';
+
 const year = new Date().getFullYear();
 ---
+
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-content">
+    <div class="footer-top">
       <div class="footer-brand">
-        <h3>Minik Anlar</h3>
-        <p>Hafta hafta gebelik takibi ve anı defteri.</p>
+        <p class="brand-name">{SITE.name}</p>
+        <p class="brand-text">
+          Hafta hafta gebelik takibi ve anı defteri. iPhone için, tamamen Türkçe.
+        </p>
       </div>
-      
-      <div class="footer-links">
-        <div class="link-column">
-          <h4>Yasal</h4>
+
+      <nav class="footer-links" aria-label="Alt bilgi bağlantıları">
+        <div>
+          <h2>Yasal</h2>
           <ul>
-            <li><a href="/gizlilik-politikasi">Gizlilik Politikası</a></li>
-            <li><a href="/kullanim-kosullari">Kullanım Koşulları</a></li>
-            <li><a href="/abonelik-kosullari">Abonelik Koşulları</a></li>
+            <li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li>
+            <li><a href="/kullanim-kosullari/">Kullanım Koşulları</a></li>
+            <li><a href="/abonelik-kosullari/">Abonelik Koşulları</a></li>
           </ul>
         </div>
-        
-        <div class="link-column">
-          <h4>Destek</h4>
+
+        <div>
+          <h2>Destek</h2>
           <ul>
-            <li><a href="/support">SSS & İletişim</a></li>
+            <li><a href="/support/">Destek ve SSS</a></li>
+            <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
           </ul>
         </div>
-      </div>
+      </nav>
     </div>
-    
+
     <div class="footer-bottom">
-      <div class="disclaimer">
-        <strong>Önemli Not:</strong> Minik Anlar uygulaması ve bu web sitesi yalnızca bilgilendirme amaçlıdır ve tıbbi tavsiye niteliği taşımaz. Sağlık kararlarınız ve her türlü tıbbi endişeniz için daima doktorunuza veya uzman bir sağlık kuruluşuna danışınız.
-      </div>
-      
-      <div class="copyright">
-        &copy; {year} Lumi-Zone. Tüm hakları saklıdır.
-      </div>
+      <p class="disclaimer">
+        <strong>Önemli not:</strong> Minik Anlar uygulaması ve bu web sitesi yalnızca
+        bilgilendirme ve kişisel takip amaçlıdır; tıbbi tavsiye, teşhis veya tedavi
+        niteliği taşımaz. Sağlığınla ilgili her konuda doktoruna danış.
+      </p>
+      <p class="copyright">&copy; {year} {SITE.publisher}. Tüm hakları saklıdır.</p>
     </div>
   </div>
 </footer>
 
 <style>
   .site-footer {
-    background-color: var(--card-bg);
-    padding: 80px 0 40px;
-    border-top: 1px solid var(--border-color);
-  }
-  
-  .footer-content {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 60px;
-  }
-  
-  .footer-brand h3 {
-    font-size: 1.5rem;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  
-  .footer-brand p {
-    color: var(--text-secondary);
-    max-width: 300px;
-  }
-  
-  .footer-links {
-    display: flex;
-    gap: 60px;
-  }
-  
-  .link-column h4 {
-    font-size: 1.1rem;
-    color: var(--ink);
-    margin-bottom: 20px;
-  }
-  
-  .link-column ul {
-    list-style: none;
-  }
-  
-  .link-column li {
-    margin-bottom: 12px;
-  }
-  
-  .link-column a {
-    color: var(--text-secondary);
-    transition: color 0.2s;
-  }
-  
-  .link-column a:hover {
-    color: var(--accent);
-  }
-  
-  .footer-bottom {
-    border-top: 1px solid var(--border-color);
-    padding-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .disclaimer {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    line-height: 1.6;
-    background-color: rgba(0,0,0,0.02);
-    padding: 16px;
-    border-radius: 8px;
-  }
-  
-  .copyright {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+    background: var(--surface);
+    border-top: 1px solid var(--line);
+    padding: 64px 0 36px;
   }
 
-  @media (max-width: 768px) {
-    .footer-content {
-      flex-direction: column;
-      gap: 40px;
-    }
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 48px;
+  }
+
+  .brand-name {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .brand-text {
+    color: var(--text-secondary);
+    max-width: 34ch;
+    font-size: 0.9375rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 64px;
+  }
+
+  .footer-links h2 {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: 14px;
+  }
+
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    color: var(--text-secondary);
+    font-size: 0.9375rem;
+    text-decoration: none;
+  }
+
+  .footer-links a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+    display: grid;
+    gap: 18px;
+  }
+
+  .disclaimer {
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    background: var(--page-bg);
+    padding: 16px 18px;
+    border-radius: var(--radius-sm);
+  }
+
+  .copyright {
+    text-align: center;
+    color: var(--text-tertiary);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 620px) {
     .footer-links {
       flex-direction: column;
-      gap: 30px;
+      gap: 28px;
     }
   }
 </style>
