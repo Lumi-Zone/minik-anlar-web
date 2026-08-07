@@ -6,8 +6,7 @@ import FeatureSection from '../components/FeatureSection.astro';
 import PremiumSection from '../components/PremiumSection.astro';
 import FAQ from '../components/FAQ.astro';
 import DownloadCTA from '../components/DownloadCTA.astro';
-import Footer from '../components/Footer.astro';
-import { SITE, APP_STORE, SUBSCRIPTIONS, CURRENCY } from '../config';
+import { SITE, APP_STORE } from '../config';
 
 const title = 'Minik Anlar – Hamilelik Takibi ve Anı Defteri Uygulaması';
 const description =
@@ -57,6 +56,11 @@ const faqItems = [
   },
 ];
 
+/**
+ * `offers` bilinçli olarak yok: site fiyat göstermediği için yapılandırılmış
+ * veride de tutar yayımlanmaz. Fiyat yalnızca App Store'da ve satın alma
+ * ekranında görünür.
+ */
 const softwareApplication = {
   '@context': 'https://schema.org',
   '@type': 'SoftwareApplication',
@@ -65,13 +69,6 @@ const softwareApplication = {
   operatingSystem: `iOS ${APP_STORE.minimumOSVersion}+`,
   applicationCategory: 'HealthApplication',
   inLanguage: 'tr',
-  offers: SUBSCRIPTIONS.map((plan) => ({
-    '@type': 'Offer',
-    name: `${SITE.name} Premium — ${plan.name}`,
-    price: plan.priceValue,
-    priceCurrency: CURRENCY,
-    category: 'subscription',
-  })),
 };
 
 const faqPage = {
@@ -90,7 +87,18 @@ const faqPage = {
     <Hero />
     <PrivacyStrip />
 
-    <div id="ozellikler">
+    <div id="ozellikler" class="features">
+      <div class="container">
+        <div class="section-heading center">
+          <span class="eyebrow">Özellikler</span>
+          <h2>Gebeliğin dört ayrı ihtiyacı, tek uygulamada</h2>
+          <p>
+            Takip, günlük, anılar ve doğuma hazırlık — hepsi aynı sade akışta,
+            birbirini tekrar etmeden.
+          </p>
+        </div>
+      </div>
+
       <FeatureSection
         id="takip"
         eyebrow="Bugün"
@@ -172,6 +180,15 @@ const faqPage = {
     <FAQ items={faqItems} />
     <DownloadCTA />
   </main>
-
-  <Footer />
 </BaseLayout>
+
+<style>
+  .features {
+    padding-top: var(--section-y);
+  }
+
+  /* Bölüm başlığı ile ilk özellik arasındaki boşluk iki kez sayılmasın. */
+  .features > .container .section-heading {
+    margin-bottom: 0;
+  }
+</style>

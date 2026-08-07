@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 import { SITE, APP_STORE } from '../config';
 
 const title = 'Kullanım Koşulları – Minik Anlar';
@@ -9,16 +8,16 @@ const description =
 ---
 
 <BaseLayout title={title} description={description}>
-  <main id="main" class="legal-page">
+  <main id="main">
     <div class="container prose-wrap">
-      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
-
-      <h1>Kullanım Koşulları</h1>
-      <p class="last-updated">
+      <header class="page-header">
+        <h1 class="page-title">Kullanım Koşulları</h1>
+        <p class="page-meta">
         Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
-      </p>
+        </p>
+      </header>
 
-      <div class="content-body">
+      <div class="prose">
         <p>
           Bu koşullar, {SITE.publisher} tarafından geliştirilen Minik Anlar iPhone
           uygulamasının ("Uygulama") kullanımını düzenler. Uygulamayı indirerek, kurarak
@@ -72,7 +71,7 @@ const description =
         <p>
           Temel özellikler ücretsizdir. Gelişim Videosu, Dijital Albüm, PDF Anı Kitabı,
           kayıtlı projeler, hizalı poz kamerası ve randevu özeti isteğe bağlı Premium
-          aboneliğiyle açılır. Fiyatlar, otomatik yenileme, deneme süresi, iptal ve iade
+          aboneliğiyle açılır. Paketler, otomatik yenileme, deneme süresi, iptal ve iade
           kuralları ayrı bir sayfada düzenlenmiştir:
           <a href="/abonelik-kosullari/">Abonelik Koşulları</a>.
         </p>
@@ -144,6 +143,4 @@ const description =
       </div>
     </div>
   </main>
-
-  <Footer />
 </BaseLayout>

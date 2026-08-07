@@ -1,0 +1,119 @@
+---
+/**
+ * Sabit üst başlık. JavaScript kullanmaz: yapışkanlık, bulanık zemin ve
+ * duyarlı davranış tamamen CSS ile çözülür.
+ */
+import { SITE, NAV, appStoreUrl, downloadLabel } from '../config';
+---
+
+<header class="site-header">
+  <div class="container bar">
+    <a class="brand" href="/">
+      <span class="mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2" opacity="0.3" />
+          <path
+            d="M12 3a9 9 0 0 1 9 9"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+      <span class="wordmark">{SITE.name}</span>
+    </a>
+
+    <nav class="nav" aria-label="Ana gezinme">
+      {NAV.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+
+    {
+      appStoreUrl ? (
+        <a href={appStoreUrl} class="btn btn-sm header-cta">
+          {downloadLabel}
+        </a>
+      ) : (
+        <span class="btn btn-sm is-pending header-cta">{downloadLabel}</span>
+      )
+    }
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--page) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: saturate(180%) blur(16px);
+    -webkit-backdrop-filter: saturate(180%) blur(16px);
+  }
+
+  .bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+    min-height: 64px;
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-right: auto;
+    color: var(--ink);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .mark {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    background: var(--brand-soft);
+    color: var(--brand-deep);
+  }
+
+  .mark svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .wordmark {
+    font-size: var(--text-base);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-5);
+  }
+
+  .nav a {
+    color: var(--ink-2);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .nav a:hover {
+    color: var(--ink);
+  }
+
+  @media (max-width: 840px) {
+    /* Tek sayfalık akışta bağlantılar zaten sırayla geçiliyor; dar ekranda
+       başlık yalnızca marka ve birincil eyleme indirgenir. */
+    .nav {
+      display: none;
+    }
+  }
+
+  @media (max-width: 420px) {
+    .header-cta {
+      display: none;
+    }
+  }
+</style>

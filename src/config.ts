@@ -1,9 +1,8 @@
 /**
  * Sitedeki tüm değişken bilgiler tek yerde.
  *
- * Buradaki her değer uygulamanın kod tabanından doğrulanmıştır — fiyatlar
- * `MinikAnlar/Resources/MinikAnlar.storekit`, ürün kimlikleri
- * `Services/PremiumStore.swift`. Değiştirmeden önce plan.md § 2'ye bak.
+ * Buradaki her değer uygulamanın kod tabanından doğrulanmıştır — ürün
+ * kimlikleri `Services/PremiumStore.swift`. Değiştirmeden önce plan.md § 2'ye bak.
  */
 
 export const SITE = {
@@ -38,18 +37,28 @@ export const downloadLabel = appStoreUrl
   : "Yakında App Store'da";
 
 /**
+ * Başlıktaki gezinme. Çapalar ana sayfada; alt sayfalardan da çalışsın diye
+ * kök göreli (`/#...`) yazılır.
+ */
+export const NAV = [
+  { href: '/#ozellikler', label: 'Özellikler' },
+  { href: '/#premium', label: 'Premium' },
+  { href: '/#sss', label: 'SSS' },
+  { href: '/support/', label: 'Destek' },
+] as const;
+
+/**
  * Otomatik yenilenen iki abonelik. Yıllık plan yoktur.
  *
- * Ücretsiz deneme süresi bilinçli olarak burada yer almaz: teklif Adapty
- * tarafından kullanıcıya göre belirlenir (`PremiumStore.introOfferPeriodTexts`),
- * dolayısıyla sitede sabit bir süre vaat edilemez.
+ * Fiyat ve ücretsiz deneme süresi bilinçli olarak burada yer almaz: her ikisi de
+ * Apple'ın bölgesel fiyatlandırmasına ve Adapty'nin kullanıcıya özel teklifine
+ * bağlıdır (`PremiumStore.introOfferPeriodTexts`). Sitede sabit bir tutar veya
+ * süre vaat edilmez; güncel değerler yalnızca satın alma ekranında gösterilir.
  */
 export const SUBSCRIPTIONS = [
   {
     id: 'premium_weekly_subscription',
     name: 'Haftalık',
-    price: '199,99 ₺',
-    priceValue: '199.99',
     period: 'hafta',
     note: 'Kısa süreli denemek için',
     featured: false,
@@ -57,15 +66,11 @@ export const SUBSCRIPTIONS = [
   {
     id: 'premium_monthly_subscription',
     name: 'Aylık',
-    price: '699,99 ₺',
-    priceValue: '699.99',
     period: 'ay',
     note: 'Uygulamadaki varsayılan seçim',
     featured: true,
   },
 ] as const;
-
-export const CURRENCY = 'TRY';
 
 /** Premium'un açtığı yetenekler — `Features/PremiumViews.swift` `PremiumBenefit`. */
 export const PREMIUM_BENEFITS = [

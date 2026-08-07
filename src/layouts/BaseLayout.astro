@@ -1,5 +1,7 @@
 ---
 import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import { SITE, APP_STORE } from '../config';
 
 interface Props {
@@ -42,7 +44,8 @@ const jsonLd = JSON.stringify([organization, ...schemas]);
       name="robots"
       content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large'}
     />
-    <meta name="theme-color" content="#F6F2EC" />
+    <meta name="theme-color" content="#FAF7F3" />
+    <meta name="color-scheme" content="light" />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
@@ -80,6 +83,8 @@ const jsonLd = JSON.stringify([organization, ...schemas]);
   </head>
   <body>
     <a class="skip-link" href="#main">İçeriğe geç</a>
+    <Header />
     <slot />
+    <Footer />
   </body>
 </html>

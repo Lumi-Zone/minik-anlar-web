@@ -2,39 +2,63 @@
 import { SITE } from '../config';
 
 const year = new Date().getFullYear();
+
+const groups = [
+  {
+    title: 'Ürün',
+    links: [
+      { href: '/#ozellikler', label: 'Özellikler' },
+      { href: '/#premium', label: 'Premium' },
+      { href: '/#sss', label: 'Sıkça sorulan sorular' },
+    ],
+  },
+  {
+    title: 'Yasal',
+    links: [
+      { href: '/gizlilik-politikasi/', label: 'Gizlilik Politikası' },
+      { href: '/kullanim-kosullari/', label: 'Kullanım Koşulları' },
+      { href: '/abonelik-kosullari/', label: 'Abonelik Koşulları' },
+    ],
+  },
+  {
+    title: 'Destek',
+    links: [
+      { href: '/support/', label: 'Destek ve SSS' },
+      { href: `mailto:${SITE.supportEmail}`, label: SITE.supportEmail },
+    ],
+  },
+];
 ---
 
 <footer class="site-footer">
   <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
+    <div class="top">
+      <div class="brand">
         <p class="brand-name">{SITE.name}</p>
         <p class="brand-text">
           Hafta hafta gebelik takibi ve anı defteri. iPhone için, tamamen Türkçe.
         </p>
       </div>
 
-      <nav class="footer-links" aria-label="Alt bilgi bağlantıları">
-        <div>
-          <h2>Yasal</h2>
-          <ul>
-            <li><a href="/gizlilik-politikasi/">Gizlilik Politikası</a></li>
-            <li><a href="/kullanim-kosullari/">Kullanım Koşulları</a></li>
-            <li><a href="/abonelik-kosullari/">Abonelik Koşulları</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h2>Destek</h2>
-          <ul>
-            <li><a href="/support/">Destek ve SSS</a></li>
-            <li><a href={`mailto:${SITE.supportEmail}`}>{SITE.supportEmail}</a></li>
-          </ul>
-        </div>
+      <nav class="groups" aria-label="Alt bilgi bağlantıları">
+        {
+          groups.map((group) => (
+            <div>
+              <h2>{group.title}</h2>
+              <ul class="list-reset">
+                {group.links.map((link) => (
+                  <li>
+                    <a href={link.href}>{link.label}</a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </nav>
     </div>
 
-    <div class="footer-bottom">
+    <div class="bottom">
       <p class="disclaimer">
         <strong>Önemli not:</strong> Minik Anlar uygulaması ve bu web sitesi yalnızca
         bilgilendirme ve kişisel takip amaçlıdır; tıbbi tavsiye, teşhis veya tedavi
@@ -47,90 +71,100 @@ const year = new Date().getFullYear();
 
 <style>
   .site-footer {
+    padding-block: var(--space-9) var(--space-6);
     background: var(--surface);
     border-top: 1px solid var(--line);
-    padding: 64px 0 36px;
   }
 
-  .footer-top {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 40px;
-    margin-bottom: 48px;
+  .top {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr);
+    gap: var(--space-8);
+    padding-bottom: var(--space-8);
   }
 
   .brand-name {
-    font-size: 1.25rem;
+    font-size: var(--text-lg);
     font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 8px;
+    letter-spacing: -0.02em;
   }
 
   .brand-text {
-    color: var(--text-secondary);
     max-width: 34ch;
-    font-size: 0.9375rem;
+    margin-top: var(--space-2);
+    color: var(--ink-2);
+    font-size: var(--text-sm);
   }
 
-  .footer-links {
-    display: flex;
-    gap: 64px;
-  }
-
-  .footer-links h2 {
-    font-size: 0.8125rem;
-    font-weight: 700;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 14px;
-  }
-
-  .footer-links ul {
-    list-style: none;
-    padding: 0;
+  .groups {
     display: grid;
-    gap: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-5);
   }
 
-  .footer-links a {
-    color: var(--text-secondary);
-    font-size: 0.9375rem;
+  .groups h2 {
+    margin-bottom: var(--space-4);
+    color: var(--ink-3);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+  }
+
+  .groups ul {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  .groups a {
+    color: var(--ink-2);
+    font-size: var(--text-sm);
     text-decoration: none;
+    overflow-wrap: anywhere;
   }
 
-  .footer-links a:hover {
-    color: var(--primary-hover);
+  .groups a:hover {
+    color: var(--ink);
     text-decoration: underline;
   }
 
-  .footer-bottom {
-    border-top: 1px solid var(--line);
-    padding-top: 28px;
+  .bottom {
     display: grid;
-    gap: 18px;
+    gap: var(--space-5);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--line);
   }
 
   .disclaimer {
-    font-size: 0.8125rem;
-    line-height: 1.7;
-    color: var(--text-secondary);
-    background: var(--page-bg);
-    padding: 16px 18px;
+    padding: var(--space-4);
     border-radius: var(--radius-sm);
+    background: var(--page);
+    color: var(--ink-2);
+    font-size: var(--text-xs);
+    line-height: 1.7;
+  }
+
+  .disclaimer strong {
+    color: var(--ink);
   }
 
   .copyright {
+    color: var(--ink-3);
+    font-size: var(--text-xs);
     text-align: center;
-    color: var(--text-tertiary);
-    font-size: 0.875rem;
   }
 
-  @media (max-width: 620px) {
-    .footer-links {
-      flex-direction: column;
-      gap: 28px;
+  @media (max-width: 860px) {
+    .top {
+      grid-template-columns: 1fr;
+      gap: var(--space-7);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .groups {
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
     }
   }
 </style>

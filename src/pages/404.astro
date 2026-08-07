@@ -1,9 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 
 const title = 'Sayfa bulunamadı – Minik Anlar';
 const description = 'Aradığın sayfa bulunamadı.';
+
+const links = [
+  { href: '/support/', label: 'Destek' },
+  { href: '/gizlilik-politikasi/', label: 'Gizlilik Politikası' },
+  { href: '/kullanim-kosullari/', label: 'Kullanım Koşulları' },
+  { href: '/abonelik-kosullari/', label: 'Abonelik Koşulları' },
+];
 ---
 
 <BaseLayout title={title} description={description} noindex={true}>
@@ -11,58 +17,57 @@ const description = 'Aradığın sayfa bulunamadı.';
     <div class="container">
       <p class="code">404</p>
       <h1>Bu sayfayı bulamadık</h1>
-      <p class="text">
-        Aradığın sayfa taşınmış veya adresi değişmiş olabilir.
-      </p>
+      <p class="text">Aradığın sayfa taşınmış veya adresi değişmiş olabilir.</p>
 
       <a href="/" class="btn">Ana sayfaya dön</a>
 
       <nav class="links" aria-label="Diğer sayfalar">
-        <a href="/support/">Destek</a>
-        <a href="/gizlilik-politikasi/">Gizlilik Politikası</a>
-        <a href="/kullanim-kosullari/">Kullanım Koşulları</a>
-        <a href="/abonelik-kosullari/">Abonelik Koşulları</a>
+        {links.map((link) => <a href={link.href}>{link.label}</a>)}
       </nav>
     </div>
   </main>
-
-  <Footer />
 </BaseLayout>
 
 <style>
   .notfound {
-    padding: 100px 0 120px;
+    padding-block: clamp(72px, 12vw, 128px);
     text-align: center;
   }
 
   .code {
-    font-size: 3.5rem;
+    margin-bottom: var(--space-3);
+    color: var(--brand-deep);
+    font-size: var(--text-sm);
     font-weight: 700;
-    color: var(--primary-muted);
-    line-height: 1;
-    margin-bottom: 12px;
+    letter-spacing: 0.16em;
   }
 
-  .notfound h1 {
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin-bottom: 12px;
+  h1 {
+    font-size: var(--display-md);
   }
 
   .text {
-    color: var(--text-secondary);
-    margin-bottom: 32px;
+    max-width: 44ch;
+    margin: var(--space-4) auto var(--space-7);
+    color: var(--ink-2);
   }
 
   .links {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 8px 24px;
-    margin-top: 44px;
-    font-size: 0.9375rem;
+    gap: var(--space-2) var(--space-5);
+    margin-top: var(--space-8);
+    font-size: var(--text-sm);
   }
 
   .links a {
-    color: var(--text-secondary);
+    color: var(--ink-2);
+    text-decoration: none;
+  }
+
+  .links a:hover {
+    color: var(--ink);
+    text-decoration: underline;
   }
 </style>

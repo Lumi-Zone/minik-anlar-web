@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 import { SITE } from '../config';
 
 const title = 'Gizlilik Politikası – Minik Anlar';
@@ -9,16 +8,16 @@ const description =
 ---
 
 <BaseLayout title={title} description={description}>
-  <main id="main" class="legal-page">
+  <main id="main">
     <div class="container prose-wrap">
-      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
-
-      <h1>Gizlilik Politikası</h1>
-      <p class="last-updated">
+      <header class="page-header">
+        <h1 class="page-title">Gizlilik Politikası</h1>
+        <p class="page-meta">
         Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
-      </p>
+        </p>
+      </header>
 
-      <div class="content-body">
+      <div class="prose">
         <p>
           Minik Anlar ("Uygulama"), hamilelik sürecini takip etmen ve anılarını saklaman için
           geliştirilmiş bir iPhone uygulamasıdır. Hamilelik verisi en hassas veri
@@ -27,7 +26,7 @@ const description =
         </p>
 
         <div class="callout">
-          <h3>Kısaca</h3>
+          <h2>Kısaca</h2>
           <p>
             Gebelik kayıtların, günlüğün, fotoğrafların ve notların <strong>yalnızca
             telefonunda</strong> saklanır. Kullanıcı hesabı yoktur, reklam yoktur, uygulama
@@ -177,6 +176,4 @@ const description =
       </div>
     </div>
   </main>
-
-  <Footer />
 </BaseLayout>

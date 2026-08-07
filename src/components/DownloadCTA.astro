@@ -2,21 +2,21 @@
 import { APP_STORE, appStoreUrl, downloadLabel } from '../config';
 ---
 
-<section class="cta" aria-labelledby="cta-title">
+<section class="cta on-dark" aria-labelledby="cta-title">
   <div class="container">
     <h2 id="cta-title">Yolculuğunu bugün kaydetmeye başla</h2>
-    <p>
+    <p class="lede">
       Minik Anlar'ı ücretsiz indir; hafta hafta takip, günlük ve anı defteri
       hiçbir ücret ödemeden kullanılabilir.
     </p>
 
     {
       appStoreUrl ? (
-        <a href={appStoreUrl} class="btn btn-appstore">
+        <a href={appStoreUrl} class="btn">
           {downloadLabel}
         </a>
       ) : (
-        <span class="btn btn-appstore is-pending">{downloadLabel}</span>
+        <span class="btn is-pending">{downloadLabel}</span>
       )
     }
 
@@ -26,39 +26,27 @@ import { APP_STORE, appStoreUrl, downloadLabel } from '../config';
 
 <style>
   .cta {
-    padding: 96px 0;
-    background: var(--primary);
-    color: #fff;
+    padding-block: var(--section-y);
+    background: var(--brand-deep);
+    color: var(--on-dark);
     text-align: center;
   }
 
-  .cta h2 {
-    color: #fff;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin-bottom: 14px;
+  h2 {
+    font-size: var(--display-md);
+    color: var(--on-dark);
   }
 
-  .cta > .container > p {
-    font-size: 1.0625rem;
-    max-width: 52ch;
-    margin: 0 auto 32px;
-    color: rgba(255, 255, 255, 0.92);
-  }
-
-  .cta .btn-appstore.is-pending {
-    background: #fff;
-    color: var(--ink);
-    border-color: transparent;
-  }
-
-  .cta .btn-appstore.is-pending:hover {
-    background: #fff;
-    color: var(--ink);
+  .lede {
+    max-width: 50ch;
+    margin: var(--space-4) auto var(--space-7);
+    color: var(--on-dark-2);
+    font-size: var(--text-lg);
   }
 
   .requirement {
-    margin-top: 22px;
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.8);
+    margin-top: var(--space-5);
+    color: var(--on-dark-2);
+    font-size: var(--text-xs);
   }
 </style>

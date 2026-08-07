@@ -7,24 +7,38 @@ interface FAQItem {
 interface Props {
   items: FAQItem[];
   title?: string;
+  /** Aynı sayfada iki SSS listesi olursa çapa kimlikleri çakışmasın. */
+  id?: string;
 }
 
-const { items, title = 'Sıkça Sorulan Sorular' } = Astro.props;
+const { items, title = 'Sıkça Sorulan Sorular', id = 'sss' } = Astro.props;
 ---
 
-<section class="faq" id="sss" aria-labelledby="faq-title">
+<section class="faq" id={id} aria-labelledby={`${id}-title`}>
   <div class="container">
-    <h2 id="faq-title">{title}</h2>
+    <div class="section-heading center">
+      <h2 id={`${id}-title`}>{title}</h2>
+    </div>
 
-    <div class="faq-list">
+    <div class="list card">
       {
         items.map((item) => (
-          <details class="faq-item">
+          <details class="item">
             <summary>
               <span>{item.q}</span>
-              <span class="icon" aria-hidden="true" />
+              <span class="chevron" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M4 6l4 4 4-4"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
             </summary>
-            <div class="faq-answer">
+            <div class="answer">
               <p set:html={item.a} />
             </div>
           </details>
@@ -36,80 +50,92 @@ const { items, title = 'Sıkça Sorulan Sorular' } = Astro.props;
 
 <style>
   .faq {
-    padding: 84px 0;
+    padding-block: var(--section-y);
   }
 
-  .faq h2 {
-    text-align: center;
-    font-size: clamp(1.8rem, 4vw, 2.4rem);
-    margin-bottom: 44px;
-  }
-
-  .faq-list {
+  .list {
     max-width: var(--prose-width);
     margin-inline: auto;
-    display: grid;
-    gap: 12px;
-  }
-
-  .faq-item {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
     overflow: hidden;
   }
 
+  .item + .item {
+    border-top: 1px solid var(--line);
+  }
+
   summary {
-    padding: 20px 24px;
-    font-size: 1.0625rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    font-size: var(--text-base);
     font-weight: 600;
     color: var(--ink);
     cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 16px;
     list-style: none;
+    transition: background-color var(--dur) var(--ease);
   }
 
   summary::-webkit-details-marker {
     display: none;
   }
 
-  /* Artı işareti iki sözde elemanla çizilir; açıkken eksiye döner. */
-  .icon {
-    position: relative;
+  summary:hover {
+    background: var(--surface-sunken);
+  }
+
+  summary:focus-visible {
+    outline-offset: -3px;
+  }
+
+  .chevron {
+    display: grid;
+    place-items: center;
     flex: none;
-    width: 16px;
-    height: 16px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--brand-tint);
+    color: var(--brand-deep);
+    transition: transform var(--dur) var(--ease);
   }
 
-  .icon::before,
-  .icon::after {
-    content: '';
-    position: absolute;
-    background: var(--primary);
-    border-radius: 2px;
-    inset-block: 7px;
-    inset-inline: 0;
+  .chevron svg {
+    width: 15px;
+    height: 15px;
   }
 
-  .icon::after {
-    inset-block: 0;
-    inset-inline: 7px;
-    transition: opacity 0.2s ease;
+  .item[open] .chevron {
+    transform: rotate(180deg);
   }
 
-  .faq-item[open] .icon::after {
-    opacity: 0;
+  .answer {
+    padding: 0 var(--space-5) var(--space-5);
+    color: var(--ink-2);
+    font-size: var(--text-sm);
+    line-height: 1.7;
   }
 
-  .faq-answer {
-    padding: 0 24px 22px;
-    color: var(--text-secondary);
-  }
+  /* Destekleyen tarayıcılarda açılma yumuşatılır; diğerlerinde anında açılır. */
+  @supports (interpolate-size: allow-keywords) {
+    .item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition: block-size 240ms var(--ease), content-visibility 240ms allow-discrete;
+    }
 
-  .faq-answer :global(a) {
-    font-weight: 500;
+    .item[open]::details-content {
+      block-size: auto;
+    }
+  }
+</style>
+
+<style is:global>
+  /* `interpolate-size` kalıtsaldır; kök üzerinde tanımlanmalı. */
+  @supports (interpolate-size: allow-keywords) {
+    :root {
+      interpolate-size: allow-keywords;
+    }
   }
 </style>

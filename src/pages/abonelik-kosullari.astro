@@ -1,24 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Footer from '../components/Footer.astro';
 import { SITE, SUBSCRIPTIONS } from '../config';
 
 const title = 'Abonelik Koşulları – Minik Anlar Premium';
 const description =
-  'Minik Anlar Premium abonelik koşulları: paketler ve fiyatlar, otomatik yenileme, ücretsiz deneme, iptal ve iade bilgileri.';
+  'Minik Anlar Premium abonelik koşulları: paketler, otomatik yenileme, ücretsiz deneme, iptal ve iade bilgileri.';
 ---
 
 <BaseLayout title={title} description={description}>
-  <main id="main" class="legal-page">
+  <main id="main">
     <div class="container prose-wrap">
-      <a class="back-link" href="/">&larr; Ana sayfaya dön</a>
-
-      <h1>Abonelik Koşulları</h1>
-      <p class="last-updated">
+      <header class="page-header">
+        <h1 class="page-title">Abonelik Koşulları</h1>
+        <p class="page-meta">
         Yürürlük tarihi: <time datetime={SITE.legalUpdatedISO}>{SITE.legalUpdatedLabel}</time>
-      </p>
+        </p>
+      </header>
 
-      <div class="content-body">
+      <div class="prose">
         <p>
           Minik Anlar'ın temel özellikleri ücretsizdir: hafta hafta takip, günlük, anı
           defteri, sağlık kayıtları ve hatırlatıcılar için ödeme yapman gerekmez.
@@ -40,12 +39,11 @@ const description =
           örneğini oluşturup paylaşabilirsin.
         </p>
 
-        <h2>2. Paketler ve fiyatlar</h2>
+        <h2>2. Paketler</h2>
         <table>
           <thead>
             <tr>
               <th>Paket</th>
-              <th>Fiyat</th>
               <th>Yenilenme</th>
             </tr>
           </thead>
@@ -54,7 +52,6 @@ const description =
               SUBSCRIPTIONS.map((plan) => (
                 <tr>
                   <td>{plan.name}</td>
-                  <td>{plan.price}</td>
                   <td>Her {plan.period} otomatik</td>
                 </tr>
               ))
@@ -62,9 +59,10 @@ const description =
           </tbody>
         </table>
         <p>
-          Fiyatlar Türkiye App Store için geçerlidir. Apple'ın bölgesel fiyatlandırması,
-          vergiler ve döviz kurları nedeniyle bulunduğun ülkeye göre farklılık gösterebilir.
-          Satın alma ekranında sana uygulanacak güncel fiyat her zaman görünür.
+          Bu sitede tutar belirtilmez. Apple'ın bölgesel fiyatlandırması, vergiler ve
+          döviz kurları nedeniyle ödeyeceğin tutar bulunduğun ülkeye göre değişir; sana
+          uygulanacak güncel tutar App Store'da ve uygulama içindeki satın alma ekranında,
+          satın almayı onaylamadan önce her zaman görünür.
         </p>
 
         <h2>3. Ücretsiz deneme</h2>
@@ -123,7 +121,7 @@ const description =
 
         <h2>8. Değişiklikler</h2>
         <p>
-          Fiyatlar ve paket içerikleri değişebilir. Mevcut aboneliğinin fiyatında bir
+          Paket içerikleri ve fiyatlandırma değişebilir. Mevcut aboneliğinin tutarında bir
           değişiklik olursa Apple seni önceden bilgilendirir ve gerektiğinde onayını ister;
           onaylamazsan abonelik yenilenmez.
         </p>
@@ -140,6 +138,4 @@ const description =
       </div>
     </div>
   </main>
-
-  <Footer />
 </BaseLayout>

@@ -5,8 +5,9 @@ interface Props {
   title: string;
   intro: string;
   items: string[];
-  /** Yandaki panelde gösterilen kısa vurgular. */
+  /** Yandaki kartta gösterilen kısa vurgular. */
   highlights: { label: string; value: string }[];
+  /** Görsel ritim için sırayla metin ve kartın yeri değişir. */
   reverse?: boolean;
 }
 
@@ -15,129 +16,124 @@ const { id, eyebrow, title, intro, items, highlights, reverse = false } = Astro.
 
 <section class={`feature ${reverse ? 'reverse' : ''}`} aria-labelledby={`${id}-title`}>
   <div class="container feature-grid">
-    <div class="feature-copy">
-      <p class="eyebrow">{eyebrow}</p>
+    <div class="copy">
+      <span class="eyebrow">{eyebrow}</span>
       <h2 id={`${id}-title`}>{title}</h2>
       <p class="intro">{intro}</p>
-      <ul class="feature-list">
+
+      <ul class="items list-reset">
         {items.map((item) => <li>{item}</li>)}
       </ul>
     </div>
 
-    <div class="feature-panel">
-      <dl>
-        {
-          highlights.map((h) => (
-            <div class="highlight">
-              <dt>{h.label}</dt>
-              <dd>{h.value}</dd>
-            </div>
-          ))
-        }
-      </dl>
-    </div>
+    <dl class="panel card">
+      {
+        highlights.map((highlight) => (
+          <div class="row">
+            <dt>{highlight.label}</dt>
+            <dd>{highlight.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
   </div>
 </section>
 
 <style>
   .feature {
-    padding: 72px 0;
+    padding-block: clamp(48px, 6vw, 80px);
+  }
+
+  /* Ardışık özellikler ince bir çizgiyle ayrılır. */
+  .feature + .feature {
+    border-top: 1px solid var(--line);
   }
 
   .feature-grid {
     display: grid;
-    grid-template-columns: 1.15fr 1fr;
-    gap: 60px;
-    align-items: center;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    align-items: start;
+    gap: clamp(32px, 5vw, 72px);
   }
 
-  .feature.reverse .feature-copy {
+  .feature.reverse .copy {
     order: 2;
   }
 
-  .feature-copy h2 {
-    font-size: clamp(1.7rem, 3.6vw, 2.25rem);
-    margin-bottom: 14px;
+  /* Ters sırada metin ikinci sütuna geçtiği için sütun genişlikleri de
+     takas edilir; metin her satırda aynı genişlikte kalır. */
+  .feature.reverse .feature-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  }
+
+  h2 {
+    font-size: var(--display-sm);
   }
 
   .intro {
-    color: var(--text-secondary);
-    font-size: 1.0625rem;
-    margin-bottom: 24px;
+    margin-top: var(--space-3);
+    color: var(--ink-2);
   }
 
-  .feature-list {
-    list-style: none;
-    padding: 0;
+  .items {
     display: grid;
-    gap: 13px;
+    gap: var(--space-3);
+    margin-top: var(--space-5);
   }
 
-  .feature-list li {
+  .items li {
     position: relative;
-    padding-left: 30px;
-    color: var(--text-secondary);
+    padding-left: 26px;
+    color: var(--ink-2);
+    font-size: var(--text-sm);
   }
 
-  .feature-list li::before {
+  .items li::before {
     content: '';
     position: absolute;
-    left: 0;
-    top: 0.55em;
-    width: 9px;
-    height: 9px;
+    left: 4px;
+    top: 0.6em;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
-    background: var(--primary);
+    background: var(--brand);
   }
 
-  .feature-panel {
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 12px;
-    box-shadow: var(--shadow-soft);
+  .panel {
+    padding-inline: var(--space-6);
   }
 
-  .feature-panel dl {
-    margin: 0;
-    display: grid;
-    gap: 4px;
+  .row {
+    padding-block: var(--space-5);
   }
 
-  .highlight {
-    background: var(--page-bg);
-    border-radius: var(--radius-sm);
-    padding: 18px 20px;
+  .row + .row {
+    border-top: 1px solid var(--line);
   }
 
-  .highlight dt {
+  dt {
+    color: var(--ink-3);
     font-size: 0.6875rem;
     font-weight: 700;
-    letter-spacing: 0.07em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--text-tertiary);
-    margin-bottom: 4px;
   }
 
-  .highlight dd {
-    margin: 0;
-    font-size: 1.0625rem;
+  dd {
+    margin-top: var(--space-1);
+    font-size: var(--text-base);
     font-weight: 600;
-    color: var(--ink);
     line-height: 1.35;
   }
 
   @media (max-width: 900px) {
-    .feature {
-      padding: 48px 0;
-    }
-
-    .feature-grid {
+    .feature-grid,
+    .feature.reverse .feature-grid {
       grid-template-columns: 1fr;
-      gap: 32px;
+      gap: var(--space-6);
     }
 
-    .feature.reverse .feature-copy {
+    .feature.reverse .copy {
       order: 0;
     }
   }
